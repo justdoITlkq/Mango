@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:id="@+id/titlbar"
+    android:background="?attr/colorPrimary"
+
+    android:minHeight="?attr/actionBarSize"
+    android:paddingTop="25dp"
+
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    >
+  <LinearLayout
+      android:id="@+id/title_bar_default"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+      >
+
+
+    <!--左边标题栏-->
+    <RelativeLayout
+        android:id="@id/title_left"
+        android:layout_width="@dimen/title_bar_side_width"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        >
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_centerVertical="true"
+          android:scaleType="centerCrop"
+          android:src="@drawable/back_arrow"
+          />
+
+      <TextView
+          android:id="@id/tv_title_left"
+          android:layout_width="@dimen/title_bar_side_width"
+          android:layout_height="match_parent"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true"
+          android:layout_alignParentTop="true"
+          android:gravity="center_vertical|right"
+          android:paddingRight="@dimen/title_bar_padding"
+          android:textColor="#fff"
+          android:textSize="@dimen/title_bar_text_size"
+          />
+    </RelativeLayout>
+
+
+    <!--中间标题栏-->
+    <TextView
+        android:id="@id/tv_title_center"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:textSize="@dimen/title_bar_center_text_size"
+        />
+
+    <!--右边标题栏-->
+    <RelativeLayout
+        android:id="@id/title_right"
+        android:layout_width="@dimen/title_bar_side_width"
+        android:layout_height="match_parent"
+        android:layout_marginRight="@dimen/title_bar_padding"
+        android:clickable="true"
+        >
+      <TextView
+          android:id="@id/tv_title_right"
+          android:layout_width="@dimen/title_bar_side_width"
+          android:layout_height="match_parent"
+          android:gravity="center_vertical|left"
+          android:paddingLeft="@dimen/title_bar_padding"
+          android:textColor="#fff"
+          android:textSize="@dimen/title_bar_text_size"
+          />
+      <ImageView
+          android:id="@id/img_title_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignParentRight="true"
+          android:layout_centerVertical="true"
+          android:scaleType="centerCrop"
+          android:src="@drawable/back_arrow"
+          />
+    </RelativeLayout>
+
+  </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

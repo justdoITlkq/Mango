@@ -1,0 +1,62 @@
+<resources>
+  <!--ios dialog needs-->
+  <!--标题文字大小-->
+  <dimen name="textSize_alert_title">22sp</dimen>
+  <dimen name="textSize_actionsheet_title">14sp</dimen>
+  <!--标题文字高度-->
+  <dimen name="height_alert_title">60dp</dimen>
+  <dimen name="height_actionsheet_title">40dp</dimen>
+  <!--消息文字大小-->
+  <dimen name="textSize_alert_msg">15sp</dimen>
+  <dimen name="textSize_actionsheet_msg">14sp</dimen>
+  <!--消息距离底部间距-->
+  <dimen name="marginBottom_alert_msg">25dp</dimen>
+  <dimen name="marginBottom_actionsheet_msg">14dp</dimen>
+  <!--窗口模式左右两边到屏幕的间距-->
+  <dimen name="margin_alert_left_right">40dp</dimen>
+  <dimen name="margin_actionsheet_left_right">10dp</dimen>
+  <!--线条粗细-->
+  <dimen name="size_divier">1dp</dimen>
+  <!--按钮的高度-->
+  <dimen name="height_alert_button">48dp</dimen>
+  <!--按钮文字大小-->
+  <dimen name="textSize_alert_button">18sp</dimen>
+  <!--圆角-->
+  <dimen name="radius_alertview">15px</dimen>
+  <!--ios dialog needs end-->
+
+
+  <!--md dialog needs start-->
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="action_button_height">32dp</dimen>
+  <dimen name="action_button_text_size">14sp</dimen>
+  <dimen name="action_button_min_width">56dp</dimen>
+  <dimen name="action_button_padding_horizontal">4dp</dimen>
+  <!--md dialog needs end-->
+
+
+  <!--material design edittext needs start-->
+  <dimen name="default_padding_top">8dp</dimen>
+  <dimen name="default_padding_bottom">8dp</dimen>
+  <dimen name="inner_padding_left">0dp</dimen>
+  <dimen name="inner_padding_right">0dp</dimen>
+  <dimen name="floating_label_text_size">12sp</dimen>
+  <dimen name="bottom_text_size">12sp</dimen>
+  <dimen name="inner_components_spacing">8dp</dimen>
+  <dimen name="bottom_ellipsis_height">4dp</dimen>
+  <!--material design edittext needs end-->
+
+
+  <!--md viewpager needs start-->
+  <dimen name="cardMarginHorizontal">10dp</dimen>
+  <dimen name="cardMarginVertical">8dp</dimen>
+  <dimen name="materialviewpager_logoHeight">35dp</dimen>
+  <!--md viewpager needs end-->
+
+<!--bottom bar needs start  原来是56 我改成66-->
+  <dimen name="bb_height">66dp</dimen>
+  <!--bottom bar needs end -->
+
+</resources>

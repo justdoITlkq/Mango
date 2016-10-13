@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+  <!--my styles  start-->
+  <style name="ProgressBarDialogWindowAnim_fade">
+    <item name="android:windowEnterAnimation">@anim/fade_in_center</item>
+    <item name="android:windowExitAnimation">@anim/fade_out_center</item>
+  </style>
+
+
+  <!-- Base application theme. md Theme  -->
+  <style name="MangoBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">     <!-- customize the color palette -->
+    <item name="colorPrimary">@color/material_colorPrimary
+    </item>              <!-- 对应ActionBar的颜色-->
+    <item name="colorPrimaryDark">@color/material_colorPrimaryDark</item>      <!-- 对应状态栏的颜色-->
+    <item name="colorAccent">@color/material_colorAccent</item>                <!-- 对应控件被选中的颜色-->
+    <item name="windowActionBar">false
+    </item>                                  <!-- 去掉系统actionbar   这里和parent 中.noActionBar是一样的效果-->
+    <item name="android:windowNoTitle">true</item>                             <!-- 去掉系统actionbar-->
+  </style>
+  <!--my styles  start  ends -->
+
+
+  <!--ios dialog needs-->
+  <style name="AlertActivity_AlertStyle" parent="android:Theme.Dialog">
+    <!--<item name="android:windowAnimationStyle">@style/AnimAlert</item>-->
+    <!-- 边框 -->
+    <item name="android:windowFrame">@null</item>
+    <!-- 是否浮现在activity之上 -->
+    <item name="android:windowIsFloating">true</item>
+    <!-- 半透明 -->
+    <item name="android:windowIsTranslucent">true</item>
+    <!-- 无标题 -->
+    <item name="android:windowNoTitle">true</item>
+    <!-- 背景透明 -->
+    <item name="android:windowBackground">@android:color/transparent</item>
+    <!-- 模糊 -->
+    <item name="android:backgroundDimEnabled">true</item>
+  </style>
+  <!--ios dialog needs end-->
+
+
+  <!--md dialog needs-->
+  <style name="ActionButton">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">@dimen/action_button_height</item>
+    <item name="android:minWidth">@dimen/action_button_min_width</item>
+    <item name="android:paddingLeft">@dimen/action_button_padding_horizontal</item>
+    <item name="android:paddingRight">@dimen/action_button_padding_horizontal</item>
+    <item name="android:background">@drawable/button</item>
+    <item name="android:textSize">@dimen/action_button_text_size</item>
+  </style>
+  <!--md dialog needs end-->
+
+
+  <!--smoothprogressbar circular needs-->
+  <style name="Theme.SmoothProgressBarDefaults" parent="android:Theme.Holo">
+    <item name="cpbStyle">@style/CircularProgressBar</item>
+    <item name="spbStyle">@style/SmoothProgressBar</item>
+  </style>
+
+  <style name="CPB" parent="android:Widget.Holo.ProgressBar">
+  </style>
+
+  <style name="CircularProgressBar" parent="CPB">
+    <item name="cpb_color">@color/cpb_default_color</item>
+    <item name="cpb_stroke_width">@dimen/cpb_default_stroke_width</item>
+    <item name="cpb_min_sweep_angle">@integer/cpb_default_min_sweep_angle</item>
+    <item name="cpb_max_sweep_angle">@integer/cpb_default_max_sweep_angle</item>
+    <item name="cpb_sweep_speed">@string/cpb_default_sweep_speed</item>
+    <item name="cpb_rotation_speed">@string/cpb_default_rotation_speed</item>
+  </style>
+  <!--smoothprogressbar circular needs end-->
+
+
+  <!--smoothprogressbar horiztonal needs -->
+  <!--这里注释掉后把default属性放到上面-->
+  <!--<style name="Theme.SmoothProgressBarDefaults" parent="android:Theme">-->
+  <!--<item name="spbStyle">@style/SmoothProgressBar</item>-->
+  <!--</style>-->
+  <style name="SPB" parent="android:Widget.ProgressBar.Horizontal">
+  </style>
+
+  <style name="SmoothProgressBar" parent="SPB">
+    <item name="spb_color">@color/spb_default_color</item>
+    <item name="spb_sections_count">@integer/spb_default_sections_count</item>
+    <item name="spb_speed">@string/spb_default_speed</item>
+    <item name="spb_stroke_width">@dimen/spb_default_stroke_width</item>
+    <item name="spb_stroke_separator_length">@dimen/spb_default_stroke_separator_length</item>
+    <item name="spb_reversed">@bool/spb_default_reversed</item>
+    <item name="spb_mirror_mode">@bool/spb_default_mirror_mode</item>
+    <item name="spb_interpolator">@integer/spb_default_interpolator</item>
+  </style>
+  <!--smoothprogressbar horiztonal needs end-->
+
+
+  <!--md viewpager needs start-->
+  <style name="MVP_AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
+  </style>
+
+  <!-- Base application theme. -->
+  <style name="MVP_AppTheme" parent="MVP_AppBaseTheme">
+
+    <item name="android:textColorPrimary">@android:color/white</item>
+    <item name="drawerArrowStyle">@style/MVP_DrawerArrowStyle</item>
+    <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
+
+    <item name="android:windowContentOverlay">@null</item>
+    <item name="windowActionBar">false</item>
+
+    <!-- Toolbar Theme / Apply white arrow -->
+    <item name="colorControlNormal">@android:color/white</item>
+    <item name="actionBarTheme">@style/MVP_AppTheme.ActionBarTheme</item>
+
+    <!-- Material Theme -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/accent_color</item>
+
+    <item name="android:statusBarColor" tools:targetApi="21">@color/statusBarColor</item>
+    <item name="android:navigationBarColor" tools:targetApi="21">@color/navigationBarColor</item>
+    <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="21">true</item>
+
+  </style>
+
+  <style name="MVP_AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+    <!-- White arrow -->
+    <item name="colorControlNormal">@android:color/white</item>
+  </style>
+
+  <style name="MVP_DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+    <item name="spinBars">true</item>
+    <item name="color">@color/drawerArrowColor</item>
+  </style>
+  <!--md viewapager needs end-->
+
+
+<!--bottom bar needs start -->
+  <style name="BB_BottomBarItem">
+    <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    <item name="android:layout_width">wrap_content</item>
+    <!-- layout_height is ignored since the height is set programmatically in BottomBar
+    .updateItems() -->
+    <item name="android:layout_height">@dimen/bb_height</item>
+  </style>
+
+  <style name="BB_BottomBarItem_TitleStyle">
+    <!-- Material spec: "Avoid long text labels as these labels do not truncate or wrap." -->
+    <item name="android:singleLine">true</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:gravity">center_horizontal</item>
+  </style>
+
+  <style name="BB_BottomBarItem_Fixed.TitleAppearance" parent="TextAppearance.AppCompat.Body1">
+    <item name="android:textSize">14sp</item>
+  </style>
+
+  <style name="BB_BottomBarItem_Shifting.TitleAppearance" parent="BB_BottomBarItem_Fixed.TitleAppearance">
+    <item name="android:textColor">#FFFFFF</item>
+  </style>
+
+  <style name="BB_BottomBarItem_Tablet">
+    <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+  </style>
+
+  <style name="BB_BottomBarBadge_Text" parent="TextAppearance.AppCompat.Body2">
+    <item name="android:textColor">#FFFFFF</item>
+  </style>
+<!--bottom bar needs end -->
+</resources>

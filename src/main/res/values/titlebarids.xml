@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--my title bar needs -->
+  <item name="tv_title_left" type="id"/>
+  <item name="title_left" type="id"/>
+
+  <item name="tv_title_right" type="id"/>
+  <item name="title_right" type="id"/>
+
+  <item name="tv_title_center" type="id"/>
+  <item name="title_center" type="id"/>
+
+  <item name="img_title_right" type="id"/>
+  <!--my title bar needs end-->
+
+  <!--toobar title needs -->
+
+  <!--toobar title needs end-->
+</resources>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!--my md theme color -->
+  <color name="material_colorPrimary">#F44336</color>
+  <color name="material_colorPrimaryDark">#D32F2F</color>
+  <color name="material_colorAccent">#FF4081</color>
+  <color name="material_white">#FFFFFF</color>
+  <!--my md theme color -->
+
+
+  <!--ios dialog needs-->
+  <!--覆盖颜色-->
+  <color name="bgColor_overlay">#60000000</color>
+  <!--窗口背景颜色-->
+  <color name="bgColor_alertview_alert">#f8f8f8</color>
+  <color name="bgColor_alertview_alert_start">#f0f0f0</color>
+  <!--标题颜色-->
+  <color name="textColor_alert_title">#000000</color>
+  <color name="textColor_actionsheet_title">#8f8f8f</color>
+  <!--消息颜色-->
+  <color name="textColor_alert_msg">#000000</color>
+  <color name="textColor_actionsheet_msg">#8f8f8f</color>
+  <!--线条颜色-->
+  <color name="bgColor_divier">#d7d7db</color>
+  <!--取消按钮颜色-->
+  <color name="textColor_alert_button_cancel">#007aff</color>
+  <!--高亮按钮颜色-->
+  <color name="textColor_alert_button_destructive">#ff3b30</color>
+  <!--普通按钮文字颜色-->
+  <color name="textColor_alert_button_others">#007aff</color>
+  <!--点击颜色-->
+  <color name="bgColor_alert_button_press">#EAEAEA</color>
+  <!--actionsheet模式的取消按钮背景颜色-->
+  <color name="bgColor_actionsheet_cancel_nor">#ffffff</color>
+  <!--ios dialog needs end-->
+
+
+  <!--md dialog needs-->
+  <color name="card_background">#ffffff</color>
+  <color name="card_shadow">#10000000</color>
+  <color name="lite_blue">#ff359ff2</color>
+  <color name="window_background">#00000000</color>
+  <color name="black_de">#DE000000</color>
+  <!--md dialog needs end-->
+
+
+  <!--smoothprogressbar circular needs-->
+  <!--<color name="green">#388E3C</color>-->
+  <!--<color name="blue">#03A9F4</color>-->
+  <!--<color name="red">#D32F2F</color>-->
+  <color name="orange">#FF9800</color>
+  <color name="black">#212121</color>
+  <!--<color name="purple">#7c4dff</color>-->
+  <!--smoothprogressbar circular needs end-->
+
+
+  <!--md viewpager needs start-->
+  <color name="blue">#303F9F</color>
+  <color name="green">#4CAF50</color>
+  <color name="green_teal">#009688</color>
+  <color name="purple">#673AB7</color>
+  <color name="red">#F44336</color>
+  <color name="cyan">#00BCD4</color>
+  <color name="lime">#CDDC39</color>
+
+  <color name="accent_color">@color/blue</color>
+  <color name="colorPrimary">@color/blue</color>
+  <color name="colorPrimaryDark">@color/blue</color>
+  <color name="statusBarColor">@color/blue</color>
+  <color name="navigationBarColor">@android:color/black</color>
+  <color name="drawerArrowColor">@android:color/white</color>
+  <!--md view pager needs end-->
+
+<!--bottom bar needs start -->
+  <color name="bb_inActiveBottomBarItemColor">#747474</color>
+  <color name="bb_darkBackgroundColor">#212121</color>
+  <color name="bb_tabletRightBorderDark">#505050</color>
+  <!--bottom bar needs end -->
+</resources>
+
+

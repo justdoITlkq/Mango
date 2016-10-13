@@ -1,0 +1,16 @@
+<resources>
+  <string name="app_name">Mango</string>
+  <!--md dialog needs-->
+  <string name="hello_world">Hello world!</string>
+  <string name="action_settings">Settings</string>
+  <!--md dialog needs end-->
+  <!--smooth progressbar circular needs-->
+  <integer-array name="mycolors">
+
+    <item>@color/blue</item>
+    <item>@color/red</item>
+    <item>@color/green</item>
+    <item>@color/orange</item>
+  </integer-array>
+  <!--smooth progressbar circular needs-->
+</resources>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!--smoothprogressbar circular needs-->
+  <declare-styleable name="CircularProgressBar">
+    <attr format="reference" name="cpbStyle"/>
+    <attr format="color" name="cpb_color"/>
+    <attr format="reference" name="cpb_colors"/>
+    <attr format="dimension" name="cpb_stroke_width"/>
+    <attr format="integer" name="cpb_min_sweep_angle"/>
+    <attr format="integer" name="cpb_max_sweep_angle"/>
+    <attr format="float" name="cpb_sweep_speed"/>
+    <attr format="float" name="cpb_rotation_speed"/>
+  </declare-styleable>
+  <!--smoothprogressbar circular needs end-->
+
+
+  <!--smoothprogressbar horizontal needs -->
+  <declare-styleable name="SmoothProgressBar">
+    <attr format="reference" name="spbStyle"/>
+    <attr format="color" name="spb_color"/>
+    <attr format="dimension" name="spb_stroke_width"/>
+    <attr format="dimension" name="spb_stroke_separator_length"/>
+    <attr format="integer" name="spb_sections_count"/>
+    <attr format="float" name="spb_speed"/>
+    <attr format="float" name="spb_progressiveStart_speed"/>
+    <attr format="float" name="spb_progressiveStop_speed"/>
+    <attr format="enum" name="spb_interpolator">
+      <enum name="spb_interpolator_accelerate" value="0"/>
+      <enum name="spb_interpolator_linear" value="1"/>
+      <enum name="spb_interpolator_acceleratedecelerate" value="2"/>
+      <enum name="spb_interpolator_decelerate" value="3"/>
+    </attr>
+    <attr format="boolean" name="spb_reversed"/>
+    <attr format="boolean" name="spb_mirror_mode"/>
+    <attr format="reference" name="spb_colors"/>
+    <attr format="boolean" name="spb_progressiveStart_activated"/>
+    <attr format="reference" name="spb_background"/>
+    <attr format="boolean" name="spb_generate_background_with_colors"/>
+    <attr format="boolean" name="spb_gradients"/>
+  </declare-styleable>
+  <!--smoothprogressbar horizontal needs end-->
+
+
+  <!--material design edittext needs-->
+  <declare-styleable name="MaterialEditText">
+    <!-- The base color of the line and the texts. Default is black. -->
+    <attr format="color" name="met_baseColor"/>
+    <!-- The highlight color of the line, and the floating label if the highlightFloatingLabel is true. -->
+    <attr format="color" name="met_primaryColor"/>
+    <!-- How the floating label should be shown. Default is none -->
+    <attr name="met_floatingLabel">
+      <enum name="none" value="0"/>
+      <enum name="normal" value="1"/>
+      <enum name="highlight" value="2"/>
+    </attr>
+    <!-- The color for when something is wrong.(e.g. exceeding max characters) -->
+    <attr format="color" name="met_errorColor"/>
+    <!-- Min characters count limit. 0 means no limit. -->
+    <attr format="integer" name="met_minCharacters"/>
+    <!-- max Characters count limit. 0 means no limit. -->
+    <attr format="integer" name="met_maxCharacters"/>
+    <!-- Whether to show the bottom ellipsis in singleLine mode -->
+    <attr format="boolean" name="met_singleLineEllipsis"/>
+    <!-- Reserved bottom text lines count, no matter if there is some helper/error text. -->
+    <attr format="integer" name="met_minBottomTextLines"/>
+    <!-- Helper text at the bottom -->
+    <attr format="string" name="met_helperText"/>
+    <!-- Helper text color -->
+    <attr format="color" name="met_helperTextColor"/>
+    <!-- Font of the paint used to draw accent texts -->
+    <attr format="string" name="met_accentTypeface"/>
+    <!-- Font used on view -->
+    <attr format="string" name="met_typeface"/>
+    <!-- Custom float label text -->
+    <attr format="string" name="met_floatingLabelText"/>
+    <!-- spacing between the main text and the floating label -->
+    <attr format="dimension" name="met_floatingLabelPadding"/>
+    <!-- Hide underline -->
+    <attr format="boolean" name="met_hideUnderline"/>
+    <!-- Underline's color -->
+    <attr format="color" name="met_underlineColor"/>
+    <!-- Auto validate -->
+    <attr format="boolean" name="met_autoValidate"/>
+    <!-- Left icon -->
+    <attr format="reference" name="met_iconLeft"/>
+    <!-- Right icon -->
+    <attr format="reference" name="met_iconRight"/>
+    <!-- Padding between icon(s) and the main area. 8dp by default. -->
+    <attr format="dimension" name="met_iconPadding"/>
+    <!-- Clear button -->
+    <attr format="boolean" name="met_clearButton"/>
+    <!-- The floating label's text size. 12sp by default. -->
+    <attr format="dimension" name="met_floatingLabelTextSize"/>
+    <!-- The floating label's text color. -1 by default. -->
+    <attr format="color" name="met_floatingLabelTextColor"/>
+    <!-- The bottom texts' size. 12sp by default. -->
+    <attr format="dimension" name="met_bottomTextSize"/>
+    <!-- Always show the floating label, instead of animating it in/out. False by default. -->
+    <attr format="boolean" name="met_floatingLabelAlwaysShown"/>
+    <!-- Always show the helper text, no matter if the edit text is focused. False by default. -->
+    <attr format="boolean" name="met_helperTextAlwaysShown"/>
+    <!-- Whether use animation to show/hide the floating label. True by default. -->
+    <attr format="boolean" name="met_floatingLabelAnimating"/>
+    <!-- Text color -->
+    <attr format="color" name="met_textColor"/>
+    <!-- Hint Text Color -->
+    <attr format="color" name="met_textColorHint"/>
+    <!-- Auto validate on focus lost. False by default. -->
+    <attr format="boolean" name="met_validateOnFocusLost"/>
+    <!-- Whether check the characters count at the beginning it's shown. True by default. -->
+    <attr format="boolean" name="met_checkCharactersCountAtBeginning"/>
+
+  </declare-styleable>
+  <!--material design edittext needs end-->
+
+
+  <!--material design viewpager needs start-->
+  <declare-styleable name="MaterialViewPager">
+    <attr name="viewpager_header" format="reference"/>
+    <attr name="viewpager_logo" format="reference"/>
+    <attr name="viewpager_pagerTitleStrip" format="reference"/>
+    <attr name="viewpager_viewpager" format="reference"/>
+    <attr name="viewpager_logoMarginTop" format="dimension"/>
+    <attr name="viewpager_color" format="color"/>
+    <attr name="viewpager_headerHeight" format="dimension"/>
+    <attr name="viewpager_headerAlpha" format="float"/>
+    <attr name="viewpager_imageHeaderDarkLayerAlpha" format="float"/>
+    <attr name="viewpager_hideToolbarAndTitle" format="boolean"/>
+    <attr name="viewpager_hideLogoWithFade" format="boolean"/>
+    <attr name="viewpager_enableToolbarElevation" format="boolean"/>
+    <attr name="viewpager_parallaxHeaderFactor" format="float"/>
+    <attr name="viewpager_headerAdditionalHeight" format="dimension"/>
+    <attr name="viewpager_displayToolbarWhenSwipe" format="boolean"/>
+    <attr name="viewpager_transparentToolbar" format="boolean"/>
+    <attr name="viewpager_animatedHeaderImage" format="boolean"/>
+    <attr name="viewpager_disableToolbar" format="boolean"/>
+  </declare-styleable>
+  <!--material design viewpager needs ends-->
+
+<!--bottombar needs start-->
+  <declare-styleable name="BottomBar">
+    <attr name="bb_tabXmlResource" format="reference" />
+    <attr name="bb_tabletMode" format="boolean" />
+    <attr name="bb_behavior">
+      <flag name="shifting" value="1" />
+      <flag name="shy" value="2" />
+      <flag name="underNavbar" value="4" />
+    </attr>
+    <attr name="bb_inActiveTabAlpha" format="float" />
+    <attr name="bb_activeTabAlpha" format="float" />
+    <attr name="bb_inActiveTabColor" format="color" />
+    <attr name="bb_activeTabColor" format="color" />
+    <attr name="bb_badgeBackgroundColor" format="color" />
+    <attr name="bb_titleTextAppearance" format="reference" />
+    <attr name="bb_titleTypeFace" format="string" />
+    <attr name="bb_showShadow" format="boolean" />
+  </declare-styleable>
+  <!--bottombar needs end-->
+</resources>
