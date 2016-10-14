@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tabs>
   <tab
-      icon="@drawable/back_arrow"
-      id="@+id/tab_favorites"
-      title="Favorites"/>
+      icon="@drawable/ic_action_info"
+      id="@+id/tab_info"
+      title="首页"/>
   <tab
-      icon="@drawable/ptr_rotate_arrow"
-      id="@+id/tab_nearby"
-      title="Nearby"/>
+      icon="@drawable/ic_action_grade"
+      id="@+id/tab_grade"
+      title="关注"/>
   <tab
-      icon="@drawable/met_ic_clear"
-      id="@+id/tab_friends"
-      title="Friends"/>
+      icon="@drawable/ic_action_favorite"
+      id="@+id/tab_favorite"
+      title="喜欢"/>
+  <tab
+      icon="@drawable/ic_action_account_circle"
+      id="@+id/my"
+      title="我的"/>
 </tabs>
