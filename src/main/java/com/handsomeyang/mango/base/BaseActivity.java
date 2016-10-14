@@ -5,22 +5,26 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
-import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
+import com.handsomeyang.mango.thrid.bottombar.BottomBar;
+import com.handsomeyang.mango.thrid.bottombar.OnTabItemClickListener;
+import com.handsomeyang.mango.thrid.bottombar.OnTabSelectListener;
+
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.res.LayoutRes;
+
+import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -48,6 +52,8 @@ import org.androidannotations.annotations.res.LayoutRes;
   private boolean useBottombar = false;
   private boolean useTitlebar = false;
   private boolean useToolbar = false;
+
+  OnTabItemClickListener[] itemClickListeners;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
@@ -195,9 +201,31 @@ import org.androidannotations.annotations.res.LayoutRes;
       bottombarLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
       bottombar.setLayoutParams(bottombarLayoutParams);
       mRelativeLayout.addView(bottombar);
+      ((BottomBar)bottombar).setOnTabSelectListener(new OnTabSelectListener() {
+        @Override
+        public void onTabSelected(@IdRes int tabId) {
+          if(tabId == R.id.tab_1){
+            itemClickListeners[0].onTabClick();
+          }else if(tabId == R.id.tab_2){
+            itemClickListeners[1].onTabClick();
+          }else if(tabId ==R.id.tab_3){
+            itemClickListeners[2].onTabClick();
+          }else{
+            itemClickListeners[3].onTabClick();
+          }
+        }
+      });
     }
 
     mTitleBar.requestFocus();
+  }
+
+  /**
+   * 设置bottomBar的点击监听器
+   * @param itemClickListeners
+     */
+  public void setOnTabItemClickListeners(OnTabItemClickListener[] itemClickListeners){
+    this.itemClickListeners = itemClickListeners;
   }
 
   /**

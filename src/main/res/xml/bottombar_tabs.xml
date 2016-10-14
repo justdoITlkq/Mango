@@ -2,18 +2,18 @@
 <tabs>
   <tab
       icon="@drawable/ic_action_info"
-      id="@+id/tab_info"
+      id="@+id/tab_1"
       title="首页"/>
   <tab
       icon="@drawable/ic_action_grade"
-      id="@+id/tab_grade"
+      id="@+id/tab_2"
       title="关注"/>
   <tab
       icon="@drawable/ic_action_favorite"
-      id="@+id/tab_favorite"
+      id="@+id/tab_3"
       title="喜欢"/>
   <tab
       icon="@drawable/ic_action_account_circle"
-      id="@+id/my"
+      id="@+id/tab_4"
       title="我的"/>
 </tabs>
