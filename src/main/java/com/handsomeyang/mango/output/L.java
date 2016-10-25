@@ -1,5 +1,6 @@
 package com.handsomeyang.mango.output;
 
+import android.support.compat.BuildConfig;
 import android.text.TextUtils;
 import android.util.Log;
 import org.json.JSONArray;
@@ -12,14 +13,9 @@ import org.json.JSONObject;
  */
 
 public class L {
-  private static boolean sDebug = true;
   private static String sTag = "Mango.Log";
   private static final int JSON_INDENT = 2;
 
-  public static void init(boolean debug, String tag) {
-    L.sDebug = debug;
-    L.sTag = tag;
-  }
 
   public static void e(String msg) {
     e(null, msg, null);
@@ -30,12 +26,12 @@ public class L {
   }
 
   public static void e(String tag, String msg, Object[] params) {
-    if (!sDebug) return;
+    if (!BuildConfig.DEBUG) return;
     LogText.e(getFinalTag(tag), String.format(msg, params));
   }
 
   public static void m(String msg) {
-    if (!sDebug) return;
+    if (!BuildConfig.DEBUG) return;
     String methodName = new Exception().getStackTrace()[1].getMethodName();
     e(methodName + ":    " + msg);
   }
@@ -45,7 +41,7 @@ public class L {
   }
 
   public static void json(String tag, String json) {
-    if (!sDebug) return;
+    if (!BuildConfig.DEBUG) return;
     LogText.e(getFinalTag(tag), getPrettyJson(json));
   }
 
