@@ -97,13 +97,13 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
   }
 
   @Override public void setContentView(int layoutResID) {
-    if (useTitlebar || useToolbar||useBottombar) {
+    if (useTitlebar || useToolbar || useBottombar) {
       initTileBar(layoutResID);
     } else {
       super.setContentView(layoutResID);
       //为了不让app内容占据status bar 和 navbar
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        getWindow().getDecorView().getRootView().setPaddingRelative(0,60,0,100);
+        getWindow().getDecorView().getRootView().setPaddingRelative(0, 60, 0, 100);
       }
     }
   }
@@ -201,16 +201,16 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
       bottombarLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
       bottombar.setLayoutParams(bottombarLayoutParams);
       mRelativeLayout.addView(bottombar);
-      ((BottomBar)bottombar).setOnTabSelectListener(new OnTabSelectListener() {
-        @Override
-        public void onTabSelected(@IdRes int tabId) {
-          if(tabId == R.id.tab_1){
+
+      ((BottomBar) bottombar).setOnTabSelectListener(new OnTabSelectListener() {
+        @Override public void onTabSelected(@IdRes int tabId) {
+          if (tabId == R.id.tab_1) {
             itemClickListeners[0].onTabClick();
-          }else if(tabId == R.id.tab_2){
+          } else if (tabId == R.id.tab_2) {
             itemClickListeners[1].onTabClick();
-          }else if(tabId ==R.id.tab_3){
+          } else if (tabId == R.id.tab_3) {
             itemClickListeners[2].onTabClick();
-          }else{
+          } else {
             itemClickListeners[3].onTabClick();
           }
         }
@@ -222,9 +222,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
   /**
    * 设置bottomBar的点击监听器
-   * @param itemClickListeners
-     */
-  public void setOnTabItemClickListeners(OnTabItemClickListener[] itemClickListeners){
+   */
+  public void setOnTabItemClickListeners(OnTabItemClickListener[] itemClickListeners) {
     this.itemClickListeners = itemClickListeners;
   }
 

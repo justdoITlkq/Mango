@@ -37,5 +37,7 @@ public class Constant {
    * DI 依赖注入 dragger 2+butterKnife view
    * 写医生端用 mvp+dragger 2+ rxjava +mvp
    *
+   * 拆了mdviewpager 糅合了smartTablayout
+   *
    */
 }

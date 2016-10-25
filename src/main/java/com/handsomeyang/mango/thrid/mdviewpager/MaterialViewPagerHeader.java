@@ -18,7 +18,8 @@ public class MaterialViewPagerHeader {
 
   protected View toolbarLayout;
   protected Toolbar toolbar;
-  protected View mPagerSlidingTabStrip;
+  //protected View mPagerSlidingTabStrip;
+  protected View mSmartTabLayout;
 
   protected View toolbarLayoutBackground;
   protected View headerBackground;
@@ -52,15 +53,30 @@ public class MaterialViewPagerHeader {
     return context;
   }
 
-  public MaterialViewPagerHeader withPagerSlidingTabStrip(View pagerSlidingTabStrip) {
-    this.mPagerSlidingTabStrip = pagerSlidingTabStrip;
+  //public MaterialViewPagerHeader withPagerSlidingTabStrip(View pagerSlidingTabStrip) {
+  //  this.mPagerSlidingTabStrip = pagerSlidingTabStrip;
+  //
+  //  mPagerSlidingTabStrip.getViewTreeObserver()
+  //      .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+  //        @Override public boolean onPreDraw() {
+  //          finalTabsY = dpToPx(-2, context);
+  //
+  //          mPagerSlidingTabStrip.getViewTreeObserver().removeOnPreDrawListener(this);
+  //          return false;
+  //        }
+  //      });
+  //
+  //  return this;
+  //}
+  public MaterialViewPagerHeader withSmartTabLayout(View pagerSlidingTabStrip) {
+    this.mSmartTabLayout = pagerSlidingTabStrip;
 
-    mPagerSlidingTabStrip.getViewTreeObserver()
+    mSmartTabLayout.getViewTreeObserver()
         .addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
           @Override public boolean onPreDraw() {
             finalTabsY = dpToPx(-2, context);
 
-            mPagerSlidingTabStrip.getViewTreeObserver().removeOnPreDrawListener(this);
+            mSmartTabLayout.getViewTreeObserver().removeOnPreDrawListener(this);
             return false;
           }
         });

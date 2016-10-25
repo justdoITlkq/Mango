@@ -15,8 +15,9 @@
   <com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressBar
       android:id="@+id/smooth_progressbar_horizontal"
       android:layout_width="200dp"
-      android:layout_height="40dp"
+      android:layout_height="wrap_content"
       android:layout_centerInParent="true"
+      android:background="@drawable/shape_round_corner"
       android:indeterminate="true"
       app:spb_color="#FF0000"
       app:spb_colors="@array/mycolors"

@@ -98,7 +98,7 @@ public class MaterialViewPagerAnimator {
   public boolean onMaterialScrolled(Object source, float yOffset) {
 
     if (initialDistance == -1 || initialDistance == 0) {
-      initialDistance = mHeader.mPagerSlidingTabStrip.getTop() - mHeader.toolbar.getBottom();
+      initialDistance = mHeader.mSmartTabLayout.getTop() - mHeader.toolbar.getBottom();
     }
 
     //only if yOffset changed
@@ -139,7 +139,7 @@ public class MaterialViewPagerAnimator {
     if (percent != 0) {
       //distance between pager & toolbar
       float newDistance =
-          ViewCompat.getY(mHeader.mPagerSlidingTabStrip) - mHeader.toolbar.getBottom();
+          ViewCompat.getY(mHeader.mSmartTabLayout) - mHeader.toolbar.getBottom();
 
       percent = 1 - newDistance / initialDistance;
 
@@ -177,7 +177,7 @@ public class MaterialViewPagerAnimator {
 
       lastPercent = percent; //save the percent
 
-      if (mHeader.mPagerSlidingTabStrip != null) { //move the viewpager indicator
+      if (mHeader.mSmartTabLayout != null) { //move the viewpager indicator
         //float newY = ViewCompat.getY(mHeader.mPagerSlidingTabStrip) + scrollTop;
 
         if (ENABLE_LOG) {
@@ -186,13 +186,13 @@ public class MaterialViewPagerAnimator {
 
         //mHeader.mPagerSlidingTabStrip.setTranslationY(mHeader.getToolbar().getBottom()-mHeader.mPagerSlidingTabStrip.getY());
         if (scrollTop <= 0) {
-          ViewCompat.setTranslationY(mHeader.mPagerSlidingTabStrip, scrollTop);
+          ViewCompat.setTranslationY(mHeader.mSmartTabLayout, scrollTop);
           ViewCompat.setTranslationY(mHeader.toolbarLayoutBackground, scrollTop);
 
           //when
-          if (ViewCompat.getY(mHeader.mPagerSlidingTabStrip) < mHeader.getToolbar().getBottom()) {
-            float ty = mHeader.getToolbar().getBottom() - mHeader.mPagerSlidingTabStrip.getTop();
-            ViewCompat.setTranslationY(mHeader.mPagerSlidingTabStrip, ty);
+          if (ViewCompat.getY(mHeader.mSmartTabLayout) < mHeader.getToolbar().getBottom()) {
+            float ty = mHeader.getToolbar().getBottom() - mHeader.mSmartTabLayout.getTop();
+            ViewCompat.setTranslationY(mHeader.mSmartTabLayout, ty);
             ViewCompat.setTranslationY(mHeader.toolbarLayoutBackground, ty);
           }
         }
@@ -255,7 +255,7 @@ public class MaterialViewPagerAnimator {
         mHeader.statusBackground.setBackgroundColor(colorAlpha);
         mHeader.toolbar.setBackgroundColor(colorAlpha);
         mHeader.toolbarLayoutBackground.setBackgroundColor(colorAlpha);
-        mHeader.mPagerSlidingTabStrip.setBackgroundColor(colorAlpha);
+        mHeader.mSmartTabLayout.setBackgroundColor(colorAlpha);
 
         //set the new color as MaterialViewPager's color
         settings.color = animatedValue;
@@ -283,15 +283,15 @@ public class MaterialViewPagerAnimator {
 
     if (percent >= 1) {
       setBackgroundColor(colorWithAlpha(this.settings.color, percent), mHeader.toolbar,
-          mHeader.toolbarLayoutBackground, mHeader.mPagerSlidingTabStrip);
+          mHeader.toolbarLayoutBackground, mHeader.mSmartTabLayout);
     } else {
       setBackgroundColor(colorWithAlpha(this.settings.color, 0), mHeader.toolbar,
-          mHeader.toolbarLayoutBackground, mHeader.mPagerSlidingTabStrip);
+          mHeader.toolbarLayoutBackground, mHeader.mSmartTabLayout);
     }
 
     if (this.settings.enableToolbarElevation && toolbarJoinsTabs()) {
       setElevation((percent == 1) ? elevation : 0, mHeader.toolbar, mHeader.toolbarLayoutBackground,
-          mHeader.mPagerSlidingTabStrip, mHeader.mLogo);
+          mHeader.mSmartTabLayout, mHeader.mLogo);
     }
   }
 
@@ -549,8 +549,8 @@ public class MaterialViewPagerAnimator {
 
   private boolean toolbarJoinsTabs() {
     return (mHeader.toolbar.getBottom()
-        == mHeader.mPagerSlidingTabStrip.getTop() + ViewCompat.getTranslationY(
-        mHeader.mPagerSlidingTabStrip));
+        == mHeader.mSmartTabLayout.getTop() + ViewCompat.getTranslationY(
+        mHeader.mSmartTabLayout));
   }
 
   //endregion

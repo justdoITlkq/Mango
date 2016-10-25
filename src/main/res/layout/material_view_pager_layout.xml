@@ -64,7 +64,7 @@
         />
 
     <FrameLayout
-        android:id="@+id/pagerTitleStripContainer"
+        android:id="@+id/smartTabLayoutContainer"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="160dp"

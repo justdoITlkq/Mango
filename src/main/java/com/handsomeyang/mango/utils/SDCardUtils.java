@@ -1,10 +1,14 @@
 package com.handsomeyang.mango.utils;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import java.io.File;
 
-import static com.handsomeyang.mango.utils.ConstantUtils.MemoryUnit;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
 
 /**
  * <pre>
@@ -16,170 +20,136 @@ import static com.handsomeyang.mango.utils.ConstantUtils.MemoryUnit;
  */
 public class SDCardUtils {
 
-  private SDCardUtils() {
-    throw new UnsupportedOperationException("u can't fuck me...");
-  }
+    private SDCardUtils() {
+        throw new UnsupportedOperationException("u can't instantiate me...");
+    }
 
-  /**
-   * 判断SD卡是否可用
-   *
-   * @return true : 可用<br>false : 不可用
-   */
-  public static boolean isSDCardEnable() {
-    return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
-  }
+    /**
+     * 判断SD卡是否可用
+     *
+     * @return true : 可用<br>false : 不可用
+     */
+    public static boolean isSDCardEnable() {
+        return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+    }
 
-  /**
-   * 获取SD卡路径
-   * <p>一般是/storage/emulated/0/</p>
-   *
-   * @return SD卡路径
-   */
-  public static String getSDCardPath() {
-    return Environment.getExternalStorageDirectory().getPath() + File.separator;
-  }
+    /**
+     * 获取SD卡Data路径
+     *
+     * @return SD卡Data路径
+     */
+    public static String getDataPath() {
+        if (!isSDCardEnable()) return "sdcard unable!";
+        return Environment.getDataDirectory().getPath() + File.separator;
+    }
 
-  /**
-   * 获取SD卡Data路径
-   *
-   * @return Data路径
-   */
-  public static String getDataPath() {
-    return Environment.getDataDirectory().getPath();
-  }
+    /**
+     * 获取SD卡路径
+     * <p>一般是/storage/emulated/0/</p>
+     *
+     * @return SD卡路径
+     */
+    public static String getSDCardPath() {
+        if (!isSDCardEnable()) return "sdcard unable!";
+        return Environment.getExternalStorageDirectory().getPath() + File.separator;
+    }
 
-  /**
-   * 计算SD卡的剩余空间
-   *
-   * @param unit <ul>
-   * <li>{@link MemoryUnit#BYTE}: 字节</li>
-   * <li>{@link MemoryUnit#KB}  : 千字节</li>
-   * <li>{@link MemoryUnit#MB}  : 兆</li>
-   * <li>{@link MemoryUnit#GB}  : GB</li>
-   * </ul>
-   * @return 返回-1，说明SD卡不可用，否则返回SD卡剩余空间
-   */
-  public static double getFreeSpace(MemoryUnit unit) {
-    if (isSDCardEnable()) {
-      try {
+    /**
+     * 获取SD卡路径
+     *
+     * @return SD卡路径
+     */
+    public static String getSDCardPathByCmd() {
+        if (!isSDCardEnable()) return "sdcard unable!";
+        String cmd = "cat /proc/mounts";
+        Runtime run = Runtime.getRuntime();
+        BufferedReader bufferedReader = null;
+        try {
+            Process p = run.exec(cmd);
+            bufferedReader = new BufferedReader(new InputStreamReader(new BufferedInputStream(p.getInputStream())));
+            String lineStr;
+            while ((lineStr = bufferedReader.readLine()) != null) {
+                if (lineStr.contains("sdcard") && lineStr.contains(".android_secure")) {
+                    String[] strArray = lineStr.split(" ");
+                    if (strArray.length >= 5) {
+                        return strArray[1].replace("/.android_secure", "") + File.separator;
+                    }
+                }
+                if (p.waitFor() != 0 && p.exitValue() == 1) {
+                    return " 命令执行失败";
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            CloseUtils.closeIO(bufferedReader);
+        }
+        return Environment.getExternalStorageDirectory().getPath() + File.separator;
+    }
+
+    /**
+     * 获取SD卡剩余空间
+     *
+     * @return SD卡剩余空间
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static String getFreeSpace() {
+        if (!isSDCardEnable()) return "sdcard unable!";
         StatFs stat = new StatFs(getSDCardPath());
         long blockSize, availableBlocks;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-          availableBlocks = stat.getAvailableBlocksLong();
-          blockSize = stat.getBlockSizeLong();
-        } else {
-          availableBlocks = stat.getAvailableBlocks();
-          blockSize = stat.getBlockSize();
-        }
-        return FileUtils.byte2Size(availableBlocks * blockSize, unit);
-      } catch (Exception e) {
-        e.printStackTrace();
-        return -1.0;
-      }
-    } else {
-      return -1.0;
+        availableBlocks = stat.getAvailableBlocksLong();
+        blockSize = stat.getBlockSizeLong();
+        return ConvertUtils.byte2FitSize(availableBlocks * blockSize);
     }
-  }
 
-  //    /**
-  //     * 获取指定路径所在空间的剩余可用容量字节数，单位byte
-  //     *
-  //     * @param filePath
-  //     * @return 容量字节 SDCard可用空间，内部存储可用空间
-  //     */
-  //    public static long getFreeBytes(String filePath) {
-  //        // 如果是sd卡的下的路径，则获取sd卡可用容量
-  //        if (filePath.startsWith(getSDCardPath())) {
-  //            filePath = getSDCardPath();
-  //        } else {// 如果是内部存储的路径，则获取内存存储的可用容量
-  //            filePath = Environment.getDataDirectory().getAbsolutePath();
-  //        }
-  //        StatFs stat = new StatFs(filePath);
-  //        long availableBlocks = (long) stat.getAvailableBlocks() - 4;
-  //        return stat.getBlockSize() * availableBlocks;
-  //    }
-  //
-  //    /**
-  //     * 获取系统存储路径
-  //     *
-  //     * @return
-  //     */
-  //    public static String getRootDirectoryPath() {
-  //        return Environment.getRootDirectory().getAbsolutePath();
-  //    }
-  //
-  //    /**
-  //     * Check if the file is exists
-  //     *
-  //     * @param filePath
-  //     * @param fileName
-  //     * @return
-  //     */
-  //    public static boolean isFileExistsInSDCard(String filePath, String fileName) {
-  //        boolean flag = false;
-  //        if (isSDCardEnable()) {
-  //            File file = new File(filePath, fileName);
-  //            if (file.exists()) {
-  //                flag = true;
-  //            }
-  //        }
-  //        return flag;
-  //    }
-  //
-  //    /**
-  //     * Write file to SD card
-  //     *
-  //     * @param filePath
-  //     * @param filename
-  //     * @param content
-  //     * @return
-  //     * @throws Exception
-  //     */
-  //    public static boolean saveFileToSDCard(String filePath, String filename, String content)
-  //            throws Exception {
-  //        boolean flag = false;
-  //        if (isSDCardEnable()) {
-  //            File dir = new File(filePath);
-  //            if (!dir.exists()) {
-  //                dir.mkdirs();
-  //            }
-  //            File file = new File(filePath, filename);
-  //            FileOutputStream outStream = new FileOutputStream(file);
-  //            outStream.write(content.getBytes());
-  //            outStream.close();
-  //            flag = true;
-  //        }
-  //        return flag;
-  //    }
-  //
-  //    /**
-  //     * Read file as stream from SD card
-  //     *
-  //     * @param fileName String PATH =
-  //     *                 Environment.getExternalStorageDirectory().getAbsolutePath() +
-  //     *                 "/dirName";
-  //     * @return
-  //     */
-  //    public static byte[] readFileFromSDCard(String filePath, String fileName) {
-  //        byte[] buffer = null;
-  //        FileInputStream fin = null;
-  //        try {
-  //            if (isSDCardEnable()) {
-  //                String filePaht = filePath + "/" + fileName;
-  //                fin = new FileInputStream(filePaht);
-  //                int length = fin.available();
-  //                buffer = new byte[length];
-  //                fin.read(buffer);
-  //            }
-  //        } catch (Exception e) {
-  //            e.printStackTrace();
-  //        } finally {
-  //            try {
-  //                if (fin != null) fin.close();
-  //            } catch (IOException e) {
-  //                e.printStackTrace();
-  //            }
-  //        }
-  //        return buffer;
-  //    }
+    /**
+     * 获取SD卡信息
+     *
+     * @return SDCardInfo
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    public static SDCardInfo getSDCardInfo() {
+        SDCardInfo sd = new SDCardInfo();
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            sd.isExist = true;
+            File sdcardDir = Environment.getExternalStorageDirectory();
+            StatFs sf = new StatFs(sdcardDir.getPath());
+            sd.totalBlocks = sf.getBlockCountLong();
+            sd.blockByteSize = sf.getBlockSizeLong();
+            sd.availableBlocks = sf.getAvailableBlocksLong();
+            sd.availableBytes = sf.getAvailableBytes();
+            sd.freeBlocks = sf.getFreeBlocksLong();
+            sd.freeBytes = sf.getFreeBytes();
+            sd.totalBytes = sf.getTotalBytes();
+        }
+        return sd;
+    }
+
+    private static class SDCardInfo {
+        boolean isExist;
+        long    totalBlocks;
+        long    freeBlocks;
+        long    availableBlocks;
+
+        long blockByteSize;
+
+        long totalBytes;
+        long freeBytes;
+        long availableBytes;
+
+        @Override
+        public String toString() {
+            return "SDCardInfo{" +
+                    "isExist=" + isExist +
+                    ", totalBlocks=" + totalBlocks +
+                    ", freeBlocks=" + freeBlocks +
+                    ", availableBlocks=" + availableBlocks +
+                    ", blockByteSize=" + blockByteSize +
+                    ", totalBytes=" + totalBytes +
+                    ", freeBytes=" + freeBytes +
+                    ", availableBytes=" + availableBytes +
+                    '}';
+        }
+    }
 }

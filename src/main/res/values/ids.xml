@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <!--md viewpager needs start-->
-  <item name="materialviewpager_pagerTitleStrip" type="id"/>
+  <item name="materialviewpager_smartTabLayout" type="id"/>
   <item name="materialviewpager_imageHeader" type="id"/>
   <item name="materialviewpager_headerImageDarkLayer" type="id"/>
   <item name="materialviewpager_viewpager" type="id"/>
