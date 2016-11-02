@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-  <com.github.florent37.materialviewpager.header.MaterialViewPagerImageHeader
+  <com.handsomeyang.mango.thrid.mdviewpager.header.MaterialViewPagerImageHeader
       xmlns:android="http://schemas.android.com/apk/res/android"
       android:id="@id/materialviewpager_imageHeader"
       android:layout_width="match_parent"

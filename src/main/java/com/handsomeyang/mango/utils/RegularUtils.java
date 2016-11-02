@@ -1,13 +1,12 @@
 package com.handsomeyang.mango.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-import static com.handsomeyang.mango.utils.ConstantUtils.*;
+import static com.handsomeyang.mango.utils.ConstUtils.*;
 
 /**
  * <pre>

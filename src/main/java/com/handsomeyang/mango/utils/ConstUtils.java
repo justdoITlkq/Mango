@@ -8,10 +8,10 @@ package com.handsomeyang.mango.utils;
  *     desc  : 常量相关工具类
  * </pre>
  */
-public class ConstantUtils {
+public class ConstUtils {
 
-  private ConstantUtils() {
-    throw new UnsupportedOperationException("u can't fuck me...");
+  private ConstUtils() {
+    throw new UnsupportedOperationException("u can't instantiate me...");
   }
 
   /******************** 存储相关常量 ********************/
@@ -99,11 +99,6 @@ public class ConstantUtils {
   public static final String REGEX_IDCARD18 =
       "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9Xx])$";
   /**
-   * 正则表达式:验证密码(不包含特殊字符)
-   * 大小写字母，数字，6-16位
-   */
-  public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,16}$";
-  /**
    * 正则：邮箱
    */
   public static final String REGEX_EMAIL = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
@@ -129,4 +124,9 @@ public class ConstantUtils {
    */
   public static final String REGEX_IP =
       "((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)";
+  /**
+   * 正则表达式:验证密码(不包含特殊字符)
+   * 大小写字母，数字，6-16位
+   */
+  public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,16}$";
 }

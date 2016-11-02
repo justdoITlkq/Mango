@@ -9,6 +9,7 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -23,6 +24,7 @@ import com.handsomeyang.mango.thrid.smoothprogressbar.circular.CircularProgressB
 import com.handsomeyang.mango.thrid.smoothprogressbar.circular.CircularProgressDrawable;
 import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressBar;
 import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressDrawable;
+import com.handsomeyang.mango.utils.ConvertUtils;
 import com.nineoldandroids.animation.PropertyValuesHolder;
 import retrofit2.http.GET;
 
@@ -134,6 +136,54 @@ public class P {
     //------------------------------------------------------
     TextView tvTitle = (TextView) rootView.findViewById(R.id.tv_title_dialog);
     tvTitle.setVisibility(View.GONE);
+    mDialog_H.setContentView(rootView);
+    mDialog_H.show();
+  }
+  /**
+   * 横向进度条，没有dialog背景暗色
+   */
+  public static void h_(Context context) {
+    mDialog_H = new Dialog(context);
+    mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    View rootView =
+        LayoutInflater.from(context).inflate(R.layout.dialog_smooth_progressbar_horizontal, null);
+    //inerpolator------------------------------------------------------
+    ProgressBar mSmoothProgressBar =
+        (ProgressBar) rootView.findViewById(R.id.smooth_progressbar_horizontal);
+
+    SmoothProgressDrawable mSmoothProgressDrawable =
+        new SmoothProgressDrawable.Builder(context).sectionsCount(4)
+            .separatorLength(25)
+            .strokeWidth(35f)
+            .colors(context.getResources().getIntArray(R.array.mycolors))
+            .interpolator(new AccelerateDecelerateInterpolator())
+            .progressiveStart(true)
+            .progressiveStartSpeed(1.5f)
+            .progressiveStopSpeed(0.7f)
+            .speed(1f)
+            .build();
+    mSmoothProgressBar.setIndeterminateDrawable(mSmoothProgressDrawable);
+
+    //让进度条变长
+    ViewGroup.LayoutParams layoutParamsPro = mSmoothProgressBar.getLayoutParams();
+    layoutParamsPro.width = ConvertUtils.dp2px(context, 250);
+    mSmoothProgressBar.setLayoutParams(layoutParamsPro);
+
+    //------------------------------------------------------
+    TextView tvTitle = (TextView) rootView.findViewById(R.id.tv_title_dialog);
+    tvTitle.setVisibility(View.GONE);
+
+    //让dialog 背景消失
+    //mDialog_H.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    //设置周围暗色指数    1为全黑   0为全透明
+    mDialog_H.getWindow().setDimAmount(0f);
+
+    WindowManager.LayoutParams layoutParams = mDialog_H.getWindow().getAttributes();
+    layoutParams.y = 100;
+    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+    mDialog_H.getWindow().setAttributes(layoutParams);
+
+    mDialog_H.setCancelable(false);
     mDialog_H.setContentView(rootView);
     mDialog_H.show();
   }

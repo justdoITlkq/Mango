@@ -15,12 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.astuetz.PagerSlidingTabStrip;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.thrid.mdviewpager.header.HeaderDesign;
 import com.handsomeyang.mango.thrid.mdviewpager.header.MaterialViewPagerImageHelper;
+import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 /**
  * Created by florentchampigny on 28/04/15.
@@ -56,11 +57,11 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
    */
   private ViewGroup headerBackgroundContainer;
   /**
-   * the layout containing tabs
-   * default : add @layout/material_view_pager_pagertitlestrip_standard
-   * with viewpager_pagerTitleStrip you can set your own layout
+   * by  Handsomeyang    change pagerStrip --> smarttablayout
+   * default:add @layuout/material_view_pager_smarttablayout_default
+   * you can set your own layout
    */
-  private ViewGroup pagerTitleStripContainer;
+  private ViewGroup smartTabLayoutContainer;
   /**
    * the layout containing the viewpager, can be replaced to add your own implementation of
    * viewpager
@@ -136,13 +137,13 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
   }
 
   /**
-   * Retrieve the displayed tabs
+   * 找到vp indicator
    *
-   * @return the displayed tabs
+   * @return vp indicator
    */
-  public PagerSlidingTabStrip getPagerTitleStrip() {
-    return (PagerSlidingTabStrip) pagerTitleStripContainer.findViewById(
-        R.id.materialviewpager_pagerTitleStrip);
+  public SmartTabLayout getSmartTabLayout() {
+    return (SmartTabLayout) smartTabLayoutContainer.findViewById(
+        R.id.materialviewpager_smartTabLayout);
   }
 
   /**
@@ -306,7 +307,7 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
         .inflate(R.layout.material_view_pager_layout, this, false));
 
     headerBackgroundContainer = (ViewGroup) findViewById(R.id.headerBackgroundContainer);
-    pagerTitleStripContainer = (ViewGroup) findViewById(R.id.pagerTitleStripContainer);
+    smartTabLayoutContainer = (ViewGroup) findViewById(R.id.smartTabLayoutContainer);
     viewpagerContainer = (ViewGroup) findViewById(R.id.viewpager_layout);
     logoContainer = (ViewGroup) findViewById(R.id.logoContainer);
 
@@ -345,11 +346,18 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
 
     if (isInEditMode()) { //preview titlestrip
       //add fake tabs on edit mode
-      settings.pagerTitleStripId = R.layout.tools_material_view_pager_pagertitlestrip;
+      //settings.pagerTitleStripId = R.layout.tools_material_view_pager_pagertitlestrip;
+      settings.smartTablayoutId=R.layout. tools_material_view_pager_pagertitlestrip;
     }
-    if (settings.pagerTitleStripId != -1) {
-      pagerTitleStripContainer.addView(LayoutInflater.from(getContext())
-          .inflate(settings.pagerTitleStripId, pagerTitleStripContainer, false));
+    //if (settings.pagerTitleStripId != -1) {
+    //  //pagerTitleStripContainer.addView(LayoutInflater.from(getContext())
+    //  smartTabLayoutContainer.addView(LayoutInflater.from(getContext())
+    //      //.inflate(settings.pagerTitleStripId, pagerTitleStripContainer, false));
+    //      .inflate(settings.pagerTitleStripId, smartTabLayoutContainer, false));
+    //}
+    if (settings.smartTablayoutId != -1) {
+      smartTabLayoutContainer.addView(LayoutInflater.from(getContext())
+          .inflate(settings.smartTablayoutId, smartTabLayoutContainer, false));
     }
 
     if (settings.logoLayoutId != -1) {
@@ -372,7 +380,9 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
     if (!isInEditMode()) {
       materialViewPagerHeader = MaterialViewPagerHeader.withToolbar(mToolbar)
           .withToolbarLayoutBackground(toolbarLayoutBackground)
-          .withPagerSlidingTabStrip(pagerTitleStripContainer)
+          //.withPagerSlidingTabStrip(pagerTitleStripContainer)
+          .withSmartTabLayout(smartTabLayoutContainer)
+          .withToolbarLayoutBackground(smartTabLayoutContainer)
           .withHeaderBackground(headerBackground)
           .withStatusBackground(findViewById(R.id.statusBackground))
           .withLogo(logoContainer);
@@ -384,7 +394,8 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
 
       //if in edit mode, add fake cardsviews
       View sample = LayoutInflater.from(getContext())
-          .inflate(R.layout.tools_list_items, pagerTitleStripContainer, false);
+          //.inflate(R.layout.tools_list_items, pagerTitleStripContainer, false);
+          .inflate(R.layout.tools_list_items, smartTabLayoutContainer, false);
 
       LayoutParams params = (LayoutParams) sample.getLayoutParams();
       int marginTop = Math.round(Utils.dpToPx(settings.headerHeight + 10, getContext()));
@@ -407,12 +418,15 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
               getContext());
       headerBackground.setLayoutParams(layoutParams);
     }
-    if (pagerTitleStripContainer != null) {
+    //if (pagerTitleStripContainer != null) {
+    if (smartTabLayoutContainer != null) {
       RelativeLayout.LayoutParams layoutParams =
-          (RelativeLayout.LayoutParams) pagerTitleStripContainer.getLayoutParams();
+          //(RelativeLayout.LayoutParams) pagerTitleStripContainer.getLayoutParams();
+          (RelativeLayout.LayoutParams) smartTabLayoutContainer.getLayoutParams();
       int marginTop = (int) Utils.dpToPx(this.settings.headerHeight - 40, getContext());
       layoutParams.setMargins(0, marginTop, 0, 0);
-      pagerTitleStripContainer.setLayoutParams(layoutParams);
+      //pagerTitleStripContainer.setLayoutParams(layoutParams);
+      smartTabLayoutContainer.setLayoutParams(layoutParams);
     }
     if (toolbarLayoutBackground != null) {
       ViewGroup.LayoutParams layoutParams = toolbarLayoutBackground.getLayoutParams();

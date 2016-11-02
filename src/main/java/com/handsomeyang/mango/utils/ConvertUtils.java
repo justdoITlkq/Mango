@@ -4,16 +4,21 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
-import static com.facebook.common.util.ByteConstants.KB;
+import static com.handsomeyang.mango.utils.ConstUtils.*;
 
 /**
  * <pre>
@@ -25,6 +30,10 @@ import static com.facebook.common.util.ByteConstants.KB;
  */
 public class ConvertUtils {
 
+  private ConvertUtils() {
+    throw new UnsupportedOperationException("u can't instantiate me...");
+  }
+
   static final char hexDigits[] =
       { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
@@ -33,16 +42,19 @@ public class ConvertUtils {
    * <p>例如：</p>
    * bytes2HexString(new byte[] { 0, (byte) 0xa8 }) returns 00A8
    *
-   * @param bytes byte数组
+   * @param bytes 字节数组
    * @return 16进制大写字符串
    */
   public static String bytes2HexString(byte[] bytes) {
-    char[] res = new char[bytes.length << 1];
-    for (int i = 0, j = 0; i < bytes.length; i++) {
-      res[j++] = hexDigits[bytes[i] >>> 4 & 0x0f];
-      res[j++] = hexDigits[bytes[i] & 0x0f];
+    if (bytes == null) return null;
+    int len = bytes.length;
+    if (len <= 0) return null;
+    char[] ret = new char[len << 1];
+    for (int i = 0, j = 0; i < len; i++) {
+      ret[j++] = hexDigits[bytes[i] >>> 4 & 0x0f];
+      ret[j++] = hexDigits[bytes[i] & 0x0f];
     }
-    return new String(res);
+    return new String(ret);
   }
 
   /**
@@ -54,16 +66,18 @@ public class ConvertUtils {
    * @return 字节数组
    */
   public static byte[] hexString2Bytes(String hexString) {
+    if (StringUtils.isSpace(hexString)) return null;
     int len = hexString.length();
     if (len % 2 != 0) {
-      throw new IllegalArgumentException("长度不是偶数");
+      hexString = "0" + hexString;
+      len = len + 1;
     }
     char[] hexBytes = hexString.toUpperCase().toCharArray();
-    byte[] res = new byte[len >>> 1];
+    byte[] ret = new byte[len >> 1];
     for (int i = 0; i < len; i += 2) {
-      res[i >> 1] = (byte) (hex2Dec(hexBytes[i]) << 4 | hex2Dec(hexBytes[i + 1]));
+      ret[i >> 1] = (byte) (hex2Dec(hexBytes[i]) << 4 | hex2Dec(hexBytes[i + 1]));
     }
-    return res;
+    return ret;
   }
 
   /**
@@ -89,6 +103,7 @@ public class ConvertUtils {
    * @return 字节数组
    */
   public static byte[] chars2Bytes(char[] chars) {
+    if (chars == null || chars.length <= 0) return null;
     int len = chars.length;
     byte[] bytes = new byte[len];
     for (int i = 0; i < len; i++) {
@@ -104,12 +119,131 @@ public class ConvertUtils {
    * @return 字符数组
    */
   public static char[] bytes2Chars(byte[] bytes) {
+    if (bytes == null) return null;
     int len = bytes.length;
+    if (len <= 0) return null;
     char[] chars = new char[len];
     for (int i = 0; i < len; i++) {
       chars[i] = (char) (bytes[i] & 0xff);
     }
     return chars;
+  }
+
+  /**
+   * 字节数转以unit为单位的size
+   *
+   * @param byteNum 字节数
+   * @param unit <ul>
+   * <li>{@link ConstUtils.MemoryUnit#BYTE}: 字节</li>
+   * <li>{@link ConstUtils.MemoryUnit#KB}  : 千字节</li>
+   * <li>{@link ConstUtils.MemoryUnit#MB}  : 兆</li>
+   * <li>{@link ConstUtils.MemoryUnit#GB}  : GB</li>
+   * </ul>
+   * @return 以unit为单位的size
+   */
+  public static double byte2Size(long byteNum, ConstUtils.MemoryUnit unit) {
+    if (byteNum < 0) return -1;
+    switch (unit) {
+      default:
+      case BYTE:
+        return (double) byteNum / BYTE;
+      case KB:
+        return (double) byteNum / KB;
+      case MB:
+        return (double) byteNum / MB;
+      case GB:
+        return (double) byteNum / GB;
+    }
+  }
+
+  /**
+   * 以unit为单位的size转字节数
+   *
+   * @param size 大小
+   * @param unit <ul>
+   * <li>{@link ConstUtils.MemoryUnit#BYTE}: 字节</li>
+   * <li>{@link ConstUtils.MemoryUnit#KB}  : 千字节</li>
+   * <li>{@link ConstUtils.MemoryUnit#MB}  : 兆</li>
+   * <li>{@link ConstUtils.MemoryUnit#GB}  : GB</li>
+   * </ul>
+   * @return 字节数
+   */
+  public static long size2Byte(long size, ConstUtils.MemoryUnit unit) {
+    if (size < 0) return -1;
+    switch (unit) {
+      default:
+      case BYTE:
+        return size * BYTE;
+      case KB:
+        return size * KB;
+      case MB:
+        return size * MB;
+      case GB:
+        return size * GB;
+    }
+  }
+
+  /**
+   * 字节数转合适大小
+   * <p>保留3位小数</p>
+   *
+   * @param byteNum 字节数
+   * @return 1...1024 unit
+   */
+  public static String byte2FitSize(long byteNum) {
+    if (byteNum < 0) {
+      return "shouldn't be less than zero!";
+    } else if (byteNum < KB) {
+      return String.format(Locale.getDefault(), "%.3fB", (double) byteNum);
+    } else if (byteNum < MB) {
+      return String.format(Locale.getDefault(), "%.3fKB", (double) byteNum / KB);
+    } else if (byteNum < GB) {
+      return String.format(Locale.getDefault(), "%.3fMB", (double) byteNum / MB);
+    } else {
+      return String.format(Locale.getDefault(), "%.3fGB", (double) byteNum / GB);
+    }
+  }
+
+  /**
+   * bytes转bits
+   *
+   * @param bytes 字节数组
+   * @return bits
+   */
+  public static String bytes2Bits(byte[] bytes) {
+    StringBuilder sb = new StringBuilder();
+    for (byte aByte : bytes) {
+      for (int j = 7; j >= 0; --j) {
+        sb.append(((aByte >> j) & 0x01) == 0 ? '0' : '1');
+      }
+    }
+    return sb.toString();
+  }
+
+  /**
+   * bits转bytes
+   *
+   * @param bits 二进制
+   * @return bytes
+   */
+  public static byte[] bits2Bytes(String bits) {
+    int lenMod = bits.length() % 8;
+    int byteLen = bits.length() / 8;
+    // 不是8的倍数前面补0
+    if (lenMod != 0) {
+      for (int i = lenMod; i < 8; i++) {
+        bits = "0" + bits;
+      }
+      byteLen++;
+    }
+    byte[] bytes = new byte[byteLen];
+    for (int i = 0; i < byteLen; ++i) {
+      for (int j = 0; j < 8; ++j) {
+        bytes[i] <<= 1;
+        bytes[i] |= bits.charAt(i * 8 + j) - '0';
+      }
+    }
+    return bytes;
   }
 
   /**
@@ -132,7 +266,7 @@ public class ConvertUtils {
       e.printStackTrace();
       return null;
     } finally {
-      FileUtils.closeIO(is);
+      CloseUtils.closeIO(is);
     }
   }
 
@@ -154,6 +288,7 @@ public class ConvertUtils {
    * @return 字节数组
    */
   public static byte[] inputStream2Bytes(InputStream is) {
+    if (is == null) return null;
     return input2OutputStream(is).toByteArray();
   }
 
@@ -164,6 +299,7 @@ public class ConvertUtils {
    * @return 输入流
    */
   public static InputStream bytes2InputStream(byte[] bytes) {
+    if (bytes == null || bytes.length <= 0) return null;
     return new ByteArrayInputStream(bytes);
   }
 
@@ -185,6 +321,7 @@ public class ConvertUtils {
    * @return 字节数组
    */
   public static OutputStream bytes2OutputStream(byte[] bytes) {
+    if (bytes == null || bytes.length <= 0) return null;
     ByteArrayOutputStream os = null;
     try {
       os = new ByteArrayOutputStream();
@@ -194,7 +331,7 @@ public class ConvertUtils {
       e.printStackTrace();
       return null;
     } finally {
-      FileUtils.closeIO(os);
+      CloseUtils.closeIO(os);
     }
   }
 
@@ -240,7 +377,7 @@ public class ConvertUtils {
    * @return 字符串
    */
   public static String outputStream2String(OutputStream out, String charsetName) {
-    if (out == null) return null;
+    if (out == null || StringUtils.isSpace(charsetName)) return null;
     try {
       return new String(outputStream2Bytes(out), charsetName);
     } catch (UnsupportedEncodingException e) {
@@ -275,21 +412,16 @@ public class ConvertUtils {
    */
   public static byte[] bitmap2Bytes(Bitmap bitmap, Bitmap.CompressFormat format) {
     if (bitmap == null) return null;
-    ByteArrayOutputStream baos = null;
-    try {
-      baos = new ByteArrayOutputStream();
-      bitmap.compress(format, 100, baos);
-      return baos.toByteArray();
-    } finally {
-      FileUtils.closeIO(baos);
-    }
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    bitmap.compress(format, 100, baos);
+    return baos.toByteArray();
   }
 
   /**
    * byteArr转bitmap
    *
    * @param bytes 字节数组
-   * @return bitmap对象
+   * @return bitmap
    */
   public static Bitmap bytes2Bitmap(byte[] bytes) {
     return (bytes == null || bytes.length == 0) ? null
@@ -300,7 +432,7 @@ public class ConvertUtils {
    * drawable转bitmap
    *
    * @param drawable drawable对象
-   * @return bitmap对象
+   * @return bitmap
    */
   public static Bitmap drawable2Bitmap(Drawable drawable) {
     return drawable == null ? null : ((BitmapDrawable) drawable).getBitmap();
@@ -309,12 +441,12 @@ public class ConvertUtils {
   /**
    * bitmap转drawable
    *
-   * @param resources resources对象
+   * @param res resources对象
    * @param bitmap bitmap对象
-   * @return drawable对象
+   * @return drawable
    */
-  public static Drawable bitmap2Drawable(Resources resources, Bitmap bitmap) {
-    return bitmap == null ? null : new BitmapDrawable(resources, bitmap);
+  public static Drawable bitmap2Drawable(Resources res, Bitmap bitmap) {
+    return bitmap == null ? null : new BitmapDrawable(res, bitmap);
   }
 
   /**
@@ -325,18 +457,38 @@ public class ConvertUtils {
    * @return 字节数组
    */
   public static byte[] drawable2Bytes(Drawable drawable, Bitmap.CompressFormat format) {
-    return bitmap2Bytes(drawable2Bitmap(drawable), format);
+    return drawable == null ? null : bitmap2Bytes(drawable2Bitmap(drawable), format);
   }
 
   /**
    * byteArr转drawable
    *
-   * @param resources resources对象
+   * @param res resources对象
    * @param bytes 字节数组
-   * @return drawable对象
+   * @return drawable
    */
-  public static Drawable bytes2Drawable(Resources resources, byte[] bytes) {
-    return bitmap2Drawable(resources, bytes2Bitmap(bytes));
+  public static Drawable bytes2Drawable(Resources res, byte[] bytes) {
+    return res == null ? null : bitmap2Drawable(res, bytes2Bitmap(bytes));
+  }
+
+  /**
+   * view转Bitmap
+   *
+   * @param view 视图
+   * @return bitmap
+   */
+  public static Bitmap view2Bitmap(View view) {
+    if (view == null) return null;
+    Bitmap ret = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+    Canvas canvas = new Canvas(ret);
+    Drawable bgDrawable = view.getBackground();
+    if (bgDrawable != null) {
+      bgDrawable.draw(canvas);
+    } else {
+      canvas.drawColor(Color.WHITE);
+    }
+    view.draw(canvas);
+    return ret;
   }
 
   /**
