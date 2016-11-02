@@ -55,6 +55,8 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 
   OnTabItemClickListener[] itemClickListeners;
 
+  private View mDecorView;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
     super.onCreate(savedInstanceState);
@@ -66,9 +68,15 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
   private void init() {
     //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-      View decorView = getWindow().getDecorView();
-      int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-      decorView.setSystemUiVisibility(option);
+      mDecorView = getWindow().getDecorView();
+      int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+          | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+          | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+          | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+          | View.SYSTEM_UI_FLAG_FULLSCREEN
+          | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+      mDecorView.setSystemUiVisibility(option);
+
       getWindow().setStatusBarColor(Color.TRANSPARENT);
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
       WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
@@ -87,6 +95,22 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
     initViews();
 
     L.e(this.getClass().getSimpleName() + "   Oncreate  ......");
+  }
+
+  /**
+   * 相当于onResume  当窗口回到焦点的时候调用
+   */
+  @Override public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+    //当app 从后台回来的时候会清除flag  所以要重置flag
+    if (hasFocus) {
+      mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+          | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+          | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+          | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+          | View.SYSTEM_UI_FLAG_FULLSCREEN
+          | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
   }
 
   /**

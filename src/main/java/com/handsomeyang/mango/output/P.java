@@ -120,7 +120,7 @@ public class P {
             //环形半径宽度
             .strokeWidth(20.0f)
             //设置颜色
-            .colors(RandomColorUtils.randomColor(5))
+            .colors(RandomColorUtils.randomColor(10))
             //弧形旋转速度
             .sweepSpeed(1.2f)
             //旋转速度
