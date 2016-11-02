@@ -59,4 +59,8 @@
   <dimen name="bb_height">66dp</dimen>
   <!--bottom bar needs end -->
 
+  <!--AppIntro needs start -->
+  <dimen name="appIntroBottomBarHeight">64dp</dimen>
+  <!--AppIntro needs end -->
+
 </resources>

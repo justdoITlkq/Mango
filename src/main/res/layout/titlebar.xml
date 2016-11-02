@@ -10,8 +10,8 @@
     android:minHeight="?attr/actionBarSize"
     android:paddingTop="25dp"
 
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:theme="@style/ThemeOverlay.AppCompat.Dialog.Alert"
     >
   <LinearLayout
       android:id="@+id/title_bar_default"
@@ -88,7 +88,6 @@
           android:layout_alignParentRight="true"
           android:layout_centerVertical="true"
           android:scaleType="centerCrop"
-          android:src="@drawable/back_arrow"
           />
     </RelativeLayout>
 
