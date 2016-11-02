@@ -26,6 +26,7 @@ import com.handsomeyang.mango.thrid.smoothprogressbar.circular.CircularProgressD
 import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressBar;
 import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressDrawable;
 import com.handsomeyang.mango.utils.ConvertUtils;
+import com.handsomeyang.mango.utils.RandomColorUtils;
 import com.nineoldandroids.animation.PropertyValuesHolder;
 import retrofit2.http.GET;
 
@@ -88,7 +89,42 @@ public class P {
             //弧形旋转速度
             .sweepSpeed(1.5f)
             //旋转速度
-            .rotationSpeed(2.0f).build();
+            .rotationSpeed(1.5f).build();
+    mProgressBar.setIndeterminateDrawable(mCircularProgressDrawable);
+    mDialog_C.setContentView(mProgressBar);
+    mDialog_C.show();
+  }
+  public static void c_Interpolator_RandomColor(Context context) {
+    //progressbar 放在dialog上
+    mDialog_C = new Dialog(context);
+    //去掉标题
+    mDialog_C.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    //让dialog 背景消失
+    mDialog_C.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    //设置周围暗色指数    1为全黑
+    mDialog_C.getWindow().setDimAmount(0f);
+    //设置进入动画    淡入淡出
+    mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
+    //点击外部不能取消
+    mDialog_C.setCanceledOnTouchOutside(false);
+    //View mInflate =
+    //    LayoutInflater.from(context).inflate(R.layout.dialog_smooth_progressbar_circular, null);
+    ProgressBar mProgressBar = new ProgressBar(context);
+    CircularProgressDrawable mCircularProgressDrawable =
+        new CircularProgressDrawable.Builder(context).angleInterpolator(
+            new FastOutLinearInInterpolator())
+            //设置旋转插值器
+            .sweepInterpolator(new OvershootInterpolator())
+            //设置style
+            .style(CircularProgressDrawable.STYLE_ROUNDED)
+            //环形半径宽度
+            .strokeWidth(20.0f)
+            //设置颜色
+            .colors(RandomColorUtils.randomColor(5))
+            //弧形旋转速度
+            .sweepSpeed(1.2f)
+            //旋转速度
+            .rotationSpeed(1.5f).build();
     mProgressBar.setIndeterminateDrawable(mCircularProgressDrawable);
     mDialog_C.setContentView(mProgressBar);
     mDialog_C.show();
@@ -161,7 +197,7 @@ public class P {
             .progressiveStart(true)
             .progressiveStartSpeed(1.5f)
             .progressiveStopSpeed(0.7f)
-            .speed(1f)
+            .speed(1.5f)
             .build();
     mSmoothProgressBar.setIndeterminateDrawable(mSmoothProgressDrawable);
 
@@ -191,7 +227,7 @@ public class P {
   /**
    * 横向进度条，没有dialog背景暗色
    */
-  public static void h_(Context context) {
+  public static void h_randomColor(Context context) {
     mDialog_H = new Dialog(context);
     mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
     View rootView =
@@ -204,12 +240,12 @@ public class P {
         new SmoothProgressDrawable.Builder(context).sectionsCount(4)
             .separatorLength(25)
             .strokeWidth(35f)
-            .colors(context.getResources().getIntArray(R.array.mycolors))
+            .colors(RandomColorUtils.randomColor(20))
             .interpolator(new AccelerateDecelerateInterpolator())
             .progressiveStart(true)
             .progressiveStartSpeed(1.5f)
             .progressiveStopSpeed(0.7f)
-            .speed(1f)
+            .speed(1.5f)
             .build();
     mSmoothProgressBar.setIndeterminateDrawable(mSmoothProgressDrawable);
 
