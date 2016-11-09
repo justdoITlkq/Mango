@@ -22,6 +22,7 @@ import com.handsomeyang.mango.thrid.bottombar.BottomBar;
 import com.handsomeyang.mango.thrid.bottombar.OnTabItemClickListener;
 import com.handsomeyang.mango.thrid.bottombar.OnTabSelectListener;
 
+import com.handsomeyang.mango.utils.ConvertUtils;
 import org.androidannotations.annotations.EActivity;
 
 import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
@@ -53,8 +54,6 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
   private boolean useTitlebar = false;
   private boolean useToolbar = false;
 
-  OnTabItemClickListener[] itemClickListeners;
-
   private View mDecorView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +69,9 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
       mDecorView = getWindow().getDecorView();
       int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-          | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+          //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
           | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-          | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+          //| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
           | View.SYSTEM_UI_FLAG_FULLSCREEN
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
       mDecorView.setSystemUiVisibility(option);
@@ -105,9 +104,9 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
     //当app 从后台回来的时候会清除flag  所以要重置flag
     if (hasFocus) {
       mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-          | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+          //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
           | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-          | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+          //| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
           | View.SYSTEM_UI_FLAG_FULLSCREEN
           | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
@@ -127,7 +126,7 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
       super.setContentView(layoutResID);
       //为了不让app内容占据status bar 和 navbar
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        getWindow().getDecorView().getRootView().setPaddingRelative(0, 60, 0, 100);
+        //getWindow().getDecorView().getRootView().setPaddingRelative(0, ConvertUtils.dp2px(this,55), 0, 100);
       }
     }
   }
@@ -225,30 +224,9 @@ import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
       bottombarLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
       bottombar.setLayoutParams(bottombarLayoutParams);
       mRelativeLayout.addView(bottombar);
-
-      ((BottomBar) bottombar).setOnTabSelectListener(new OnTabSelectListener() {
-        @Override public void onTabSelected(@IdRes int tabId) {
-          if (tabId == R.id.tab_1) {
-            itemClickListeners[0].onTabClick();
-          } else if (tabId == R.id.tab_2) {
-            itemClickListeners[1].onTabClick();
-          } else if (tabId == R.id.tab_3) {
-            itemClickListeners[2].onTabClick();
-          } else {
-            itemClickListeners[3].onTabClick();
-          }
-        }
-      });
     }
 
     mTitleBar.requestFocus();
-  }
-
-  /**
-   * 设置bottomBar的点击监听器
-   */
-  public void setOnTabItemClickListeners(OnTabItemClickListener[] itemClickListeners) {
-    this.itemClickListeners = itemClickListeners;
   }
 
   /**

@@ -32,7 +32,7 @@ public abstract class BaseFragment extends SwipeBackFragment {
   protected FragmentManager mFragmentManager;
 
   //about titlebar
-  private View mRootView;                            //Fragment 根布局
+  protected View mRootView;                            //Fragment 根布局
   private View mTitleBar, mTitleLeft, mTitleCenter, mTitleRight, mTitleRootView;
   private TextView mTvTitleLeft, mTvTitleCenter, mTvTitleRight;
   private ImageView mImageView;

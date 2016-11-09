@@ -159,6 +159,10 @@ dependencies {
   compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
   //smartTabLayout support v4包 fragment needs
   compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+  // md drawer needs
+  compile('com.mikepenz:materialdrawer:5.7.0@aar') {
+    transitive = true
+  }
 }
 
 
