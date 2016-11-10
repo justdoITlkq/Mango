@@ -25,7 +25,7 @@ import com.handsomeyang.mango.output.L;
  */
 public abstract class BaseFragment extends Fragment {
 
-  protected BaseActivity mContext;                      //作为上下文使用
+  protected BaseActivity mActivity;                      //作为上下文使用
   protected LayoutInflater mLayoutInflater;             //渲染器
   protected FragmentManager mFragmentManager;
 
@@ -42,11 +42,12 @@ public abstract class BaseFragment extends Fragment {
 
   @Override public void onAttach(Activity activity) {
     super.onAttach(activity);
-    mContext = (BaseActivity) activity;
+    mActivity = (BaseActivity) activity;
   }
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
+    mLayoutInflater= mActivity.getLayoutInflater();
 
     if (useTitlebar || useToolbar || useBottombar) {
       mRootView = initTileBar(setRootView());
@@ -54,7 +55,7 @@ public abstract class BaseFragment extends Fragment {
       mRootView = mLayoutInflater.inflate(setRootView(), container, false);
       //为了不让app内容占据status bar 和 navbar
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        mContext.getWindow().getDecorView().getRootView().setPaddingRelative(0, 60, 0, 100);
+        //mActivity.getWindow().getDecorView().getRootView().setPaddingRelative(0, 60, 0, 100);
       }
     }
     initConfig();
@@ -69,12 +70,12 @@ public abstract class BaseFragment extends Fragment {
   private void init() {
     //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
-      View decorView = mContext.getWindow().getDecorView();
+      View decorView = mActivity.getWindow().getDecorView();
       int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
       decorView.setSystemUiVisibility(option);
-      mContext.getWindow().setStatusBarColor(Color.TRANSPARENT);
+      mActivity.getWindow().setStatusBarColor(Color.TRANSPARENT);
     } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
-      WindowManager.LayoutParams localLayoutParams = mContext.getWindow().getAttributes();
+      WindowManager.LayoutParams localLayoutParams = mActivity.getWindow().getAttributes();
       localLayoutParams.flags =
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
@@ -96,7 +97,7 @@ public abstract class BaseFragment extends Fragment {
    */
 
   private View initTileBar(int layoutResID) {
-    RelativeLayout mRelativeLayout = new RelativeLayout(mContext);
+    RelativeLayout mRelativeLayout = new RelativeLayout(mActivity);
     ViewGroup.LayoutParams layoutParams =
         new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT);
@@ -308,7 +309,7 @@ public abstract class BaseFragment extends Fragment {
    * 如果startActivity有数据就返回true，如果没数据就返回false
    */
   public boolean start_Activity(Class activity, Bundle bundle) {
-    Intent mIntent = new Intent(mContext, activity);
+    Intent mIntent = new Intent(mActivity, activity);
     mIntent.putExtra("bundle", bundle);
     startActivity(mIntent);
     if (bundle == null) {
