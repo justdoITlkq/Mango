@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
+import javax.inject.Inject;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -47,7 +48,7 @@ public abstract class BaseFragment extends Fragment {
 
   @Nullable @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
-    mLayoutInflater= mActivity.getLayoutInflater();
+    mLayoutInflater = mActivity.getLayoutInflater();
 
     if (useTitlebar || useToolbar || useBottombar) {
       mRootView = initTileBar(setRootView());
