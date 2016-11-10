@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import com.handsomeyang.mango.R;
@@ -347,7 +346,7 @@ public class MaterialViewPager extends FrameLayout implements ViewPager.OnPageCh
     if (isInEditMode()) { //preview titlestrip
       //add fake tabs on edit mode
       //settings.pagerTitleStripId = R.layout.tools_material_view_pager_pagertitlestrip;
-      settings.smartTablayoutId=R.layout. tools_material_view_pager_pagertitlestrip;
+      settings.smartTablayoutId = R.layout.tools_material_view_pager_pagertitlestrip;
     }
     //if (settings.pagerTitleStripId != -1) {
     //  //pagerTitleStripContainer.addView(LayoutInflater.from(getContext())
