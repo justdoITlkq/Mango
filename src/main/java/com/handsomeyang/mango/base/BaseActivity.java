@@ -6,7 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
-import org.androidannotations.annotations.EActivity;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -28,7 +27,7 @@ import org.androidannotations.annotations.EActivity;
  * 继承appcompatActivity是为了使Toolbar兼容的
  * 开发要注意向md风格靠近
  */
-@EActivity public abstract class BaseActivity extends FragmentActivity {
+public abstract class BaseActivity extends FragmentActivity {
   protected BaseActivity mContext;
   protected LayoutInflater mLayoutInflater;
   protected FragmentManager mFragmentManager;
@@ -88,6 +87,10 @@ import org.androidannotations.annotations.EActivity;
     L.e(this.getClass().getSimpleName() + "   Oncreate  ......");
   }
 
+  public abstract int setRootView();
+
+  public abstract void initViews();
+
   /**
    * 相当于onResume  当窗口回到焦点的时候调用
    */
@@ -115,10 +118,6 @@ import org.androidannotations.annotations.EActivity;
       initTileBar(layoutResID);
     } else {
       super.setContentView(layoutResID);
-      //为了不让app内容占据status bar 和 navbar
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        //getWindow().getDecorView().getRootView().setPaddingRelative(0, ConvertUtils.dp2px(this,55), 0, 100);
-      }
     }
   }
 
@@ -255,7 +254,11 @@ import org.androidannotations.annotations.EActivity;
     }
     if (mTitleLeft != null) {
       mTitleLeft.setVisibility(View.VISIBLE);
-      mTitleLeft.setOnClickListener(view -> BaseActivity.this.finish());
+      mTitleLeft.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+          BaseActivity.this.finish();
+        }
+      });
     }
   }
 
@@ -339,10 +342,16 @@ import org.androidannotations.annotations.EActivity;
     useBottombar = true;
   }
 
+  //对Activity操作---------------------------------------------------------------------------------
+  public void mangoStartActivity(Class actiivty) {
+    Intent intent = new Intent(mContext, actiivty);
+    startActivity(intent);
+  }
+
   /**
    * 如果startActivity有数据就返回true，如果没数据就返回false
    */
-  public boolean start_Activity(Class activity, Bundle bundle) {
+  public boolean mangoStartActivity(Class activity, Bundle bundle) {
     Intent mIntent = new Intent(mContext, activity);
     mIntent.putExtra("bundle", bundle);
     startActivity(mIntent);
@@ -352,16 +361,39 @@ import org.androidannotations.annotations.EActivity;
     return true;
   }
 
-  /**
-   * 如果fragment 栈中数量大于1，就移除最顶层fragment
-   */
-  public void remove_Fragment() {
-    if (mFragmentManager.getBackStackEntryCount() > 1) {
-      mFragmentManager.popBackStack();
-    } else {
-      finish();
-    }
+  //对于Activity操作结束------------------------------------------------------------------------
+
+  //对于fragment操作--------------------------------------------------------------------------
+  public void mangoAddFragment(int des, BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .add(des, fragment, fragment.getClass().getSimpleName())
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
   }
+
+  public void mangoReplaceFragment(int des, BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .replace(des, fragment, fragment.getClass().getSimpleName())
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+
+  public void mangoHideFragment(BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .hide(fragment)
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+
+  public void mangoShowFragment(BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .show(fragment)
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+  //对于framgent 操作结束-----------------------------------------------------------------
+
+  //backpress 相关----------------------------------------------------------------------
 
   /**
    * 是否安全退出
@@ -386,6 +418,17 @@ import org.androidannotations.annotations.EActivity;
   }
 
   /**
+   * 如果fragment 栈中数量大于1，就移除最顶层fragment
+   */
+  public void mangoRemoveFragment() {
+    if (mFragmentManager.getBackStackEntryCount() > 1) {
+      mFragmentManager.popBackStack();
+    } else {
+      finish();
+    }
+  }
+
+  /**
    * 只有回退栈中没有事务的时候才会触发acticity安全退出
    */
   @Override public void onBackPressed() {
@@ -398,16 +441,13 @@ import org.androidannotations.annotations.EActivity;
       super.onBackPressed();
     } else {
       //如果回退栈中有事务，就要先退出fragment
-      remove_Fragment();
+      mangoRemoveFragment();
     }
   }
 
+  //backpress 相关----------------------------------------------------------------------
   @Override protected void onDestroy() {
     super.onDestroy();
     mBaseActivityMaster.removeFromMaster(this);
   }
-
-  public abstract int setRootView();
-
-  public abstract void initViews();
 }

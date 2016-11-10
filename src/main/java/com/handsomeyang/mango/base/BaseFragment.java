@@ -54,10 +54,6 @@ public abstract class BaseFragment extends Fragment {
       mRootView = initTileBar(setRootView());
     } else {
       mRootView = mLayoutInflater.inflate(setRootView(), container, false);
-      //为了不让app内容占据status bar 和 navbar
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        //mActivity.getWindow().getDecorView().getRootView().setPaddingRelative(0, 60, 0, 100);
-      }
     }
     initConfig();
     init();
@@ -67,6 +63,11 @@ public abstract class BaseFragment extends Fragment {
 
   protected void initConfig() {
   }
+
+  //容器id
+  public abstract int setRootView();
+
+  protected abstract void initViews();
 
   private void init() {
     //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统
@@ -223,7 +224,11 @@ public abstract class BaseFragment extends Fragment {
     }
     if (mTitleLeft != null) {
       mTitleLeft.setVisibility(View.VISIBLE);
-      mTitleLeft.setOnClickListener(view -> BaseFragment.this.killSelf());
+      mTitleLeft.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+          BaseFragment.this.killSelf();
+        }
+      });
     }
   }
 
@@ -306,19 +311,28 @@ public abstract class BaseFragment extends Fragment {
     useBottombar = true;
   }
 
+  //对于Activiy的操作------------------------------------------------------------------------------
+
   /**
    * 如果startActivity有数据就返回true，如果没数据就返回false
    */
-  public boolean start_Activity(Class activity, Bundle bundle) {
+  public boolean mangoStartActivity(Class activity, Bundle bundle) {
     Intent mIntent = new Intent(mActivity, activity);
     mIntent.putExtra("bundle", bundle);
-    startActivity(mIntent);
+    mActivity.startActivity(mIntent);
     if (bundle == null) {
       return false;
     }
     return true;
   }
-  //--------------------------------------------------
+
+  public void mangoStartActiviy(Class activity) {
+    Intent intent = new Intent(mActivity, activity);
+    mActivity.startActivity(intent);
+  }
+  //对于Activity 操作结束-------------------------------------------------------------------------
+
+  //对于Fragment的操作-----------------------------------------------------------------------------
 
   /**
    * 封装添加fragment,如果没有add就add上来，如果已经add就替换原有的fragment
@@ -326,7 +340,7 @@ public abstract class BaseFragment extends Fragment {
    * @param targetFragment 目标fragment
    * @param ResID 要添加到activity的位置
    */
-  public void addOrReplace_Fragment(BaseFragment targetFragment, int ResID) {
+  public void mangoAddOrReplaceFragment(BaseFragment targetFragment, int ResID) {
     if (targetFragment == null) {
       mFragmentManager.beginTransaction()
           .add(ResID, targetFragment)
@@ -340,10 +354,39 @@ public abstract class BaseFragment extends Fragment {
     }
   }
 
+
+  public void mangoAddFragment(int des, BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .add(des, fragment, fragment.getClass().getSimpleName())
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+
+  public void mangoReplaceFragment(int des, BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .replace(des, fragment, fragment.getClass().getSimpleName())
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+
+  public void mangoHideFragment(BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .hide(fragment)
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+
+  public void mangoShowFragment(BaseFragment fragment) {
+    mFragmentManager.beginTransaction()
+        .show(fragment)
+        .addToBackStack(fragment.getClass().getSimpleName())
+        .commit();
+  }
+
   /**
    * 如果fragment 栈中数量大于1，就移除最顶层fragment
    */
-  public void remove_Fragment() {
+  public void mangoRemoveFragment() {
     if (mFragmentManager.getBackStackEntryCount() > 1) {
       mFragmentManager.popBackStack();
     } else {
@@ -351,15 +394,7 @@ public abstract class BaseFragment extends Fragment {
     }
   }
 
-  /**
-   * showframgent
-   */
-  public void show_Fragment(BaseFragment targetFragment) {
-    mFragmentManager.beginTransaction()
-        .show(targetFragment)
-        .addToBackStack(targetFragment.getClass().getSimpleName())
-        .commitAllowingStateLoss();
-  }
+  //对于framgent 操作结束-------------------------------------------------------------------------
 
   /**
    * 销毁自己  就是移除
@@ -373,9 +408,4 @@ public abstract class BaseFragment extends Fragment {
   @Override public void onDestroy() {
     super.onDestroy();
   }
-
-  //容器id
-  public abstract int setRootView();
-
-  protected abstract void initViews();
 }
