@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
-import me.yokeyword.fragmentation_swipeback.SwipeBackActivity;
 import org.androidannotations.annotations.EActivity;
 
 /**
@@ -27,7 +28,7 @@ import org.androidannotations.annotations.EActivity;
  * 继承appcompatActivity是为了使Toolbar兼容的
  * 开发要注意向md风格靠近
  */
-@EActivity public abstract class BaseActivity extends SwipeBackActivity {
+@EActivity public abstract class BaseActivity extends FragmentActivity {
   protected BaseActivity mContext;
   protected LayoutInflater mLayoutInflater;
   protected FragmentManager mFragmentManager;

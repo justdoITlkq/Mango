@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
@@ -14,18 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
-import com.handsomeyang.mango.thrid.bottombar.BottomBar;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
  */
-public abstract class BaseFragment extends SwipeBackFragment {
+public abstract class BaseFragment extends Fragment {
 
   protected BaseActivity mContext;                      //作为上下文使用
   protected LayoutInflater mLayoutInflater;             //渲染器
