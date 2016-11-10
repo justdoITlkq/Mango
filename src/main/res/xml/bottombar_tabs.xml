@@ -9,15 +9,15 @@
       barColorWhenSelected="#5D4037"
       icon="@drawable/ic_action_grade"
       id="@+id/tab_2"
-      title="关注"/>
+      title="消息"/>
   <tab
       barColorWhenSelected="#FF5252"
       icon="@drawable/ic_action_favorite"
       id="@+id/tab_3"
-      title="喜欢"/>
+      title="功能"/>
   <tab
       barColorWhenSelected="#FF9800"
       icon="@drawable/ic_action_account_circle"
       id="@+id/tab_4"
-      title="我的"/>
+      title="我"/>
 </tabs>

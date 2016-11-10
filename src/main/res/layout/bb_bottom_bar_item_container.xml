@@ -4,7 +4,7 @@
     <ImageView
         android:id="@+id/bb_bottom_bar_shadow"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="2dp"
         android:src="@drawable/bb_bottom_bar_top_shadow"/>
 
     <FrameLayout

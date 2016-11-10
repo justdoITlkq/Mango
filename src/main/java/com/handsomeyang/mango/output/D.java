@@ -42,7 +42,7 @@ public class D {
    * https://github.com/drakeet/MaterialDialog
    */
   public static void md(Context context, String title, String msg, View.OnClickListener listener) {
-    MaterialDialog mMaterialDialog = new MaterialDialog(context);
+    final MaterialDialog mMaterialDialog = new MaterialDialog(context);
     mMaterialDialog.setTitle(title)
         .setMessage(msg)
         .setCanceledOnTouchOutside(false)

@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import butterknife.ButterKnife;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
 
@@ -75,6 +76,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     //----------------------------------------------------------------------------------------------
+    ButterKnife.bind(this);
     mContext = this;
     mLayoutInflater = this.getLayoutInflater();
     mFragmentManager = this.getSupportFragmentManager();
