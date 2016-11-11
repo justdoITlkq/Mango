@@ -3,7 +3,7 @@
 <resources>
   <!--my title bar needs-->
   <!--标题栏的高度-->
-  <dimen name="title_bar_height">75dp</dimen>
+  <dimen name="title_bar_height">85dp</dimen>
   <!--两边标题栏的宽度-->
   <dimen name="title_bar_side_width">65dp</dimen>
   <dimen name="title_bar_side_margin">10dp</dimen>

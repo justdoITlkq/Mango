@@ -8,10 +8,10 @@
     android:background="?attr/colorPrimary"
 
     android:minHeight="?attr/actionBarSize"
-    android:paddingTop="25dp"
 
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dialog.Alert"
+    app:theme="@style/ThemeOverlay.AppCompat.Light"
+    android:paddingTop="25dp"
     >
   <LinearLayout
       android:id="@+id/title_bar_default"

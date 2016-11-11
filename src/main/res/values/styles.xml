@@ -9,14 +9,10 @@
 
 
   <!-- Base application theme. md Theme  -->
-  <style name="MangoBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">     <!-- customize the color palette -->
-    <item name="colorPrimary">@color/material_colorPrimary </item>              <!-- 对应ActionBar的颜色-->
-
-    <item name="colorPrimaryDark">@color/material_colorPrimaryDark</item>      <!-- 对应状态栏的颜色-->
-    <item name="colorAccent">@color/material_colorAccent</item>                <!-- 对应控件被选中的颜色-->
-    <item name="windowActionBar">false </item>                                  <!-- 去掉系统actionbar   这里和parent 中.noActionBar是一样的效果-->
-
-    <item name="android:windowNoTitle">true</item>                             <!-- 去掉系统actionbar-->
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
   </style>
   <!--my styles  start  ends -->
 
@@ -135,7 +131,7 @@
   <!--md viewapager needs end-->
 
 
-<!--bottom bar needs start -->
+  <!--bottom bar needs start -->
   <style name="BB_BottomBarItem">
     <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
     <item name="android:layout_width">wrap_content</item>
@@ -168,7 +164,7 @@
   <style name="BB_BottomBarBadge_Text" parent="TextAppearance.AppCompat.Body2">
     <item name="android:textColor">#FFFFFF</item>
   </style>
-<!--bottom bar needs end -->
+  <!--bottom bar needs end -->
 
   <!--AppIntro needs start-->
   <style name="AppIntroButtonStyleCompat" parent="Widget.AppCompat.Button.Borderless">

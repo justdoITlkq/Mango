@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
+import com.handsomeyang.mango.thrid.bottombar.BottomBar;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -47,6 +47,7 @@ public abstract class BaseActivity extends FragmentActivity {
   private boolean useTitlebar = false;
   private boolean useToolbar = false;
 
+  private BottomBar mBottomBar;
   private View mDecorView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +59,11 @@ public abstract class BaseActivity extends FragmentActivity {
    * 一些初始化赋值操作  如果不希望布局中的内容拉到状态栏上的话就在xml最外层+fitSystemWindow=true
    */
   private void init() {
-    //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统
+    //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统-----------------------------------------------
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
       mDecorView = getWindow().getDecorView();
-      int option = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-          //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-          | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-          //| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-          | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+      int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+          | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
       mDecorView.setSystemUiVisibility(option);
 
       getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -75,7 +73,7 @@ public abstract class BaseActivity extends FragmentActivity {
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
 
-    //----------------------------------------------------------------------------------------------
+    //标题栏设置结束------------------------------------------------------------------------------------
     ButterKnife.bind(this);
     mContext = this;
     mLayoutInflater = this.getLayoutInflater();
@@ -84,43 +82,35 @@ public abstract class BaseActivity extends FragmentActivity {
     mBaseActivityMaster.addToMaster(this);
     initConfig();
     setContentView(setRootView());
+
     initViews();
-
-    L.e(this.getClass().getSimpleName() + "   Oncreate  ......");
-  }
-
-  public abstract int setRootView();
-
-  public abstract void initViews();
-
-  /**
-   * 相当于onResume  当窗口回到焦点的时候调用
-   */
-  @Override public void onWindowFocusChanged(boolean hasFocus) {
-    super.onWindowFocusChanged(hasFocus);
-    //当app 从后台回来的时候会清除flag  所以要重置flag
-    if (hasFocus) {
-      mDecorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-          //| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-          | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-          //| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-          | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
   }
 
   /**
    * 初始化一些配置，比如使用标题栏或者使用bottombar
    */
   protected void initConfig() {
-    //useBottombar=true;
   }
+
+  public abstract int setRootView();
+
+  public abstract void initViews();
 
   @Override public void setContentView(int layoutResID) {
     if (useTitlebar || useToolbar || useBottombar) {
-      initTileBar(layoutResID);
+      initConfig(layoutResID);
     } else {
       super.setContentView(layoutResID);
     }
+
+    //为了设置每个布局页面都设置  android:fitSystemWindows=true;   须在setContentView之后------------
+    //http://www.jianshu.com/p/0acc12c29c1b  原po是 getchild（0） 因为我多嵌套了一层relativeLatyou 所以我写1
+    //ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
+    //View parentView = contentFrameLayout.getChildAt(1);
+    //if (parentView != null && Build.VERSION.SDK_INT >= 14) {
+    //  parentView.setFitsSystemWindows(true);
+    //}
+    //设置结束--------------------------------------------
   }
 
   /**
@@ -129,20 +119,21 @@ public abstract class BaseActivity extends FragmentActivity {
    * @param layoutResID 根布局
    * @return 添加标题栏后的根布局
    */
-  private void initTileBar(int layoutResID) {
+  private void initConfig(int layoutResID) {
     //rootview
-    RelativeLayout mRelativeLayout = new RelativeLayout(this);
-    //mRelativeLayout.setOrientation(LinearLayout.VERTICAL);
+    RelativeLayout mRootRelativeLayout = new RelativeLayout(this);
+
     //要先设置布局才能用布局参数
-    setContentView(mRelativeLayout);
+    setContentView(mRootRelativeLayout);
 
     //设置宽高
-    ViewGroup.LayoutParams layoutParams = mRelativeLayout.getLayoutParams();
-    layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-    layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-    mRelativeLayout.setLayoutParams(layoutParams);
+    ViewGroup.LayoutParams rootLayoutParams = mRootRelativeLayout.getLayoutParams();
+    rootLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+    rootLayoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+    mRootRelativeLayout.setLayoutParams(rootLayoutParams);
+
     //----------------------------------------------------------------------------------
-    mTitleBar = mLayoutInflater.inflate(R.layout.titlebar, mRelativeLayout, false);
+    mTitleBar = mLayoutInflater.inflate(R.layout.titlebar, mRootRelativeLayout, false);
     RelativeLayout.LayoutParams mTitleBarLayoutParams =
         (RelativeLayout.LayoutParams) mTitleBar.getLayoutParams();
     mTitleBarLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
@@ -151,7 +142,7 @@ public abstract class BaseActivity extends FragmentActivity {
     mTitleBar.setVisibility(View.GONE);
     //titlebar rootView
     mTitleRootView = mTitleBar.findViewById(R.id.title_bar_default);
-    //普通标题栏
+    //普通标题栏-------------------------------------------------------------------------------
     if (useTitlebar) {
       try {
         mTitleLeft = mTitleBar.findViewById(R.id.title_left);
@@ -192,30 +183,34 @@ public abstract class BaseActivity extends FragmentActivity {
         L.e("title right img  doesn't exit");
       }
     } else if (useToolbar) {
-
-      //普通toolbar
-      //默认都是显示toolbar的，隐藏的话需要手动调用hideToolbar的方法
+      //使用Toolbar-------------------------------------------------------------------------
       mTitleBar.setVisibility(View.VISIBLE);
       mTitleRootView.setVisibility(View.GONE);
-      mToolbar = (Toolbar) mTitleBar;
     }
 
-    View rootView = mLayoutInflater.inflate(layoutResID, mRelativeLayout, false);
+    View rootView = mLayoutInflater.inflate(layoutResID, mRootRelativeLayout, false);
     RelativeLayout.LayoutParams rootViewLayoutParams =
         (RelativeLayout.LayoutParams) rootView.getLayoutParams();
     rootViewLayoutParams.addRule(RelativeLayout.BELOW, R.id.titlbar);
     rootViewLayoutParams.addRule(RelativeLayout.ABOVE, R.id.bottombar);
 
-    mRelativeLayout.addView(mTitleBar);
-    mRelativeLayout.addView(rootView);
+    mRootRelativeLayout.addView(mTitleBar);
+    mRootRelativeLayout.addView(rootView);
 
+    //只有添加到布局上之后才能findviewbyid
+    mToolbar = (Toolbar) findViewById(R.id.titlbar);
+
+    //bottombar-------------------------------------------------------------------------
     if (useBottombar) {
-      View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRelativeLayout, false);
+      View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRootRelativeLayout, false);
       RelativeLayout.LayoutParams bottombarLayoutParams =
           (RelativeLayout.LayoutParams) bottombar.getLayoutParams();
       bottombarLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
       bottombar.setLayoutParams(bottombarLayoutParams);
-      mRelativeLayout.addView(bottombar);
+
+      mRootRelativeLayout.addView(bottombar);
+      //add 之后才能findviewbyid
+      mBottomBar = (BottomBar) findViewById(R.id.bottombar);
     }
 
     mTitleBar.requestFocus();
@@ -447,7 +442,8 @@ public abstract class BaseActivity extends FragmentActivity {
     }
   }
 
-  //backpress 相关----------------------------------------------------------------------
+  //backpress 相关结束----------------------------------------------------------------------
+
   @Override protected void onDestroy() {
     super.onDestroy();
     mBaseActivityMaster.removeFromMaster(this);

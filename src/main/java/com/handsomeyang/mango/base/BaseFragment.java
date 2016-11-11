@@ -82,7 +82,7 @@ public abstract class BaseFragment extends Fragment {
       localLayoutParams.flags =
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
-
+     //-------------------------------------------------------------------------------------
     ButterKnife.bind(mActivity);
 
     L.e(this.getClass().getSimpleName() + "  Oncreate  .....");
