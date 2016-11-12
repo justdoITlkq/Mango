@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import butterknife.ButterKnife;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
 import com.handsomeyang.mango.thrid.bottombar.BottomBar;
@@ -62,8 +61,7 @@ public abstract class BaseActivity extends FragmentActivity {
     //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统-----------------------------------------------
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
       mDecorView = getWindow().getDecorView();
-      int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-          | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+      int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
       mDecorView.setSystemUiVisibility(option);
 
       getWindow().setStatusBarColor(Color.TRANSPARENT);
@@ -74,7 +72,7 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     //标题栏设置结束------------------------------------------------------------------------------------
-    ButterKnife.bind(this);
+    //ButterKnife.bind(this);
     mContext = this;
     mLayoutInflater = this.getLayoutInflater();
     mFragmentManager = this.getSupportFragmentManager();
@@ -82,8 +80,8 @@ public abstract class BaseActivity extends FragmentActivity {
     mBaseActivityMaster.addToMaster(this);
     initConfig();
     setContentView(setRootView());
-
     initViews();
+
   }
 
   /**

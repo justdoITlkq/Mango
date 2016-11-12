@@ -17,10 +17,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import butterknife.ButterKnife;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
-import javax.inject.Inject;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -83,7 +81,7 @@ public abstract class BaseFragment extends Fragment {
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
      //-------------------------------------------------------------------------------------
-    ButterKnife.bind(mActivity);
+    //ButterKnife.bind(mActivity);
 
     L.e(this.getClass().getSimpleName() + "  Oncreate  .....");
     //初始化

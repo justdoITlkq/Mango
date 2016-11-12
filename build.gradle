@@ -82,8 +82,11 @@ dependencies {
   compile 'com.commit451:NativeStackBlur:1.0.2' //高斯模糊
   //luban图片压缩上传  needs
   compile 'top.zibin:Luban:1.0.8'
-  //jake wharton butterknife
-  compile 'com.jakewharton:butterknife:+'
+
+  //jake wharton butterknife这两句需要拷贝到   app build.gradle下
+//  compile 'com.jakewharton:butterknife:8.4.0'
+//  annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
   //to use snackbar
   compile 'com.android.support:design:24.2.0'
   //card view  md viewpager needs
