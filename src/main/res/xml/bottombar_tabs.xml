@@ -13,7 +13,7 @@
       id="@+id/tab_3"
       title="应用"/>
   <tab
-      icon="@drawable/ic_action_account_circle"
+      icon="@drawable/ic_user_main"
       id="@+id/tab_4"
       title="我"/>
 </tabs>
