@@ -11,6 +11,7 @@
   <item name="title_center" type="id"/>
 
   <item name="img_title_right" type="id"/>
+  <item name="img_title_left" type="id"/>
   <!--my title bar needs end-->
 
   <!--toobar title needs -->

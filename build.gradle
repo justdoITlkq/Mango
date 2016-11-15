@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+//apply plugin: 'com.neenbedankt.android-apt'    //dagger 2 needs
+//apply plugin: 'android-apt'                  //butterKnife needs
 
 android {
   compileSdkVersion 24
@@ -21,34 +23,8 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
-  //dagger 2 needs  start-------------------
-  lintOptions {
-    warning 'InvalidPackage'
-  }
-  //degger 2 needs end-----------------------
 }
 
-//dagger 2 needs start  -------------------
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    // replace with the current version of the Android plugin
-    classpath 'com.android.tools.build:gradle:2.1.0'
-    // the latest version of the android-apt plugin
-    classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-  }
-}
-//dagger2  needs end ---------------------------------
-
-//google dragger 2 needs start---------------------------------
-apply plugin: 'com.neenbedankt.android-apt'
-dependencies {
-  compile 'com.google.dagger:dagger:2.7'
-  apt 'com.google.dagger:dagger-compiler:2.7'
-}
-//dragger 2 needs ends----------------------------------------
 
 dependencies {
   compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -83,15 +59,10 @@ dependencies {
   //luban图片压缩上传  needs
   compile 'top.zibin:Luban:1.0.8'
 
-  //jake wharton butterknife这两句需要拷贝到   app build.gradle下
-//  compile 'com.jakewharton:butterknife:8.4.0'
-//  annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
-
   //to use snackbar
   compile 'com.android.support:design:24.2.0'
   //card view  md viewpager needs
   compile 'com.android.support:cardview-v7:24.2.1'
-
 
   // md viewapger dependencies needs imageview
   compile 'com.flaviofaria:kenburnsview:1.0.7'
@@ -113,6 +84,14 @@ dependencies {
   compile('com.mikepenz:materialdrawer:5.7.0@aar') {
     transitive = true
   }
+
+  //dagger2 needs ---------------------
+//  compile 'com.google.dagger:dagger:2.7'
+//  apt 'com.google.dagger:dagger-compiler:2.7'
+
+  //jake wharton butterknife这两句需要拷贝到   app build.gradle下
+  //  compile 'com.jakewharton:butterknife:8.4.0'
+  //  annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 }
 
 

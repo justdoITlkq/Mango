@@ -36,7 +36,7 @@ public abstract class BaseActivity extends FragmentActivity {
   private View mTitleBar, mTitleLeft, mTitleCenter, mTitleRight, mTitleRootView;
   private TextView mTvTitleLeft, mTvTitleCenter, mTvTitleRight;
   private ImageView mImageView;
-  protected Toolbar mToolbar;                         //开放toolbar出去
+  public Toolbar mToolbar;                         //开放toolbar出去
 
   private long mTimeBegin;
   private boolean mSafeExit;
@@ -46,8 +46,8 @@ public abstract class BaseActivity extends FragmentActivity {
   private boolean useTitlebar = false;
   private boolean useToolbar = false;
 
-  private BottomBar mBottomBar;
-  private View mDecorView;
+  protected BottomBar mBottomBar;
+  protected View mDecorView;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
@@ -81,7 +81,6 @@ public abstract class BaseActivity extends FragmentActivity {
     initConfig();
     setContentView(setRootView());
     initViews();
-
   }
 
   /**
@@ -100,15 +99,6 @@ public abstract class BaseActivity extends FragmentActivity {
     } else {
       super.setContentView(layoutResID);
     }
-
-    //为了设置每个布局页面都设置  android:fitSystemWindows=true;   须在setContentView之后------------
-    //http://www.jianshu.com/p/0acc12c29c1b  原po是 getchild（0） 因为我多嵌套了一层relativeLatyou 所以我写1
-    //ViewGroup contentFrameLayout = (ViewGroup) findViewById(Window.ID_ANDROID_CONTENT);
-    //View parentView = contentFrameLayout.getChildAt(1);
-    //if (parentView != null && Build.VERSION.SDK_INT >= 14) {
-    //  parentView.setFitsSystemWindows(true);
-    //}
-    //设置结束--------------------------------------------
   }
 
   /**
@@ -249,6 +239,8 @@ public abstract class BaseActivity extends FragmentActivity {
     }
     if (mTitleLeft != null) {
       mTitleLeft.setVisibility(View.VISIBLE);
+      ImageView imgv_title_left = (ImageView) mTitleBar.findViewById(R.id.img_title_left);
+      imgv_title_left.setImageResource(R.drawable.back_arrow_left);
       mTitleLeft.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
           BaseActivity.this.finish();
