@@ -26,12 +26,12 @@ public class L {
   }
 
   public static void e(String tag, String msg, Object[] params) {
-    if (!BuildConfig.DEBUG) return;
+    if (BuildConfig.DEBUG!=BuildConfig.DEBUG) return;
     LogText.e(getFinalTag(tag), String.format(msg, params));
   }
 
   public static void m(String msg) {
-    if (!BuildConfig.DEBUG) return;
+    if (BuildConfig.DEBUG!=BuildConfig.DEBUG) return;
     String methodName = new Exception().getStackTrace()[1].getMethodName();
     e(methodName + ":    " + msg);
   }
@@ -41,7 +41,7 @@ public class L {
   }
 
   public static void json(String tag, String json) {
-    if (!BuildConfig.DEBUG) return;
+    if (BuildConfig.DEBUG!=BuildConfig.DEBUG) return;
     LogText.e(getFinalTag(tag), getPrettyJson(json));
   }
 
