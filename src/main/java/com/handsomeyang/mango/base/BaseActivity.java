@@ -81,6 +81,8 @@ public abstract class BaseActivity extends FragmentActivity {
     initConfig();
     setContentView(setRootView());
     initViews();
+
+    L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
   }
 
   /**
@@ -437,5 +439,6 @@ public abstract class BaseActivity extends FragmentActivity {
   @Override protected void onDestroy() {
     super.onDestroy();
     mBaseActivityMaster.removeFromMaster(this);
+    L.e(this.getClass().getSimpleName() + "  OnDestroy  .....");
   }
 }

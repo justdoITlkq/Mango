@@ -4,7 +4,7 @@ package com.handsomeyang.mango;
  * Created by HandsomeYang on 2016/9/9.
  */
 
-public class Constant {
+public class MangoConstant {
   //判别用户登录标识，UID=用户名
   public static final String UID = "userID";
   /**

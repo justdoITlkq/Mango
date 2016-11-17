@@ -83,7 +83,7 @@ public abstract class BaseFragment extends Fragment {
      //-------------------------------------------------------------------------------------
     //ButterKnife.bind(mActivity);
 
-    L.e(this.getClass().getSimpleName() + "  Oncreate  .....");
+    L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
     //初始化
     mFragmentManager = getFragmentManager();
   }
@@ -408,5 +408,6 @@ public abstract class BaseFragment extends Fragment {
 
   @Override public void onDestroy() {
     super.onDestroy();
+    L.e(this.getClass().getSimpleName() + "  OnDestroy  .....");
   }
 }
