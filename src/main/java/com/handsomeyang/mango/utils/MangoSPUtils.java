@@ -11,7 +11,7 @@ import java.util.Map;
  * SharedPreferenceHelper zhy封装  不直接用apply而用内部类完全是为了兼容
  */
 
-public class SPUtils {
+public class MangoSPUtils {
   /**
    * 保存在手机里面的文件名
    */

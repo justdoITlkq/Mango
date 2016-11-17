@@ -4,13 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import com.handsomeyang.mango.utils.AppUtils;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
-import rx.Observable;
+import com.blankj.utilcode.utils.AppUtils;
 
 /**
  * Created by HandsomeYang on 2016/9/20.

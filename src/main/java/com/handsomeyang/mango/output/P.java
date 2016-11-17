@@ -4,31 +4,22 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.internal.view.SupportMenu;
 import android.support.v4.view.animation.FastOutLinearInInterpolator;
-import android.support.v4.view.animation.FastOutSlowInInterpolator;
-import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.AnticipateOvershootInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.blankj.utilcode.utils.ConvertUtils;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.thrid.jumpingbeans.JumpingBeans;
-import com.handsomeyang.mango.thrid.smoothprogressbar.circular.CircularProgressBar;
 import com.handsomeyang.mango.thrid.smoothprogressbar.circular.CircularProgressDrawable;
-import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressBar;
 import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressDrawable;
-import com.handsomeyang.mango.utils.ConvertUtils;
-import com.handsomeyang.mango.utils.RandomColorUtils;
-import com.nineoldandroids.animation.PropertyValuesHolder;
-import retrofit2.http.GET;
+import com.handsomeyang.mango.utils.MangoRandomColorUtils;
 
 /**
  * Created by HandsomeYang on 2016/9/14.
@@ -120,7 +111,7 @@ public class P {
             //环形半径宽度
             .strokeWidth(20.0f)
             //设置颜色
-            .colors(RandomColorUtils.randomColor(10))
+            .colors(MangoRandomColorUtils.randomColor(10))
             //弧形旋转速度
             .sweepSpeed(1.2f)
             //旋转速度
@@ -240,7 +231,7 @@ public class P {
         new SmoothProgressDrawable.Builder(context).sectionsCount(4)
             .separatorLength(25)
             .strokeWidth(35f)
-            .colors(RandomColorUtils.randomColor(20))
+            .colors(MangoRandomColorUtils.randomColor(20))
             .interpolator(new AccelerateDecelerateInterpolator())
             .progressiveStart(true)
             .progressiveStartSpeed(1.5f)

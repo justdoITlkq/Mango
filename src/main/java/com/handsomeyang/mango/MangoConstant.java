@@ -5,6 +5,8 @@ package com.handsomeyang.mango;
  */
 
 public class MangoConstant {
+  // 三方工具类Readme.md   https://github.com/Blankj/AndroidUtilCode/blob/master/README-CN.md
+
   //判别用户登录标识，UID=用户名
   public static final String UID = "userID";
   /**
@@ -40,4 +42,10 @@ public class MangoConstant {
    * 拆了mdviewpager 糅合了smartTablayout
    *
    */
+
+  /**
+   * 正则表达式:验证密码(不包含特殊字符)
+   * 大小写字母，数字，6-16位
+   */
+  public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,16}$";
 }

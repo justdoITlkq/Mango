@@ -13,7 +13,7 @@ import com.handsomeyang.mango.R;
  * Created by HandsomeYang on 2016/9/22.   author zhy
  */
 
-public class SnackBarUtils {
+public class MangoSnackBarUtils {
   public static final int Info = 1;
   public static final int Confirm = 2;
   public static final int Warning = 3;

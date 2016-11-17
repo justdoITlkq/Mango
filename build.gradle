@@ -84,10 +84,12 @@ dependencies {
   compile('com.mikepenz:materialdrawer:5.7.0@aar') {
     transitive = true
   }
+  //三方工具类  https://github.com/Blankj/AndroidUtilCode
+  compile 'com.blankj:utilcode:+'
 
   //dagger2 needs ---------------------
-//  compile 'com.google.dagger:dagger:2.7'
-//  apt 'com.google.dagger:dagger-compiler:2.7'
+  //  compile 'com.google.dagger:dagger:2.7'
+  //  apt 'com.google.dagger:dagger-compiler:2.7'
 
   //jake wharton butterknife这两句需要拷贝到   app build.gradle下
   //  compile 'com.jakewharton:butterknife:8.4.0'

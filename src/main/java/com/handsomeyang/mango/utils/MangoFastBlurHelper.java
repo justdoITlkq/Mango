@@ -6,12 +6,12 @@ import android.graphics.Bitmap;
 /**
  * Helper used to apply Fast blur algorithm on bitmap.
  */
-final class FastBlurHelper {
+final class MangoFastBlurHelper {
 
   /**
    * non instantiable helper
    */
-  private FastBlurHelper() {
+  private MangoFastBlurHelper() {
 
   }
 
