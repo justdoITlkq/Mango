@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -28,6 +30,7 @@ import com.handsomeyang.mango.thrid.bottombar.BottomBar;
  * 开发要注意向md风格靠近
  */
 public abstract class BaseActivity extends FragmentActivity {
+  protected View mDocterView;
   protected BaseActivity mContext;
   protected LayoutInflater mLayoutInflater;
   protected FragmentManager mFragmentManager;
@@ -73,6 +76,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     //标题栏设置结束------------------------------------------------------------------------------------
     //ButterKnife.bind(this);
+    mDecorView = getWindow().getDecorView();
     mContext = this;
     mLayoutInflater = this.getLayoutInflater();
     mFragmentManager = this.getSupportFragmentManager();
@@ -248,6 +252,25 @@ public abstract class BaseActivity extends FragmentActivity {
           BaseActivity.this.finish();
         }
       });
+    }
+  }
+
+  public void setTitleLeft(@DrawableRes int imgBackRes, View.OnClickListener onClickListener) {
+    if (!useTitlebar) {
+      return;
+    }
+    if (mTitleLeft != null) {
+      mTitleLeft.setVisibility(View.VISIBLE);
+    }
+    if (onClickListener != null && mTitleLeft != null) {
+      mTitleLeft.setOnClickListener(onClickListener);
+    }
+    if (imgBackRes != 0 && mTvTitleLeft != null) {
+      ImageView imgeBackLeft = (ImageView) mTitleBar.findViewById(R.id.img_title_left);
+      imgeBackLeft.setImageResource(imgBackRes);
+      if (onClickListener != null && mTitleLeft == null) {
+        mTvTitleLeft.setOnClickListener(onClickListener);
+      }
     }
   }
 

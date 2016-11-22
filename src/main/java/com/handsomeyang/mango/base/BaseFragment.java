@@ -326,6 +326,14 @@ public abstract class BaseFragment extends Fragment {
     }
     return true;
   }
+  /**
+   * 如果startActivity有数据就返回true，如果没数据就返回false
+   */
+  public boolean mangoStartActivity(Class activity) {
+    Intent mIntent = new Intent(mActivity, activity);
+    mActivity.startActivity(mIntent);
+    return false;
+  }
 
   public void mangoStartActiviy(Class activity) {
     Intent intent = new Intent(mActivity, activity);

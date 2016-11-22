@@ -13,7 +13,7 @@ import org.json.JSONObject;
  */
 
 public class L {
-  private static String sTag = "Mango.Log";
+  private static String sTag = "Mango日志";
   private static final int JSON_INDENT = 2;
 
 
@@ -80,8 +80,8 @@ public class L {
     }
 
     public static void e(String tag, String content) {
-      LogText logText = new LogText("我是日志" + tag + "-------->>>");
-      logText.setup("    " + content);
+      LogText logText = new LogText("HHHHHHandsome" + tag + "-------->>>");
+      logText.setup("  日志内容：" + content);
     }
 
     public void setup(String content) {

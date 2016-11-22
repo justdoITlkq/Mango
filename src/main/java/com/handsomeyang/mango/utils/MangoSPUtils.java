@@ -64,6 +64,41 @@ public class MangoSPUtils {
   }
 
   /**
+   * create by HandsomeYang  为了封装默认值，  默认都是getString---> getInt ----- > getBoolean
+   * 默认如果都不符合默认返回false
+   *
+   * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
+   */
+  public static Object get(Context context, String key) {
+    SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+    String string = sp.getString(key, "");
+    if (string == null) {
+      int anInt = sp.getInt(key, -1);
+      if (anInt != -1) {
+        return anInt;
+      } else {
+        boolean aBoolean = sp.getBoolean(key, false);
+        return aBoolean;
+      }
+    } else {
+      return string;
+    }
+    //if (defaultObject instanceof String) {
+    //  return sp.getString(key, (String) defaultObject);
+    //} else if (defaultObject instanceof Integer) {
+    //  return sp.getInt(key, (Integer) defaultObject);
+    //} else if (defaultObject instanceof Boolean) {
+    //  return sp.getBoolean(key, (Boolean) defaultObject);
+    //} else if (defaultObject instanceof Float) {
+    //  return sp.getFloat(key, (Float) defaultObject);
+    //} else if (defaultObject instanceof Long) {
+    //  return sp.getLong(key, (Long) defaultObject);
+    //}
+
+    //return null;
+  }
+
+  /**
    * 移除某个key值已经对应的值
    */
   public static void remove(Context context, String key) {
