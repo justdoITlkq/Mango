@@ -52,6 +52,9 @@ public abstract class BaseActivity extends FragmentActivity {
   protected BottomBar mBottomBar;
   protected View mDecorView;
 
+  protected static int REQUEST_CODE_1 = 1111;
+  protected static int REQUEST_CODE_2 = 2222;
+
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
     super.onCreate(savedInstanceState);
@@ -373,6 +376,41 @@ public abstract class BaseActivity extends FragmentActivity {
     return true;
   }
 
+  /**
+   * Request code 用于标识向哪个acitivity 跳转
+   * Result code 用于标识是哪个activity 返回来的值
+   */
+  public void mangoStartActivityForResult(Class activity, int resquestCodes) {
+    Intent intent = new Intent(mContext, activity);
+    startActivityForResult(intent, REQUEST_CODE_1);
+  }
+
+  /**
+   * StartActivityForResult 回调的方法OnActiityResult
+   */
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == RESULT_OK) {
+      if (requestCode == REQUEST_CODE_1) {
+      }
+      OnActivityResult1(data);
+    } else if (requestCode == REQUEST_CODE_2) {
+      onActivityResult2(data);
+    }
+  }
+
+  /**
+   * 当resquestcode ==RESQUEST_CODE1 时候
+   */
+  private void onActivityResult2(Intent data) {
+  }
+
+  /**
+   * 当resquestcode ==RESQUEST_CODE2 时候
+   */
+  protected void OnActivityResult1(Intent data) {
+
+  }
   //对于Activity操作结束------------------------------------------------------------------------
 
   //对于fragment操作--------------------------------------------------------------------------
