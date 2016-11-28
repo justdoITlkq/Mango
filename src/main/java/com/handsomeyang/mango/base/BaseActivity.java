@@ -30,7 +30,6 @@ import com.handsomeyang.mango.thrid.bottombar.BottomBar;
  * 开发要注意向md风格靠近
  */
 public abstract class BaseActivity extends FragmentActivity {
-  protected View mDocterView;
   protected BaseActivity mContext;
   protected LayoutInflater mLayoutInflater;
   protected FragmentManager mFragmentManager;
