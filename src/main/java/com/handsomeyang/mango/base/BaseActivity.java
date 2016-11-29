@@ -30,7 +30,6 @@ import com.handsomeyang.mango.thrid.bottombar.BottomBar;
  * 开发要注意向md风格靠近
  */
 public abstract class BaseActivity extends FragmentActivity {
-  protected View mDocterView;
   protected BaseActivity mContext;
   protected LayoutInflater mLayoutInflater;
   protected FragmentManager mFragmentManager;
@@ -50,7 +49,11 @@ public abstract class BaseActivity extends FragmentActivity {
   private boolean useToolbar = false;
 
   protected BottomBar mBottomBar;
+  //mDecorView
   protected View mDecorView;
+
+  protected static int REQUEST_CODE_1 = 1111;
+  protected static int REQUEST_CODE_2 = 2222;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
@@ -361,6 +364,15 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
+   * Request code 用于标识向哪个acitivity 跳转
+   * Result code 用于标识是哪个activity 返回来的值
+   */
+  public void mangoStartActivityForResult(Class activity, int resquestCodes) {
+    Intent intent = new Intent(mContext, activity);
+    startActivityForResult(intent, REQUEST_CODE_1);
+  }
+
+  /**
    * 如果startActivity有数据就返回true，如果没数据就返回false
    */
   public boolean mangoStartActivity(Class activity, Bundle bundle) {
@@ -373,6 +385,30 @@ public abstract class BaseActivity extends FragmentActivity {
     return true;
   }
 
+  @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+    if (resultCode == RESULT_OK) {
+      if (requestCode == REQUEST_CODE_1) {
+      }
+      OnActivityResult1(data);
+    } else if (requestCode == REQUEST_CODE_2) {
+      onActivityResult2(data);
+    }
+  }
+
+  /**
+   * 当resquestcode ==RESQUEST_CODE1 时候
+   */
+  private void onActivityResult2(Intent data) {
+  }
+
+  /**
+   * 当resquestcode ==RESQUEST_CODE2 时候
+   */
+  protected void OnActivityResult1(Intent data) {
+
+  }
+
   //对于Activity操作结束------------------------------------------------------------------------
 
   //对于fragment操作--------------------------------------------------------------------------
@@ -380,7 +416,7 @@ public abstract class BaseActivity extends FragmentActivity {
     mFragmentManager.beginTransaction()
         .add(des, fragment, fragment.getClass().getSimpleName())
         .addToBackStack(fragment.getClass().getSimpleName())
-        .commit();
+        .commitNowAllowingStateLoss();
   }
 
   public void mangoReplaceFragment(int des, BaseFragment fragment) {
