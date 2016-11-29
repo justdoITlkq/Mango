@@ -481,7 +481,7 @@ public abstract class BaseActivity extends FragmentActivity {
    * 只有回退栈中没有事务的时候才会触发acticity安全退出
    */
   @Override public void onBackPressed() {
-    if (mFragmentManager.getBackStackEntryCount() == 1) {
+    if (mFragmentManager.getBackStackEntryCount() <= 1) {
       //如果设置了安全退出就安全退出
       if (mSafeExit) {
         safeExit();
