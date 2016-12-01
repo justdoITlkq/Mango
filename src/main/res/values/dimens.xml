@@ -49,12 +49,6 @@
   <!--material design edittext needs end-->
 
 
-  <!--md viewpager needs start-->
-  <dimen name="cardMarginHorizontal">10dp</dimen>
-  <dimen name="cardMarginVertical">8dp</dimen>
-  <dimen name="materialviewpager_logoHeight">35dp</dimen>
-  <!--md viewpager needs end-->
-
 <!--bottom bar needs start  原来是56 我改成66-->
   <dimen name="bb_height">66dp</dimen>
   <!--bottom bar needs end -->
