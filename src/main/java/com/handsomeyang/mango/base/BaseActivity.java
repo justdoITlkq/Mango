@@ -445,6 +445,14 @@ public abstract class BaseActivity extends FragmentActivity {
   //backpress 相关----------------------------------------------------------------------
 
   /**
+   * 对安全退出开放方法
+   */
+  public void setSafeExit(boolean useSafe, String text) {
+    mSafeExit = useSafe;
+    mSafeText = text;
+  }
+
+  /**
    * 是否安全退出
    */
   private void safeExit() {
@@ -456,25 +464,6 @@ public abstract class BaseActivity extends FragmentActivity {
       return;
     }
     mBaseActivityMaster.finishAll();
-  }
-
-  /**
-   * 对安全退出开放方法
-   */
-  public void setSafeExit(boolean useSafe, String text) {
-    mSafeExit = useSafe;
-    mSafeText = text;
-  }
-
-  /**
-   * 如果fragment 栈中数量大于1，就移除最顶层fragment
-   */
-  public void mangoRemoveFragment() {
-    if (mFragmentManager.getBackStackEntryCount() > 1) {
-      mFragmentManager.popBackStack();
-    } else {
-      finish();
-    }
   }
 
   /**
@@ -491,6 +480,17 @@ public abstract class BaseActivity extends FragmentActivity {
     } else {
       //如果回退栈中有事务，就要先退出fragment
       mangoRemoveFragment();
+    }
+  }
+
+  /**
+   * 如果fragment 栈中数量大于1，就移除最顶层fragment
+   */
+  public void mangoRemoveFragment() {
+    if (mFragmentManager.getBackStackEntryCount() > 1) {
+      mFragmentManager.popBackStack();
+    } else {
+      finish();
     }
   }
 
