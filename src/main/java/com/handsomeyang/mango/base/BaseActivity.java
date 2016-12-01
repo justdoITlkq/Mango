@@ -445,6 +445,14 @@ public abstract class BaseActivity extends FragmentActivity {
   //backpress 相关----------------------------------------------------------------------
 
   /**
+   * 对安全退出开放方法
+   */
+  public void setSafeExit(boolean useSafe, String text) {
+    mSafeExit = useSafe;
+    mSafeText = text;
+  }
+
+  /**
    * 是否安全退出
    */
   private void safeExit() {
@@ -459,11 +467,20 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 对安全退出开放方法
+   * 只有回退栈中没有事务的时候才会触发acticity安全退出
    */
-  public void setSafeExit(boolean useSafe, String text) {
-    mSafeExit = useSafe;
-    mSafeText = text;
+  @Override public void onBackPressed() {
+    if (mFragmentManager.getBackStackEntryCount() <= 1) {
+      //如果设置了安全退出就安全退出
+      if (mSafeExit) {
+        safeExit();
+        return;
+      }
+      super.onBackPressed();
+    } else {
+      //如果回退栈中有事务，就要先退出fragment
+      mangoRemoveFragment();
+    }
   }
 
   /**
@@ -474,23 +491,6 @@ public abstract class BaseActivity extends FragmentActivity {
       mFragmentManager.popBackStack();
     } else {
       finish();
-    }
-  }
-
-  /**
-   * 只有回退栈中没有事务的时候才会触发acticity安全退出
-   */
-  @Override public void onBackPressed() {
-    if (mFragmentManager.getBackStackEntryCount() == 1) {
-      //如果设置了安全退出就安全退出
-      if (mSafeExit) {
-        safeExit();
-        return;
-      }
-      super.onBackPressed();
-    } else {
-      //如果回退栈中有事务，就要先退出fragment
-      mangoRemoveFragment();
     }
   }
 
