@@ -88,7 +88,7 @@
     <attr format="reference" name="met_iconRight"/>
     <!-- Padding between icon(s) and the main area. 8dp by default. -->
     <attr format="dimension" name="met_iconPadding"/>
-    <!-- Clear button -->
+    <!-- Clear button_md_dialog -->
     <attr format="boolean" name="met_clearButton"/>
     <!-- The floating label's text size. 12sp by default. -->
     <attr format="dimension" name="met_floatingLabelTextSize"/>

@@ -351,9 +351,9 @@ public class MaterialDialog {
     }
 
     /**
-     * set positive button
+     * set positive button_md_dialog
      *
-     * @param text the name of button
+     * @param text the name of button_md_dialog
      */
     public void setPositiveButton(String text, final View.OnClickListener listener) {
       Button button = new Button(mContext);
@@ -361,7 +361,7 @@ public class MaterialDialog {
           new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
               LinearLayout.LayoutParams.WRAP_CONTENT);
       button.setLayoutParams(params);
-      button.setBackgroundResource(R.drawable.material_card);
+      button.setBackgroundResource(R.drawable.material_dialog_card);
       button.setTextColor(Color.argb(255, 35, 159, 242));
       button.setText(text);
       button.setGravity(Gravity.CENTER);
@@ -372,9 +372,9 @@ public class MaterialDialog {
     }
 
     /**
-     * set negative button
+     * set negative button_md_dialog
      *
-     * @param text the name of button
+     * @param text the name of button_md_dialog
      */
     public void setNegativeButton(String text, final View.OnClickListener listener) {
       Button button = new Button(mContext);
@@ -382,7 +382,7 @@ public class MaterialDialog {
           new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
               LinearLayout.LayoutParams.WRAP_CONTENT);
       button.setLayoutParams(params);
-      button.setBackgroundResource(R.drawable.material_card);
+      button.setBackgroundResource(R.drawable.material_dialog_card);
       button.setText(text);
       button.setTextColor(Color.argb(222, 0, 0, 0));
       button.setTextSize(14);

@@ -47,12 +47,12 @@
   <!--smoothprogressbar circular needs end-->
 
 
-
 <!--bottom bar needs start -->
   <color name="bb_inActiveBottomBarItemColor">#747474</color>
   <color name="bb_darkBackgroundColor">#212121</color>
   <color name="bb_tabletRightBorderDark">#505050</color>
   <!--bottom bar needs end -->
+
 </resources>
 
 

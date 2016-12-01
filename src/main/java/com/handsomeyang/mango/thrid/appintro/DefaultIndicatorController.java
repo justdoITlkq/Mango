@@ -40,7 +40,7 @@ class DefaultIndicatorController implements IndicatorController {
 
         for (int i = 0; i < slideCount; i++) {
             ImageView dot = new ImageView(mContext);
-            dot.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.indicator_dot_grey));
+            dot.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.indicator_dot_grey_appintro));
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -57,7 +57,7 @@ class DefaultIndicatorController implements IndicatorController {
         mCurrentPosition = index;
         for (int i = 0; i < mSlideCount; i++) {
             int drawableId = (i == index) ?
-                    (R.drawable.indicator_dot_white) : (R.drawable.indicator_dot_grey);
+                    (R.drawable.indicator_dot_white_appintro) : (R.drawable.indicator_dot_grey_appintro);
             Drawable drawable = ContextCompat.getDrawable(mContext, drawableId);
             if (selectedDotColor != DEFAULT_COLOR && i == index)
                 drawable.mutate().setColorFilter(selectedDotColor, PorterDuff.Mode.SRC_IN);

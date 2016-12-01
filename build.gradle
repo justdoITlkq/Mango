@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.neenbedankt.android-apt'    //dagger 2 needs
-//apply plugin: 'android-apt'                  //butterKnife needs
+//apply plugin: 'com.neenbedankt.android-apt'    //dagger 2 needs  copy for use
+//apply plugin: 'android-apt'                    //butterKnife needs   copy for use
 
 android {
   compileSdkVersion 24
@@ -32,16 +32,19 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
   testCompile 'junit:junit:4.12'
+
   //rxjava
   compile 'io.reactivex:rxjava:1.1.6'
   //rxandroid
   compile 'io.reactivex:rxandroid:1.2.1'
+
   //retrofit2.0
   compile 'com.squareup.retrofit2:retrofit:2.1.0'
   //Gson
   compile 'com.squareup.retrofit2:converter-gson:2.1.0'
   //rxjava+retrofit使用  三个版本号必须一样
   compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
   //Fresco主要依赖
   compile 'com.facebook.fresco:fresco:0.12.0'
   // 支持 GIF 动图，需要添加
@@ -50,6 +53,7 @@ dependencies {
   compile 'com.facebook.fresco:animated-webp:0.12.0'
   //支持Webp静态
   compile 'com.facebook.fresco:webpsupport:0.12.0'
+
   //image   uCrop
   compile 'com.yalantis:ucrop:2.1.2'
   //fresco Utils needs
@@ -59,26 +63,13 @@ dependencies {
   //luban图片压缩上传  needs
   compile 'top.zibin:Luban:1.0.8'
 
-  //to use snackbar
-  compile 'com.android.support:design:24.2.0'
-  //card view  md viewpager needs
-  compile 'com.android.support:cardview-v7:24.2.1'
-
-  // md viewapger dependencies needs imageview
-  compile 'com.flaviofaria:kenburnsview:1.0.7'
-  //glide  md viewpager dependencies needs      以下两个
-  compile 'com.github.bumptech.glide:glide:3.6.1'
-  //md viewpager needs    同一个作者的但是不知道啥
-  compile('com.github.florent37:carpaccio:1.0.1@aar') {
-    transitive = true
-  }
   //smart TabLayout needs  https://github.com/ogaclejapan/SmartTabLayout
   compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
   //smartTabLayout support v4包 fragment needs
   compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 
 
-  //日志框架 github地址:https://github.com/pengwei1024/LogUtils
+  //日志框架LogUtils github地址:https://github.com/pengwei1024/LogUtils
   compile 'com.apkfuns.logutils:library:1.4.2'
   // md drawer needs
   compile('com.mikepenz:materialdrawer:5.7.0@aar') {
@@ -87,7 +78,11 @@ dependencies {
   //三方工具类  https://github.com/Blankj/AndroidUtilCode
   compile 'com.blankj:utilcode:+'
 
-  //dagger2 needs ---------------------
+  //to use snackbar
+  compile 'com.android.support:design:24.2.0'
+  compile 'com.android.support:cardview-v7:24.2.1'
+
+  //dagger2 needs ---------------------  copy for use
   //  compile 'com.google.dagger:dagger:2.7'
   //  apt 'com.google.dagger:dagger-compiler:2.7'
 

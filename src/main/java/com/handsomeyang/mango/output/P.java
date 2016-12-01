@@ -43,7 +43,7 @@ public class P {
     //设置周围暗色指数    1为全黑
     mDialog_C.getWindow().setDimAmount(0f);
     //设置进入动画    淡入淡出
-    mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
+    //mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
     //点击外部不能取消
     mDialog_C.setCanceledOnTouchOutside(false);
     mDialog_C.setContentView(R.layout.dialog_smooth_progressbar_circular);
@@ -60,7 +60,7 @@ public class P {
     //设置周围暗色指数    1为全黑
     mDialog_C.getWindow().setDimAmount(0f);
     //设置进入动画    淡入淡出
-    mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
+    //mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
     //点击外部不能取消
     mDialog_C.setCanceledOnTouchOutside(false);
     //View mInflate =
@@ -95,7 +95,7 @@ public class P {
     //设置周围暗色指数    1为全黑
     mDialog_C.getWindow().setDimAmount(0f);
     //设置进入动画    淡入淡出
-    mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
+    //mDialog_C.getWindow().setWindowAnimations(R.style.ProgressBarDialogWindowAnim_fade);
     //点击外部不能取消
     mDialog_C.setCanceledOnTouchOutside(false);
     //View mInflate =

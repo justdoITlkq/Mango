@@ -28,7 +28,7 @@ public abstract class AppIntro extends AppIntroBase {
     }
 
     /**
-     * Override next button arrow color
+     * Override next button_md_dialog arrow color
      *
      * @param color your color
      */
@@ -92,7 +92,7 @@ public abstract class AppIntro extends AppIntroBase {
     //}
 
     /**
-     * Override done button text color
+     * Override done button_md_dialog text color
      *
      * @param colorDoneText your color resource
      */
@@ -102,7 +102,7 @@ public abstract class AppIntro extends AppIntroBase {
     }
 
     /**
-     * Override skip button color
+     * Override skip button_md_dialog color
      *
      * @param colorSkipButton your color resource
      */
@@ -112,7 +112,7 @@ public abstract class AppIntro extends AppIntroBase {
     }
 
     /**
-     * Override Next button
+     * Override Next button_md_dialog
      *
      * @param imageNextButton your drawable resource
      */
@@ -122,7 +122,7 @@ public abstract class AppIntro extends AppIntroBase {
     }
 
     /**
-     * Shows or hides Done button, replaced with setProgressButtonEnabled
+     * Shows or hides Done button_md_dialog, replaced with setProgressButtonEnabled
      *
      * @deprecated use {@link #setProgressButtonEnabled(boolean)} instead.
      */

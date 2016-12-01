@@ -1,5 +1,6 @@
 <resources>
   <!--ios dialog needs-->
+
   <!--标题文字大小-->
   <dimen name="textSize_alert_title">22sp</dimen>
   <dimen name="textSize_actionsheet_title">14sp</dimen>
@@ -23,6 +24,7 @@
   <dimen name="textSize_alert_button">18sp</dimen>
   <!--圆角-->
   <dimen name="radius_alertview">15px</dimen>
+
   <!--ios dialog needs end-->
 
 
