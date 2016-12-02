@@ -83,6 +83,7 @@ dependencies {
   compile 'com.android.support:cardview-v7:24.2.1'
 
   //EventBus  https://github.com/greenrobot/EventBus
+  //插件地址： https://github.com/likfe/eventbus3-intellij-plugin
   compile 'org.greenrobot:eventbus:3.0.0'
 
   //dagger2 needs ---------------------  copy for use
