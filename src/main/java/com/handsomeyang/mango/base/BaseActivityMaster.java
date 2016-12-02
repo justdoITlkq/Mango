@@ -9,6 +9,7 @@ import java.util.List;
  */
 
 public class BaseActivityMaster {
+
   private static List<BaseActivity> mBaseActivities = new ArrayList<>();
   private static BaseActivityMaster sMBaseActivityMaster;
 
