@@ -46,6 +46,7 @@ dependencies {
   compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
 
   //Fresco主要依赖      githup： https://github.com/facebook/fresco
+  //Fresco中文文档地址     https://www.fresco-cn.org/
   compile 'com.facebook.fresco:fresco:0.12.0'
   // 支持 GIF 动图，需要添加
   compile 'com.facebook.fresco:animated-gif:0.12.0'
