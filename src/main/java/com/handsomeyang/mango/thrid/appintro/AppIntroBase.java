@@ -300,8 +300,8 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Setting this to display or hide the Skip button. This is a static setting and
-   * button state is maintained across slides until explicitly changed.
+   * Setting this to display or hide the Skip button_md_dialog. This is a static setting and
+   * button_md_dialog state is maintained across slides until explicitly changed.
    *
    * @param showButton Set true to display. false to hide.
    */
@@ -315,7 +315,7 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Called when the user clicked the skip button
+   * Called when the user clicked the skip button_md_dialog
    *
    * @param currentFragment Instance of the currently displayed fragment
    */
@@ -377,8 +377,8 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Setting to to display or hide the Next or Done button. This is a static setting and
-   * button state is maintained across slides until explicitly changed.
+   * Setting to to display or hide the Next or Done button_md_dialog. This is a static setting and
+   * button_md_dialog state is maintained across slides until explicitly changed.
    *
    * @param progressButtonEnabled Set true to display. False to hide.
    */
@@ -433,7 +433,7 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Called when the user clicked the next button which triggered a fragment change
+   * Called when the user clicked the next button_md_dialog which triggered a fragment change
    *
    * @deprecated Obsolete, use {@link #onSlideChanged(Fragment, Fragment)} instead
    */
@@ -442,7 +442,7 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Called when the user clicked the done button
+   * Called when the user clicked the done button_md_dialog
    *
    * @deprecated Override {@link #onDonePressed(Fragment)} instead
    */
@@ -451,7 +451,7 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Called when the user clicked the skip button
+   * Called when the user clicked the skip button_md_dialog
    *
    * @deprecated Override {@link #onSkipPressed(Fragment)} instead
    */
@@ -469,7 +469,7 @@ public abstract class AppIntroBase extends AppCompatActivity
   }
 
   /**
-   * Called when the user clicked the done button
+   * Called when the user clicked the done button_md_dialog
    *
    * @param currentFragment Instance of the currently displayed fragment
    */
@@ -479,7 +479,7 @@ public abstract class AppIntroBase extends AppCompatActivity
 
   /**
    * Called when the selected fragment changed. This will be called automatically if the into starts
-   * or is finished via the done button.
+   * or is finished via the done button_md_dialog.
    *
    * @param oldFragment Instance of the fragment which was displayed before. This might be null if
    * the the intro has just started.
@@ -701,11 +701,11 @@ public abstract class AppIntroBase extends AppCompatActivity
    */
   public void setNextPageSwipeLock(boolean lockEnable) {
     if (lockEnable) {
-      // if locking, save current progress button visibility
+      // if locking, save current progress button_md_dialog visibility
       baseProgressButtonEnabled = progressButtonEnabled;
       setProgressButtonEnabled(false);
     } else {
-      // if unlocking, restore original button visibility
+      // if unlocking, restore original button_md_dialog visibility
       setProgressButtonEnabled(baseProgressButtonEnabled);
     }
     pager.setNextPagingEnabled(!lockEnable);
@@ -719,21 +719,21 @@ public abstract class AppIntroBase extends AppCompatActivity
    */
   public void setSwipeLock(boolean lockEnable) {
     if (lockEnable) {
-      // if locking, save current progress button visibility
+      // if locking, save current progress button_md_dialog visibility
       baseProgressButtonEnabled = progressButtonEnabled;
       //setProgressButtonEnabled(!lockEnable);
     } else {
-      // if unlocking, restore original button visibility
+      // if unlocking, restore original button_md_dialog visibility
       setProgressButtonEnabled(baseProgressButtonEnabled);
     }
     pager.setPagingEnabled(!lockEnable);
   }
 
   /**
-   * Enables/Disables leaving the intro via the device's software/hardware back button.
+   * Enables/Disables leaving the intro via the device's software/hardware back button_md_dialog.
    * Note, that does does NOT lock swiping back through the slides.
    *
-   * @param lockEnabled Whether leaving the intro via the phone's back button is locked.
+   * @param lockEnabled Whether leaving the intro via the phone's back button_md_dialog is locked.
    */
   public void setGoBackLock(boolean lockEnabled) {
     isGoBackLockEnabled = lockEnabled;
@@ -895,7 +895,7 @@ public abstract class AppIntroBase extends AppCompatActivity
       if (slidesNumber > 1) mController.selectPosition(position);
 
       // Allow the swipe to be re-enabled if a user swipes to a previous slide. Restore
-      // state of progress button depending on global progress button setting
+      // state of progress button_md_dialog depending on global progress button_md_dialog setting
       if (!pager.isNextPagingEnabled()) {
         if (pager.getCurrentItem() != pager.getLockPage()) {
           setProgressButtonEnabled(baseProgressButtonEnabled);

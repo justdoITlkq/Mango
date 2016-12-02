@@ -36,7 +36,7 @@ public final class AppIntroViewPager extends ViewPager {
 
     /**
      * Override is required to trigger {@link OnPageChangeListener#onPageSelected} for the first page.
-     * This is needed to correctly handle progress button display after rotation on a locked first page.
+     * This is needed to correctly handle progress button_md_dialog display after rotation on a locked first page.
      */
     @Override
     public void setCurrentItem(int item) {

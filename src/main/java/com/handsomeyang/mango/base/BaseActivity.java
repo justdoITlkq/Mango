@@ -248,7 +248,7 @@ public abstract class BaseActivity extends FragmentActivity {
     if (mTitleLeft != null) {
       mTitleLeft.setVisibility(View.VISIBLE);
       ImageView imgv_title_left = (ImageView) mTitleBar.findViewById(R.id.img_title_left);
-      imgv_title_left.setImageResource(R.drawable.back_arrow_left);
+      imgv_title_left.setImageResource(R.drawable.ic_arraw_white_left);
       mTitleLeft.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
           BaseActivity.this.finish();

@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
   <!--my styles  start-->
-  <style name="ProgressBarDialogWindowAnim_fade">
-    <item name="android:windowEnterAnimation">@anim/fade_in_center</item>
-    <item name="android:windowExitAnimation">@anim/fade_out_center</item>
-  </style>
-
-
   <!-- Base application theme. md Theme  -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="colorPrimary">@color/colorPrimary</item>
@@ -43,7 +37,7 @@
     <item name="android:minWidth">@dimen/action_button_min_width</item>
     <item name="android:paddingLeft">@dimen/action_button_padding_horizontal</item>
     <item name="android:paddingRight">@dimen/action_button_padding_horizontal</item>
-    <item name="android:background">@drawable/button</item>
+    <item name="android:background">@drawable/button_md_dialog</item>
     <item name="android:textSize">@dimen/action_button_text_size</item>
   </style>
   <!--md dialog needs end-->
@@ -90,47 +84,6 @@
   <!--smoothprogressbar horiztonal needs end-->
 
 
-  <!--md viewpager needs start-->
-  <style name="MVP_AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
-  </style>
-
-  <!-- Base application theme. -->
-  <style name="MVP_AppTheme" parent="MVP_AppBaseTheme">
-
-    <item name="android:textColorPrimary">@android:color/white</item>
-    <item name="drawerArrowStyle">@style/MVP_DrawerArrowStyle</item>
-    <item name="android:windowTranslucentStatus" tools:targetApi="19">true</item>
-
-    <item name="android:windowContentOverlay">@null</item>
-    <item name="windowActionBar">false</item>
-
-    <!-- Toolbar Theme / Apply white arrow -->
-    <item name="colorControlNormal">@android:color/white</item>
-    <item name="actionBarTheme">@style/MVP_AppTheme.ActionBarTheme</item>
-
-    <!-- Material Theme -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/accent_color</item>
-
-    <item name="android:statusBarColor" tools:targetApi="21">@color/statusBarColor</item>
-    <item name="android:navigationBarColor" tools:targetApi="21">@color/navigationBarColor</item>
-    <item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="21">true</item>
-
-  </style>
-
-  <style name="MVP_AppTheme.ActionBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-    <!-- White arrow -->
-    <item name="colorControlNormal">@android:color/white</item>
-  </style>
-
-  <style name="MVP_DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
-    <item name="spinBars">true</item>
-    <item name="color">@color/drawerArrowColor</item>
-  </style>
-  <!--md viewapager needs end-->
-
-
   <!--bottom bar needs start -->
   <style name="BB_BottomBarItem">
     <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
@@ -165,6 +118,7 @@
     <item name="android:textColor">#FFFFFF</item>
   </style>
   <!--bottom bar needs end -->
+
 
   <!--AppIntro needs start-->
   <style name="AppIntroButtonStyleCompat" parent="Widget.AppCompat.Button.Borderless">

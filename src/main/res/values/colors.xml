@@ -38,37 +38,21 @@
 
 
   <!--smoothprogressbar circular needs-->
-  <!--<color name="green">#388E3C</color>-->
-  <!--<color name="blue">#03A9F4</color>-->
-  <!--<color name="red">#D32F2F</color>-->
+  <color name="green">#388E3C</color>
+  <color name="blue">#03A9F4</color>
+  <color name="red">#D32F2F</color>
   <color name="orange">#FF9800</color>
   <color name="black">#212121</color>
   <!--<color name="purple">#7c4dff</color>-->
   <!--smoothprogressbar circular needs end-->
 
 
-  <!--md viewpager needs start-->
-  <color name="blue">#303F9F</color>
-  <color name="green">#4CAF50</color>
-  <color name="green_teal">#009688</color>
-  <color name="purple">#673AB7</color>
-  <color name="red">#F44336</color>
-  <color name="cyan">#00BCD4</color>
-  <color name="lime">#CDDC39</color>
-
-  <color name="accent_color">@color/blue</color>
-  <color name="colorPrimary">@color/blue</color>
-  <color name="colorPrimaryDark">@color/blue</color>
-  <color name="statusBarColor">@color/blue</color>
-  <color name="navigationBarColor">@android:color/black</color>
-  <color name="drawerArrowColor">@android:color/white</color>
-  <!--md view pager needs end-->
-
 <!--bottom bar needs start -->
   <color name="bb_inActiveBottomBarItemColor">#747474</color>
   <color name="bb_darkBackgroundColor">#212121</color>
   <color name="bb_tabletRightBorderDark">#505050</color>
   <!--bottom bar needs end -->
+
 </resources>
 
 

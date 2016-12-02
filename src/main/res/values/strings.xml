@@ -1,9 +1,11 @@
 <resources>
   <string name="app_name">Mango</string>
+
   <!--md dialog needs-->
   <string name="hello_world">Hello world!</string>
   <string name="action_settings">Settings</string>
   <!--md dialog needs end-->
+
   <!--smooth progressbar circular needs-->
   <integer-array name="mycolors">
 
