@@ -63,13 +63,13 @@ dependencies {
   //luban图片压缩上传  needs
   compile 'top.zibin:Luban:1.0.8'
 
-  //smart TabLayout needs  https://github.com/ogaclejapan/SmartTabLayout
+  //smart TabLayout needs    https://github.com/ogaclejapan/SmartTabLayout
   compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
   //smartTabLayout support v4包 fragment needs
   compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 
 
-  //日志框架LogUtils github地址:https://github.com/pengwei1024/LogUtils
+  //日志框架LogUtils  github地址:https://github.com/pengwei1024/LogUtils
   compile 'com.apkfuns.logutils:library:1.4.2'
   // md drawer needs
   compile('com.mikepenz:materialdrawer:5.7.0@aar') {
@@ -81,6 +81,9 @@ dependencies {
   //to use snackbar
   compile 'com.android.support:design:24.2.0'
   compile 'com.android.support:cardview-v7:24.2.1'
+
+  //EventBus  https://github.com/greenrobot/EventBus
+  compile 'org.greenrobot:eventbus:3.0.0'
 
   //dagger2 needs ---------------------  copy for use
   //  compile 'com.google.dagger:dagger:2.7'
