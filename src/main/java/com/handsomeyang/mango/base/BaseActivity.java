@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IntDef;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,11 @@ import android.widget.Toast;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
 import com.handsomeyang.mango.thrid.bottombar.BottomBar;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+import static com.handsomeyang.mango.base.BaseActivity.MangoRequestCode.RequestCode.REQUEST_CODE_1;
+import static com.handsomeyang.mango.base.BaseActivity.MangoRequestCode.RequestCode.REQUEST_CODE_2;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -51,8 +57,8 @@ public abstract class BaseActivity extends FragmentActivity {
   protected BottomBar mBottomBar;
   protected View mDecorView;
 
-  protected static int REQUEST_CODE_1 = 1111;
-  protected static int REQUEST_CODE_2 = 2222;
+  //protected static int REQUEST_CODE_1 = 1111;
+  //protected static int REQUEST_CODE_2 = 2222;
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
@@ -379,9 +385,21 @@ public abstract class BaseActivity extends FragmentActivity {
    * Request code 用于标识向哪个acitivity 跳转
    * Result code 用于标识是哪个activity 返回来的值
    */
-  public void mangoStartActivityForResult(Class activity, int resquestCodes) {
+  public void mangoStartActivityForResult(Class activity,
+      @MangoRequestCode.RequestCode int resquestCodes) {
     Intent intent = new Intent(mContext, activity);
     startActivityForResult(intent, REQUEST_CODE_1);
+  }
+
+  /**
+   * Request code 用于标识向哪个acitivity 跳转
+   * Result code 用于标识是哪个activity 返回来的值
+   */
+  public void mangoStartActivityForResult(Class activity,
+      @MangoRequestCode.RequestCode int resquestCodes, Bundle bundle) {
+    Intent mIntent = new Intent(mContext, activity);
+    mIntent.putExtra("bundle", bundle);
+    startActivityForResult(mIntent, REQUEST_CODE_1);
   }
 
   /**
@@ -401,7 +419,7 @@ public abstract class BaseActivity extends FragmentActivity {
   /**
    * 当resquestcode ==RESQUEST_CODE1 时候
    */
-  private void onActivityResult2(Intent data) {
+  protected void onActivityResult2(Intent data) {
   }
 
   /**
@@ -500,5 +518,17 @@ public abstract class BaseActivity extends FragmentActivity {
     super.onDestroy();
     mBaseActivityMaster.removeFromMaster(this);
     L.e(this.getClass().getSimpleName() + "  OnDestroy  .....");
+  }
+
+  /**
+   * 封装了StartActivityForResult 中的两个ResquestCode
+   */
+  public static class MangoRequestCode {
+    @IntDef({ 1111, 2222 })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface RequestCode {
+      public static int REQUEST_CODE_1 = 1111;
+      public static int REQUEST_CODE_2 = 2222;
+    }
   }
 }
