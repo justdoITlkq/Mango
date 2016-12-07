@@ -7,7 +7,6 @@ import android.view.animation.AnimationUtils;
 import com.handsomeyang.mango.R;
 
 public final class MangoAnimatorUtils {
-
   /**
    * EditText 没有填写的时候会左右循环抖动
    */
