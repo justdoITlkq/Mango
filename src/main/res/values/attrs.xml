@@ -115,7 +115,6 @@
   <!--material design edittext needs end-->
 
 
-
 <!--bottombar needs start-->
   <declare-styleable name="BottomBar">
     <attr name="bb_tabXmlResource" format="reference" />

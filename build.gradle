@@ -57,11 +57,16 @@ dependencies {
   //支持Webp静态
   compile 'com.facebook.fresco:webpsupport:0.12.0'
 
-  //图片裁剪  基于uCrop的CropUtils      https://github.com/glassLake/CropUtils
-  compile 'com.yalantis:ucrop:2.1.2'
+
+  //Yalantis的图片裁剪库  githup:https://github.com/Yalantis/uCrop
+  compile 'com.yalantis:ucrop:2.2.0'
+  //基于ucrop 2.1.2的封装的工具类，让ucrop使用更便捷   https://github.com/glassLake/CropUtils
+  compile 'com.yalantis:ucrop:2.2.0'
+
+
   //开源框架NativeStackBlur   能够将一个bitmap模糊后返回
-  //githup    https://github.com/Commit451/NativeStackBlur
-  compile 'com.commit451:NativeStackBlur:1.0.2' //高斯模糊
+  //高斯模糊   githup：https://github.com/Commit451/NativeStackBlur
+  compile 'com.commit451:NativeStackBlur:1.0.2'
 
   //fresco Utils needs
   compile 'jp.wasabeef:fresco-processors:2.0.0'
@@ -74,13 +79,9 @@ dependencies {
   //smartTabLayout support v4包 fragment needs
   compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 
-
   //日志框架LogUtils  github地址:https://github.com/pengwei1024/LogUtils
   compile 'com.apkfuns.logutils:library:1.4.2'
-  // md drawer needs
-  compile('com.mikepenz:materialdrawer:5.7.0@aar') {
-    transitive = true
-  }
+
   //三方工具类  https://github.com/Blankj/AndroidUtilCode
   compile 'com.blankj:utilcode:+'
 
