@@ -39,6 +39,8 @@ dependencies {
   compile 'io.reactivex:rxandroid:1.2.1'
 
   //retrofit2.0
+  // githup网址：https://github.com/square/retrofit
+  //square网址： http://square.github.io/retrofit/
   compile 'com.squareup.retrofit2:retrofit:2.1.0'
   //Gson
   compile 'com.squareup.retrofit2:converter-gson:2.1.0'
