@@ -39,7 +39,7 @@ dependencies {
   compile 'io.reactivex:rxandroid:1.2.1'
 
   //retrofit2.0
-  // githup网址：https://github.com/square/retrofit
+  //githup网址：https://github.com/square/retrofit
   //square网址： http://square.github.io/retrofit/
   compile 'com.squareup.retrofit2:retrofit:2.1.0'
   //Gson
@@ -57,13 +57,16 @@ dependencies {
   //支持Webp静态
   compile 'com.facebook.fresco:webpsupport:0.12.0'
 
-  //image   uCrop
+  //图片裁剪  基于uCrop的CropUtils      https://github.com/glassLake/CropUtils
   compile 'com.yalantis:ucrop:2.1.2'
+  //开源框架NativeStackBlur   能够将一个bitmap模糊后返回
+  //githup    https://github.com/Commit451/NativeStackBlur
+  compile 'com.commit451:NativeStackBlur:1.0.2' //高斯模糊
+
   //fresco Utils needs
   compile 'jp.wasabeef:fresco-processors:2.0.0'
-  //fresco Utils needs
-  compile 'com.commit451:NativeStackBlur:1.0.2' //高斯模糊
-  //luban图片压缩上传  needs
+
+  //luban图片压缩上传   githup https://github.com/Curzibn/Luban
   compile 'top.zibin:Luban:1.0.8'
 
   //smart TabLayout needs    https://github.com/ogaclejapan/SmartTabLayout
@@ -89,10 +92,10 @@ dependencies {
   //EventBus插件地址： https://github.com/likfe/eventbus3-intellij-plugin
   compile 'org.greenrobot:eventbus:3.0.0'
 
-  //md editText      https://github.com/rengwuxian/MaterialEditText
+  //md editText rengwuxian      https://github.com/rengwuxian/MaterialEditText
   compile 'com.rengwuxian.materialedittext:library:2.1.4'
 
-  //Cricle imageView      https://github.com/hdodenhof/CircleImageView
+  //Cricular imageView      https://github.com/hdodenhof/CircleImageView
   compile 'de.hdodenhof:circleimageview:2.1.0'
 
   //dagger2 needs ---------------------  copy for use
