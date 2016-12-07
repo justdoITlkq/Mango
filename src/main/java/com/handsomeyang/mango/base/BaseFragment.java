@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
+import com.handsomeyang.mango.output.S;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
@@ -81,7 +82,8 @@ public abstract class BaseFragment extends Fragment {
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
      //-------------------------------------------------------------------------------------
-    //ButterKnife.bind(mActivity);
+    //初始化SnackBarUtils
+    S.init(mActivity);
 
     L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
     //初始化

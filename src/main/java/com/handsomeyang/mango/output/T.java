@@ -4,8 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * Created by HandsomeYang on 2016/9/12.
- * Toast
+ * Created by Hongyang on 2016/9/12.
+ * Toast   need  inited
  */
 
 public class T {

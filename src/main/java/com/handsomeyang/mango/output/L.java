@@ -10,12 +10,13 @@ import org.json.JSONObject;
 /**
  * Created by HandsomeYang on 2016/9/12.
  * log
+ * 有个缺点，比如非标准的url   比如url中包含json串的就无法打印，会报错
+ * Mango还包含一个库 LogUtils ：https://github.com/pengwei1024/LogUtils
  */
 
 public class L {
   private static String sTag = "Mango日志";
   private static final int JSON_INDENT = 2;
-
 
   public static void e(String msg) {
     e(null, msg, null);
@@ -26,12 +27,12 @@ public class L {
   }
 
   public static void e(String tag, String msg, Object[] params) {
-    if (BuildConfig.DEBUG!=BuildConfig.DEBUG) return;
+    if (BuildConfig.DEBUG != BuildConfig.DEBUG) return;
     LogText.e(getFinalTag(tag), String.format(msg, params));
   }
 
   public static void m(String msg) {
-    if (BuildConfig.DEBUG!=BuildConfig.DEBUG) return;
+    if (BuildConfig.DEBUG != BuildConfig.DEBUG) return;
     String methodName = new Exception().getStackTrace()[1].getMethodName();
     e(methodName + ":    " + msg);
   }
@@ -41,7 +42,7 @@ public class L {
   }
 
   public static void json(String tag, String json) {
-    if (BuildConfig.DEBUG!=BuildConfig.DEBUG) return;
+    if (BuildConfig.DEBUG != BuildConfig.DEBUG) return;
     LogText.e(getFinalTag(tag), getPrettyJson(json));
   }
 

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.output.L;
+import com.handsomeyang.mango.output.S;
 import com.handsomeyang.mango.thrid.bottombar.BottomBar;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -83,7 +84,9 @@ public abstract class BaseActivity extends FragmentActivity {
     }
 
     //标题栏设置结束------------------------------------------------------------------------------------
-    //ButterKnife.bind(this);
+    //初始化SnackbarUtils 工具类
+    S.init(this);
+
     mDecorView = getWindow().getDecorView();
     mContext = this;
     mLayoutInflater = this.getLayoutInflater();

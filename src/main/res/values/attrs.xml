@@ -15,7 +15,7 @@
   <!--smoothprogressbar circular needs end-->
 
 
-  <!--smoothprogressbar horizontal needs -->
+  <!--smoothprogressbar horizontal_Wave needs -->
   <declare-styleable name="SmoothProgressBar">
     <attr format="reference" name="spbStyle"/>
     <attr format="color" name="spb_color"/>
@@ -39,7 +39,7 @@
     <attr format="boolean" name="spb_generate_background_with_colors"/>
     <attr format="boolean" name="spb_gradients"/>
   </declare-styleable>
-  <!--smoothprogressbar horizontal needs end-->
+  <!--smoothprogressbar horizontal_Wave needs end-->
 
 
   <!--material design edittext needs-->

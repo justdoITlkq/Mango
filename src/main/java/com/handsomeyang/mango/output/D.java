@@ -13,8 +13,11 @@ import com.handsomeyang.mango.thrid.mddialog.MaterialDialog;
 public class D {
 
   /**
+   * Darkeet 的md dialog 库
    * API:
    * https://github.com/drakeet/MaterialDialog
+   * 已经标记废弃了
+   * 想封装一个木有时间
    */
   public static void md(Context context, String title, String msg, View.OnClickListener listener) {
     final MaterialDialog mMaterialDialog = new MaterialDialog(context);

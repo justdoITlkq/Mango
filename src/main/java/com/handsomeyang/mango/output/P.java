@@ -23,7 +23,8 @@ import com.handsomeyang.mango.utils.MangoRandomColorUtils;
 
 /**
  * Created by HandsomeYang on 2016/9/14.
- * md loading progressbar   circular/horizontal
+ * md loading progressbar   circular/horizontal_Wave
+ * 这个封装的并不是很好，还有很大优化空间，暂时先如此
  */
 
 public class P {
@@ -33,7 +34,7 @@ public class P {
    * smoothprogressbar circular dialog
    * 弹出的时候面板上的控件是点不了的，因为焦点在dialog上
    */
-  public static void c_normal(Context context) {
+  public static void circular_Normal(Context context) {
     //progressbar 放在dialog上
     mDialog_C = new Dialog(context);
     //去掉标题
@@ -50,7 +51,7 @@ public class P {
     mDialog_C.show();
   }
 
-  public static void c_Interpolator(Context context) {
+  public static void circular_Interpolator(Context context) {
     //progressbar 放在dialog上
     mDialog_C = new Dialog(context);
     //去掉标题
@@ -85,7 +86,8 @@ public class P {
     mDialog_C.setContentView(mProgressBar);
     mDialog_C.show();
   }
-  public static void c_Interpolator_RandomColor(Context context) {
+
+  public static void cricular_Interpolator_RandomColor(Context context) {
     //progressbar 放在dialog上
     mDialog_C = new Dialog(context);
     //去掉标题
@@ -135,9 +137,9 @@ public class P {
 
   /**
    * 自定义横向 progressdialog
-   * smoothprogressbar horizontal dialog
+   * smoothprogressbar horizontal_Wave dialog
    */
-  public static void h(Context context) {
+  public static void horizontal_Wave(Context context) {
     mDialog_H = new Dialog(context);
     mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
     View rootView =
@@ -170,7 +172,7 @@ public class P {
   /**
    * 横向进度条，没有dialog背景暗色
    */
-  public static void h_(Context context) {
+  public static void horizontal_NoDigBg(Context context) {
     mDialog_H = new Dialog(context);
     mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
     View rootView =
@@ -215,10 +217,11 @@ public class P {
     mDialog_H.setContentView(rootView);
     mDialog_H.show();
   }
+
   /**
    * 横向进度条，没有dialog背景暗色
    */
-  public static void h_randomColor(Context context) {
+  public static void horizontal_RandomColor(Context context) {
     mDialog_H = new Dialog(context);
     mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
     View rootView =
@@ -267,7 +270,7 @@ public class P {
   /**
    * 小尾巴能抖动，同时文字也可以上下跳跃
    */
-  public static void h(Context context, String title, int startPos, int endPos) {
+  public static void horizontal_Wave(Context context, String title, int startPos, int endPos) {
     Dialog mDialog_H = new Dialog(context);
     mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
     View rootView =
@@ -307,7 +310,7 @@ public class P {
   /**
    * 小尾巴在抖动
    */
-  public static void h(Context context, String title) {
+  public static void horizontal_Wave(Context context, String title) {
     Dialog mDialog_H = new Dialog(context);
     mDialog_H.requestWindowFeature(Window.FEATURE_NO_TITLE);
     View rootView =
