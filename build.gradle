@@ -38,6 +38,9 @@ dependencies {
   //rxandroid
   compile 'io.reactivex:rxandroid:1.2.1'
 
+  //luban图片压缩      https://github.com/Curzibn/Luban
+  compile 'top.zibin:Luban:1.0.9'
+
   //retrofit2.0
   //githup网址：https://github.com/square/retrofit
   //square网址： http://square.github.io/retrofit/

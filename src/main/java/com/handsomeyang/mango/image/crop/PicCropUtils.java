@@ -20,7 +20,7 @@ import java.io.File;
  * compile 'com.yalantis:ucrop:2.2.0
  */
 
-public class PicCrop {
+public class PicCropUtils {
 
   public static final int REQUEST_SELECT_PICTURE = 0x01;
   private static final int REQUEST_CAMERA = 0x03;
@@ -29,13 +29,13 @@ public class PicCrop {
   public static final int TYPE_AVATAR = 1;
   public static final int TYPE_NORMAL = 2;
 
+  private static Uri uri;
+  private static CropConfig config = new CropConfig();
+
   public static Uri getUri() {
     return uri;
   }
 
-  private static Uri uri;
-
-  private static CropConfig config = new CropConfig();
 
   private static Uri buildUri() {
     File cacheFolder =
@@ -44,16 +44,16 @@ public class PicCrop {
       try {
         boolean result = cacheFolder.mkdir();
         //Log.d("uri", "generateUri " + cacheFolder + " result: " + (result ? "succeeded" : "failed"));
-        L.e("uri", "generateUri " + cacheFolder + " result: " + (result ? "succeeded" : "failed"));
+        L.e("uri-->  "+"generateUri " + cacheFolder + " result: " + (result ? "succeeded" : "failed"));
       } catch (Exception e) {
         //Log.e("uri", "generateUri failed: " + cacheFolder, e);
-        L.e("uri", "generateUri failed: " + cacheFolder, e);
+        L.e("uri--->  "+ "generateUri failed: " + cacheFolder+"   " +e);
       }
     }
     String name = String.format("imagecrop-%d.jpg", System.currentTimeMillis());
     uri = Uri.fromFile(cacheFolder).buildUpon().appendPath(name).build();
     //Log.e("crop", uri.toString());
-    L.e("crop", uri.toString());
+    L.e("crop的Uri--->   "+ uri.toString()+ "\r\nname---> "+name+ "\r\n不拼接name--->  "+Uri.fromFile(cacheFolder).buildUpon().build());
 
     return uri;
   }
@@ -68,9 +68,9 @@ public class PicCrop {
 
   public static void cropFromGallery(Activity context, CropConfig config, int type) {
     if (config != null) {
-      PicCrop.config = config;//怎么避免前后两次config
+      PicCropUtils.config = config;//怎么避免前后两次config
     } else {
-      PicCrop.config = new CropConfig();
+      PicCropUtils.config = new CropConfig();
     }
 
     setType(type);
@@ -101,9 +101,9 @@ public class PicCrop {
 
   public static void cropFromCamera(Activity context, CropConfig config, int type) {
     if (config != null) {
-      PicCrop.config = config;
+      PicCropUtils.config = config;
     } else {
-      PicCrop.config = new CropConfig();
+      PicCropUtils.config = new CropConfig();
     }
 
     setType(type);
