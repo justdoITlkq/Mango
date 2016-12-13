@@ -18,6 +18,14 @@ import java.io.File;
  * Created by HandsomeYang on 2016/12/8.
  * https://github.com/glassLake/CropUtils
  * compile 'com.yalantis:ucrop:2.2.0
+ *
+ * Luban：   https://github.com/Curzibn/Luban
+ * uCrop本身压缩之后会指定图片大小，所以压出来的图片本身就几十K很小了；
+ * 集成了LuBan  图片压缩框架： 可用来压缩头像上传BitMap的compress方法来压缩
+ * 微信朋友圈九宫格图片
+ *
+ * 图片压缩有两种方法：1、头像质量压缩，bitmap的compress 方法
+ *                   2、图片大小压缩：加载宽高不加载字节，然后递归让宽高符合指定宽高，最后加载字节；
  */
 
 public class PicCropUtils {
@@ -36,7 +44,6 @@ public class PicCropUtils {
     return uri;
   }
 
-
   private static Uri buildUri() {
     File cacheFolder =
         new File(Environment.getExternalStorageDirectory() + File.separator + "crop");
@@ -44,16 +51,22 @@ public class PicCropUtils {
       try {
         boolean result = cacheFolder.mkdir();
         //Log.d("uri", "generateUri " + cacheFolder + " result: " + (result ? "succeeded" : "failed"));
-        L.e("uri-->  "+"generateUri " + cacheFolder + " result: " + (result ? "succeeded" : "failed"));
+        L.e("uri-->  " + "generateUri " + cacheFolder + " result: " + (result ? "succeeded"
+            : "failed"));
       } catch (Exception e) {
         //Log.e("uri", "generateUri failed: " + cacheFolder, e);
-        L.e("uri--->  "+ "generateUri failed: " + cacheFolder+"   " +e);
+        L.e("uri--->  " + "generateUri failed: " + cacheFolder + "   " + e);
       }
     }
     String name = String.format("imagecrop-%d.jpg", System.currentTimeMillis());
     uri = Uri.fromFile(cacheFolder).buildUpon().appendPath(name).build();
     //Log.e("crop", uri.toString());
-    L.e("crop的Uri--->   "+ uri.toString()+ "\r\nname---> "+name+ "\r\n不拼接name--->  "+Uri.fromFile(cacheFolder).buildUpon().build());
+    L.e("crop的Uri--->   "
+        + uri.toString()
+        + "\r\nname---> "
+        + name
+        + "\r\n不拼接name--->  "
+        + Uri.fromFile(cacheFolder).buildUpon().build());
 
     return uri;
   }
