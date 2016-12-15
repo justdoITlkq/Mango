@@ -515,6 +515,13 @@ public abstract class BaseActivity extends FragmentActivity {
     }
   }
 
+  /**
+   * 销毁当前activity
+   */
+  protected void suicide() {
+    this.finish();
+  }
+
   //backpress 相关结束----------------------------------------------------------------------
 
   @Override protected void onDestroy() {
@@ -527,9 +534,7 @@ public abstract class BaseActivity extends FragmentActivity {
    * 封装了StartActivityForResult 中的两个ResquestCode
    */
   public static class MangoRequestCode {
-    @IntDef({ 1111, 2222 })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestCode {
+    @IntDef({ 1111, 2222 }) @Retention(RetentionPolicy.SOURCE) public @interface RequestCode {
       public static int REQUEST_CODE_1 = 1111;
       public static int REQUEST_CODE_2 = 2222;
     }
