@@ -428,8 +428,8 @@ public class S {
    */
   private int calculateSnackBarHeight() {
     int SnackbarHeight =
-        ConvertUtils.dp2px(mSnackbar.getView().getContext(), 28) + ConvertUtils.sp2px(
-            mSnackbar.getView().getContext(), 14);
+        ConvertUtils.dp2px(28) + ConvertUtils.sp2px(
+             14);
     Log.e("Jet",
         "直接获取MessageView高度:" + mSnackbar.getView().findViewById(R.id.snackbar_text).getHeight());
     return SnackbarHeight;
@@ -478,7 +478,7 @@ public class S {
     int[] locations = new int[2];
     targetView.getLocationOnScreen(locations);
     int snackbarHeight = calculateSnackBarHeight();
-    int screenHeight = ScreenUtils.getScreenHeight(mSnackbar.getView().getContext());
+    int screenHeight = ScreenUtils.getScreenHeight();
     //必须保证指定View的底部可见 且 单行Snackbar可以完整的展示
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       //为什么要'+2'? 因为在Android L(Build.VERSION_CODES.LOLLIPOP)以上,例如Button会有一定的'阴影(shadow)',阴影的大小由'高度(elevation)'决定.

@@ -1,6 +1,7 @@
 package com.handsomeyang.mango.base;
 
 import android.app.Application;
+import com.blankj.utilcode.utils.Utils;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.handsomeyang.mango.output.T;
 
@@ -23,5 +24,8 @@ public abstract class BaseApplication extends Application {
 
     //output Toast Utils init
     T.init(this);
+
+    //BlankJ  utils 获取的context  https://github.com/Blankj/AndroidUtilCode
+    Utils.init(this);
   }
 }

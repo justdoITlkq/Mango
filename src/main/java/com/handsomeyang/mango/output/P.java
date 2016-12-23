@@ -196,7 +196,7 @@ public class P {
 
     //让进度条变长
     ViewGroup.LayoutParams layoutParamsPro = mSmoothProgressBar.getLayoutParams();
-    layoutParamsPro.width = ConvertUtils.dp2px(context, 250);
+    layoutParamsPro.width = ConvertUtils.dp2px(250);
     mSmoothProgressBar.setLayoutParams(layoutParamsPro);
 
     //------------------------------------------------------
@@ -245,7 +245,7 @@ public class P {
 
     //让进度条变长
     ViewGroup.LayoutParams layoutParamsPro = mSmoothProgressBar.getLayoutParams();
-    layoutParamsPro.width = ConvertUtils.dp2px(context, 250);
+    layoutParamsPro.width = ConvertUtils.dp2px(250);
     mSmoothProgressBar.setLayoutParams(layoutParamsPro);
 
     //------------------------------------------------------
