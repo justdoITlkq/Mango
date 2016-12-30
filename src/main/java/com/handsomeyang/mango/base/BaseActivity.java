@@ -127,6 +127,8 @@ public abstract class BaseActivity extends FragmentActivity {
   private void initConfig(int layoutResID) {
     //rootview
     RelativeLayout mRootRelativeLayout = new RelativeLayout(this);
+    //为根布局 添加id，方便以后add fragment 的时候用
+    mRootRelativeLayout.setId(R.id.root_relative_layout);
 
     //要先设置布局才能用布局参数
     setContentView(mRootRelativeLayout);
@@ -196,6 +198,7 @@ public abstract class BaseActivity extends FragmentActivity {
     View rootView = mLayoutInflater.inflate(layoutResID, mRootRelativeLayout, false);
     RelativeLayout.LayoutParams rootViewLayoutParams =
         (RelativeLayout.LayoutParams) rootView.getLayoutParams();
+
     rootViewLayoutParams.addRule(RelativeLayout.BELOW, R.id.titlbar);
     rootViewLayoutParams.addRule(RelativeLayout.ABOVE, R.id.bottombar);
 

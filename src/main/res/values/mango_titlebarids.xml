@@ -12,5 +12,7 @@
 
   <item name="img_title_right" type="id"/>
   <item name="img_title_left" type="id"/>
+
+  <item name="root_relative_layout" type="id"/>
   <!--my title bar needs end-->
 </resources>

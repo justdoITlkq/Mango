@@ -55,6 +55,7 @@ public abstract class BaseFragment extends Fragment {
     } else {
       mRootView = mLayoutInflater.inflate(setRootView(), container, false);
     }
+
     initConfig();
     init();
     initViews();
@@ -62,6 +63,7 @@ public abstract class BaseFragment extends Fragment {
   }
 
   protected void initConfig() {
+
   }
 
   //容器id
@@ -102,10 +104,13 @@ public abstract class BaseFragment extends Fragment {
    */
 
   private View initTileBar(int layoutResID) {
+
     RelativeLayout mRelativeLayout = new RelativeLayout(mActivity);
+
     ViewGroup.LayoutParams layoutParams =
         new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT);
+
     mRelativeLayout.setLayoutParams(layoutParams);
 
     mTitleBar = mLayoutInflater.inflate(R.layout.titlebar, mRelativeLayout, false);
@@ -158,13 +163,11 @@ public abstract class BaseFragment extends Fragment {
       } catch (Exception e) {
         L.e("title right img  doesn't exit");
       }
+
     } else if (useToolbar) {
-      //普通toolbar
-      L.e("执行到toolbar 模式了");
-      //默认都是显示toolbar的，隐藏的话需要手动调用hideToolbar的方法
+      //Toolbar模式
       mTitleBar.setVisibility(View.VISIBLE);
       mTitleRootView.setVisibility(View.GONE);
-      mToolbar = (Toolbar) mTitleBar;
     }
 
     View rootView = mLayoutInflater.inflate(layoutResID, mRelativeLayout, false);
@@ -177,6 +180,9 @@ public abstract class BaseFragment extends Fragment {
 
     mRelativeLayout.addView(mTitleBar);
     mRelativeLayout.addView(rootView);
+
+    //只有添加到布局上之后才能findviewbyid
+    mToolbar = (Toolbar) mRootView.findViewById(R.id.titlbar);
 
     if (useBottombar) {
       View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRelativeLayout, false);
