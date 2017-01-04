@@ -26,6 +26,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.utils.ConvertUtils;
 import com.blankj.utilcode.utils.ScreenUtils;
 import com.handsomeyang.mango.R;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by HandsomeYang on 2016/12/7.

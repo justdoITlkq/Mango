@@ -32,7 +32,6 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
   })
   testCompile 'junit:junit:4.12'
-
   //rxjava
   compile 'io.reactivex:rxjava:1.1.6'
   //rxandroid
@@ -60,7 +59,6 @@ dependencies {
   //支持Webp静态
   compile 'com.facebook.fresco:webpsupport:0.12.0'
 
-
   //Yalantis的图片裁剪库  githup:https://github.com/Yalantis/uCrop
   compile 'com.yalantis:ucrop:2.2.0'
   //基于ucrop 2.1.2的封装的工具类，让ucrop使用更便捷   https://github.com/hss01248/PicCrop
@@ -81,9 +79,6 @@ dependencies {
   //smartTabLayout support v4包 fragment needs
   compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 
-  //日志框架LogUtils  github地址:https://github.com/pengwei1024/LogUtils
-  compile 'com.apkfuns.logutils:library:1.4.2'
-
   //三方工具类  https://github.com/Blankj/AndroidUtilCode
   compile 'com.blankj:utilcode:+'
 
@@ -100,6 +95,8 @@ dependencies {
 
   //Cricular imageView      https://github.com/hdodenhof/CircleImageView
   compile 'de.hdodenhof:circleimageview:2.1.0'
+  //Xlog    https://github.com/elvishew/XLog/blob/master/README_ZH.md
+  compile 'com.elvishew:xlog:1.3.0'
 
   //dagger2 needs ---------------------  copy for use
   //  compile 'com.google.dagger:dagger:2.7'
