@@ -427,9 +427,7 @@ public class S {
    * 计算单行的Snackbar的高度值(单位 pix)
    */
   private int calculateSnackBarHeight() {
-    int SnackbarHeight =
-        ConvertUtils.dp2px(28) + ConvertUtils.sp2px(
-             14);
+    int SnackbarHeight = ConvertUtils.dp2px(28) + ConvertUtils.sp2px(14);
     Log.e("Jet",
         "直接获取MessageView高度:" + mSnackbar.getView().findViewById(R.id.snackbar_text).getHeight());
     return SnackbarHeight;

@@ -6,7 +6,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
-import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
@@ -25,16 +24,11 @@ import com.handsomeyang.mango.thrid.bottombar.BottomBar;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import static com.handsomeyang.mango.base.BaseActivity.MangoRequestCode.RequestCode.REQUEST_CODE_1;
-import static com.handsomeyang.mango.base.BaseActivity.MangoRequestCode.RequestCode.REQUEST_CODE_2;
+import static com.handsomeyang.mango.base.BaseActivity.MRequestCode.Code.REQUEST_CODE_1;
+import static com.handsomeyang.mango.base.BaseActivity.MRequestCode.Code.REQUEST_CODE_2;
 
 /**
  * Created by HandsomeYang on 2016/9/9.
- * 封装标题栏，安全退出，上下文等常用属性赋值，snakebar，floatButton，toolbar
- * 转场动画，跳转，携带数据
- * 沉浸式标题栏，兼容4.4
- * 继承appcompatActivity是为了使Toolbar兼容的
- * 开发要注意向md风格靠近
  */
 public abstract class BaseActivity extends FragmentActivity {
   protected BaseActivity mContext;
@@ -45,7 +39,8 @@ public abstract class BaseActivity extends FragmentActivity {
   private View mTitleBar, mTitleLeft, mTitleCenter, mTitleRight, mTitleRootView;
   private TextView mTvTitleLeft, mTvTitleCenter, mTvTitleRight;
   private ImageView mImageView;
-  public Toolbar mToolbar;                         //开放toolbar出去
+  //public toolbar
+  public Toolbar mToolbar;
 
   private long mTimeBegin;
   private boolean mSafeExit;
@@ -58,8 +53,17 @@ public abstract class BaseActivity extends FragmentActivity {
   protected BottomBar mBottomBar;
   protected View mDecorView;
 
-  //protected static int REQUEST_CODE_1 = 1111;
-  //protected static int REQUEST_CODE_2 = 2222;
+  /**
+   * StartActivityForResult two  ResquestCode
+   */
+  public static class MRequestCode {
+    @IntDef({ 1111, 2222 })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Code {
+      int REQUEST_CODE_1 = 1111;
+      int REQUEST_CODE_2 = 2222;
+    }
+  }
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     init();
@@ -67,24 +71,27 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 一些初始化赋值操作  如果不希望布局中的内容拉到状态栏上的话就在xml最外层+fitSystemWindow=true
+   * init sth; if you are not supposed layout content extend to statusbar then, in xml
+   * +fitSystemWindow=true
    */
   private void init() {
-    //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统-----------------------------------------------
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+
+    //immersive titlebar   no statusbar   4.4+-----------------------------------------------
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0+
       mDecorView = getWindow().getDecorView();
       int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
       mDecorView.setSystemUiVisibility(option);
 
       getWindow().setStatusBarColor(Color.TRANSPARENT);
-    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4----5.0
       WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
       localLayoutParams.flags =
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
 
-    //标题栏设置结束------------------------------------------------------------------------------------
-    //初始化SnackbarUtils 工具类
+    //init titlebar end-----------------------------------------------------------------------------
+
+    //init  SnackbarUtils context
     S.init(this);
 
     mDecorView = getWindow().getDecorView();
@@ -100,16 +107,6 @@ public abstract class BaseActivity extends FragmentActivity {
     L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
   }
 
-  /**
-   * 初始化一些配置，比如使用标题栏或者使用bottombar
-   */
-  protected void initConfig() {
-  }
-
-  public abstract int setRootView();
-
-  public abstract void initViews();
-
   @Override public void setContentView(int layoutResID) {
     if (useTitlebar || useToolbar || useBottombar) {
       initConfig(layoutResID);
@@ -119,21 +116,20 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 初始化标题栏
+   * init titlbar
    *
-   * @param layoutResID 根布局
-   * @return 添加标题栏后的根布局
+   * @param layoutResID rootView
+   * @return rootView add titlebar
    */
   private void initConfig(int layoutResID) {
     //rootview
     RelativeLayout mRootRelativeLayout = new RelativeLayout(this);
-    //为根布局 添加id，方便以后add fragment 的时候用
+    //rootView setId，for add fragment
     mRootRelativeLayout.setId(R.id.root_relative_layout);
 
-    //要先设置布局才能用布局参数
     setContentView(mRootRelativeLayout);
 
-    //设置宽高
+    //set with and height
     ViewGroup.LayoutParams rootLayoutParams = mRootRelativeLayout.getLayoutParams();
     rootLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
     rootLayoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -149,7 +145,8 @@ public abstract class BaseActivity extends FragmentActivity {
     mTitleBar.setVisibility(View.GONE);
     //titlebar rootView
     mTitleRootView = mTitleBar.findViewById(R.id.title_bar_default);
-    //普通标题栏-------------------------------------------------------------------------------
+
+    //common titlebar  --------------------------------------------------------------------------
     if (useTitlebar) {
       try {
         mTitleLeft = mTitleBar.findViewById(R.id.title_left);
@@ -190,7 +187,8 @@ public abstract class BaseActivity extends FragmentActivity {
         L.e("title right img  doesn't exit");
       }
     } else if (useToolbar) {
-      //使用Toolbar-------------------------------------------------------------------------
+
+      //Toolbar  style-------------------------------------------------------------------------
       mTitleBar.setVisibility(View.VISIBLE);
       mTitleRootView.setVisibility(View.GONE);
     }
@@ -205,10 +203,10 @@ public abstract class BaseActivity extends FragmentActivity {
     mRootRelativeLayout.addView(mTitleBar);
     mRootRelativeLayout.addView(rootView);
 
-    //只有添加到布局上之后才能findviewbyid
+    //before findviewbyid must set layout
     mToolbar = (Toolbar) findViewById(R.id.titlbar);
 
-    //bottombar-------------------------------------------------------------------------
+    //bottombar  sytle -------------------------------------------------------------------------
     if (useBottombar) {
       View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRootRelativeLayout, false);
       RelativeLayout.LayoutParams bottombarLayoutParams =
@@ -217,7 +215,7 @@ public abstract class BaseActivity extends FragmentActivity {
       bottombar.setLayoutParams(bottombarLayoutParams);
 
       mRootRelativeLayout.addView(bottombar);
-      //add 之后才能findviewbyid
+      //add view findviewbyid
       mBottomBar = (BottomBar) findViewById(R.id.bottombar);
     }
 
@@ -225,10 +223,10 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 设置左边部分标题栏  会带有返回箭头图标
+   * set left titlebar   with  back arraw
    *
-   * @param text 标题文字
-   * @param onClickListener 监听
+   * @param text title
+   * @param onClickListener listener
    */
   public void setTitleLeft(String text, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
@@ -249,9 +247,8 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 设置默认左侧标题栏
-   * 默认监听销毁自己
-   * 默认image 是 返回箭头：  <
+   * set default left title  with left arraw
+   * kill this page
    */
   public void setTitleLeft() {
     if (!useTitlebar) {
@@ -269,6 +266,12 @@ public abstract class BaseActivity extends FragmentActivity {
     }
   }
 
+  /**
+   * set left title
+   *
+   * @param imgBackRes imgRes
+   * @param onClickListener listener
+   */
   public void setTitleLeft(@DrawableRes int imgBackRes, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
       return;
@@ -289,9 +292,9 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 中间标题栏部分
+   * set center title
    *
-   * @param text 标题文字
+   * @param text title
    */
   public void setTitleCenter(String text) {
     if (!useTitlebar) {
@@ -307,10 +310,10 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 右侧部分标题栏
+   * set right title
    *
-   * @param text 标题文字
-   * @param onClickListener 监听
+   * @param text title
+   * @param onClickListener listener
    */
   public void setTitleRight(String text, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
@@ -332,10 +335,10 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 设置右边标题栏image和监听
+   * set right title  with  image  and listener
    *
-   * @param ImgID image 资源id
-   * @param onClickListener 监听
+   * @param ImgID image Res id
+   * @param onClickListener listener
    */
   public void setTitleRight(int ImgID, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
@@ -356,28 +359,16 @@ public abstract class BaseActivity extends FragmentActivity {
     }
   }
 
-  protected void setUseTitlebar() {
-    useTitlebar = !useToolbar;
-  }
-
-  protected void setUseToolbar() {
-    useToolbar = !useTitlebar;
-  }
-
-  protected void setUseBottombar() {
-    useBottombar = true;
-  }
-
-  //对Activity操作---------------------------------------------------------------------------------
-  public void mangoStartActivity(Class actiivty) {
+  //Activity   start --------------------------------------------------------------------------
+  public void mStartActivity(Class actiivty) {
     Intent intent = new Intent(mContext, actiivty);
     startActivity(intent);
   }
 
   /**
-   * 如果startActivity有数据就返回true，如果没数据就返回false
+   * if startActivity with data return true，else return false
    */
-  public boolean mangoStartActivity(Class activity, Bundle bundle) {
+  public boolean mStartActivity(Class activity, Bundle bundle) {
     Intent mIntent = new Intent(mContext, activity);
     mIntent.putExtra("bundle", bundle);
     startActivity(mIntent);
@@ -388,28 +379,26 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * Request code 用于标识向哪个acitivity 跳转
-   * Result code 用于标识是哪个activity 返回来的值
+   * Request code :  acitivity skip   flag
+   * Result code :   activity back    flag
    */
-  public void mangoStartActivityForResult(Class activity,
-      @MangoRequestCode.RequestCode int resquestCodes) {
+  public void mStartActivityForResult(Class activity, @MRequestCode.Code int resquestCodes) {
     Intent intent = new Intent(mContext, activity);
     startActivityForResult(intent, REQUEST_CODE_1);
   }
 
   /**
-   * Request code 用于标识向哪个acitivity 跳转
-   * Result code 用于标识是哪个activity 返回来的值
+   * startActivityForResult  with bundle
    */
-  public void mangoStartActivityForResult(Class activity,
-      @MangoRequestCode.RequestCode int resquestCodes, Bundle bundle) {
+  public void mStartActivityForResult(Class activity, @MRequestCode.Code int resquestCodes,
+      Bundle bundle) {
     Intent mIntent = new Intent(mContext, activity);
     mIntent.putExtra("bundle", bundle);
     startActivityForResult(mIntent, REQUEST_CODE_1);
   }
 
   /**
-   * StartActivityForResult 回调的方法OnActiityResult
+   * StartActivityForResult callbak :OnActiityResult
    */
   @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
@@ -423,53 +412,53 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 当resquestcode ==RESQUEST_CODE1 时候
+   * callback:  resquestcode ==RESQUEST_CODE1
    */
   protected void onActivityResult2(Intent data) {
   }
 
   /**
-   * 当resquestcode ==RESQUEST_CODE2 时候
+   * call back:  resquestcode ==RESQUEST_CODE2
    */
   protected void OnActivityResult1(Intent data) {
 
   }
-  //对于Activity操作结束------------------------------------------------------------------------
+  //Activity   end ------------------------------------------------------------------------
 
-  //对于fragment操作--------------------------------------------------------------------------
-  public void mangoAddFragment(int des, BaseFragment fragment) {
+  //fragment   start    -------------------------------------------------------------------------
+  public void mAddFragment(int des, BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .add(des, fragment, fragment.getClass().getSimpleName())
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
 
-  public void mangoReplaceFragment(int des, BaseFragment fragment) {
+  public void mReplaceFragment(int des, BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .replace(des, fragment, fragment.getClass().getSimpleName())
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
 
-  public void mangoHideFragment(BaseFragment fragment) {
+  public void mHideFragment(BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .hide(fragment)
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
 
-  public void mangoShowFragment(BaseFragment fragment) {
+  public void mShowFragment(BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .show(fragment)
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
-  //对于framgent 操作结束-----------------------------------------------------------------
+  //framgent end -----------------------------------------------------------------
 
-  //backpress 相关----------------------------------------------------------------------
+  //backpress  start ----------------------------------------------------------------
 
   /**
-   * 对安全退出开放方法
+   * safe quit activity
    */
   public void setSafeExit(boolean useSafe, String text) {
     mSafeExit = useSafe;
@@ -477,7 +466,7 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 是否安全退出
+   * wheather safe quit or not
    */
   private void safeExit() {
     long timeNow = System.currentTimeMillis();
@@ -491,26 +480,26 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 只有回退栈中没有事务的时候才会触发acticity安全退出
+   * if fragment backstack has no fragment then,acticity safe quit
    */
   @Override public void onBackPressed() {
     if (mFragmentManager.getBackStackEntryCount() <= 1) {
-      //如果设置了安全退出就安全退出
+      //if use safe quit
       if (mSafeExit) {
         safeExit();
         return;
       }
       super.onBackPressed();
     } else {
-      //如果回退栈中有事务，就要先退出fragment
-      mangoRemoveFragment();
+      //if fragment back stack has fragment ,remove fragment
+      mRemoveFragment();
     }
   }
 
   /**
-   * 如果fragment 栈中数量大于1，就移除最顶层fragment
+   * if fragment stack counts > 1，remove top fragment
    */
-  public void mangoRemoveFragment() {
+  public void mRemoveFragment() {
     if (mFragmentManager.getBackStackEntryCount() > 1) {
       mFragmentManager.popBackStack();
     } else {
@@ -519,13 +508,13 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   /**
-   * 销毁当前activity
+   * destroy  activity
    */
-  protected void suicide() {
+  protected void mDestroy() {
     this.finish();
   }
 
-  //backpress 相关结束----------------------------------------------------------------------
+  //backpress end ----------------------------------------------------------------------
 
   @Override protected void onDestroy() {
     super.onDestroy();
@@ -533,13 +522,27 @@ public abstract class BaseActivity extends FragmentActivity {
     L.e(this.getClass().getSimpleName() + "  OnDestroy  .....");
   }
 
+  //API------------------------------------------------------------------------------------
+
   /**
-   * 封装了StartActivityForResult 中的两个ResquestCode
+   * init page style ,for example:use bottombar  or toolbar
    */
-  public static class MangoRequestCode {
-    @IntDef({ 1111, 2222 }) @Retention(RetentionPolicy.SOURCE) public @interface RequestCode {
-      public static int REQUEST_CODE_1 = 1111;
-      public static int REQUEST_CODE_2 = 2222;
-    }
+  protected void initConfig() {
+  }
+
+  public abstract int setRootView();
+
+  public abstract void initViews();
+
+  protected void setUseTitlebar() {
+    useTitlebar = !useToolbar;
+  }
+
+  protected void setUseToolbar() {
+    useToolbar = !useTitlebar;
+  }
+
+  protected void setUseBottombar() {
+    useBottombar = true;
   }
 }

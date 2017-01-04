@@ -19,13 +19,13 @@ public abstract class BaseApplication extends Application {
     super.onCreate();
     INSTANCE = this;
 
-    //Fresco  init  + 联网权限
+    //Fresco  init  + internet permission
     Fresco.initialize(this);
 
     //output Toast Utils init
     T.init(this);
 
-    //BlankJ  utils 获取的context  https://github.com/Blankj/AndroidUtilCode
+    //BlankJ  utils  context  https://github.com/Blankj/AndroidUtilCode
     Utils.init(this);
   }
 }

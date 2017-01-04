@@ -6,9 +6,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import com.handsomeyang.mango.R;
 
-public final class MangoAnimatorUtils {
+public final class MAnimatorUtils {
   /**
-   * EditText 没有填写的时候会左右循环抖动
+   * EditText will shake if edt is null
    */
   public static void shakeshake(Context context, View view) {
     Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);

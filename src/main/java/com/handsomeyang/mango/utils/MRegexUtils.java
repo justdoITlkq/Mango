@@ -1,14 +1,14 @@
 package com.handsomeyang.mango.utils;
 
 import static com.blankj.utilcode.utils.RegexUtils.isMatch;
-import static com.handsomeyang.mango.MangoConstant.REGEX_PASSWORD;
+import static com.handsomeyang.mango.MConstant.REGEX_PASSWORD;
 
 /**
  * Created by HandsomeYang on 2016/11/17.
  * 使用三方工具类中的isMatch方法
  */
 
-public class MangoRegexUtils {
+public class MRegexUtils {
 
   /**
    * 验证密码，大小写字母，数字

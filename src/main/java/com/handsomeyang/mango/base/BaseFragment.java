@@ -26,12 +26,12 @@ import com.handsomeyang.mango.output.S;
  */
 public abstract class BaseFragment extends Fragment {
 
-  protected BaseActivity mActivity;                      //作为上下文使用
-  protected LayoutInflater mLayoutInflater;             //渲染器
+  protected BaseActivity mActivity;                      //context
+  protected LayoutInflater mLayoutInflater;             //inflate
   protected FragmentManager mFragmentManager;
 
   //about titlebar
-  protected View mRootView;                            //Fragment 根布局
+  protected View mRootView;                            //Fragment rootView
   private View mTitleBar, mTitleLeft, mTitleCenter, mTitleRight, mTitleRootView;
   private TextView mTvTitleLeft, mTvTitleCenter, mTvTitleRight;
   private ImageView mImageView;
@@ -62,34 +62,25 @@ public abstract class BaseFragment extends Fragment {
     return mRootView;
   }
 
-  protected void initConfig() {
-
-  }
-
-  //容器id
-  public abstract int setRootView();
-
-  protected abstract void initViews();
-
   private void init() {
-    //沉浸式标题栏   去掉状态栏  可以兼容4.4以上系统
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0及以上
+    //immersive titlebar no statusbar 4.4+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.0+
       View decorView = mActivity.getWindow().getDecorView();
       int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
       decorView.setSystemUiVisibility(option);
       mActivity.getWindow().setStatusBarColor(Color.TRANSPARENT);
-    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4到5.0
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//4.4----5.0
       WindowManager.LayoutParams localLayoutParams = mActivity.getWindow().getAttributes();
       localLayoutParams.flags =
           (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
     }
-     //-------------------------------------------------------------------------------------
-    //初始化SnackBarUtils
+    //immersive titlebar end----------------------------------------------------------
+
+    //init SnackBarUtils    content
     S.init(mActivity);
 
-    L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
-    //初始化
     mFragmentManager = getFragmentManager();
+    L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
   }
 
   @Override public void onSaveInstanceState(Bundle outState) {
@@ -97,10 +88,10 @@ public abstract class BaseFragment extends Fragment {
   }
 
   /**
-   * 初始化标题栏
+   * init titlebar
    *
-   * @param layoutResID 根布局
-   * @return 添加标题栏后的根布局
+   * @param layoutResID rootView
+   * @return rootView after add titlebar
    */
 
   private View initTileBar(int layoutResID) {
@@ -123,7 +114,8 @@ public abstract class BaseFragment extends Fragment {
     mTitleBar.setVisibility(View.GONE);
     //titlebar rootView
     mTitleRootView = mTitleBar.findViewById(R.id.title_bar_default);
-    //普通标题栏
+
+    //common titlebar ------------------------------------------------------------
     if (useTitlebar) {
       try {
         mTitleLeft = mTitleBar.findViewById(R.id.title_left);
@@ -163,9 +155,9 @@ public abstract class BaseFragment extends Fragment {
       } catch (Exception e) {
         L.e("title right img  doesn't exit");
       }
-
     } else if (useToolbar) {
-      //Toolbar模式
+
+      //Toolbar style-------------------------------------------------------
       mTitleBar.setVisibility(View.VISIBLE);
       mTitleRootView.setVisibility(View.GONE);
     }
@@ -181,7 +173,7 @@ public abstract class BaseFragment extends Fragment {
     mRelativeLayout.addView(mTitleBar);
     mRelativeLayout.addView(rootView);
 
-    //只有添加到布局上之后才能findviewbyid
+    //only after addView can findviewbyid
     mToolbar = (Toolbar) mRootView.findViewById(R.id.titlbar);
 
     if (useBottombar) {
@@ -194,15 +186,15 @@ public abstract class BaseFragment extends Fragment {
     }
 
     mTitleBar.requestFocus();
-    //fragment 根布局
+
     return mRelativeLayout;
   }
 
   /**
-   * 设置左边部分标题栏
+   * set left titlebar
    *
-   * @param text 标题文字
-   * @param onClickListener 监听
+   * @param text title text
+   * @param onClickListener listener
    */
   public void setTitleLeft(String text, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
@@ -223,9 +215,8 @@ public abstract class BaseFragment extends Fragment {
   }
 
   /**
-   * 设置默认左侧标题栏
-   * 默认监听销毁自己
-   * 默认image 是 返回箭头：  <
+   * set defualt left titlebar
+   * listener :  destroy  self with left arraw
    */
   public void setTitleLeft() {
     if (!useTitlebar) {
@@ -235,16 +226,16 @@ public abstract class BaseFragment extends Fragment {
       mTitleLeft.setVisibility(View.VISIBLE);
       mTitleLeft.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
-          BaseFragment.this.killSelf();
+          BaseFragment.this.mDestroy();
         }
       });
     }
   }
 
   /**
-   * 中间标题栏部分
+   * set center title
    *
-   * @param text 标题文字
+   * @param text title textss
    */
   public void setTitleCenter(String text) {
     if (!useTitlebar) {
@@ -259,10 +250,10 @@ public abstract class BaseFragment extends Fragment {
   }
 
   /**
-   * 右侧部分标题栏
+   * set right title
    *
-   * @param text 标题文字
-   * @param onClickListener 监听
+   * @param text title text
+   * @param onClickListener listener
    */
   public void setTitleRight(String text, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
@@ -284,10 +275,10 @@ public abstract class BaseFragment extends Fragment {
   }
 
   /**
-   * 设置右边标题栏image和监听
+   * set right titlebar; image and listener
    *
-   * @param ImgID image 资源id
-   * @param onClickListener 监听
+   * @param ImgID image  ResId
+   * @param onClickListener listener
    */
   public void setTitleRight(int ImgID, View.OnClickListener onClickListener) {
     if (!useTitlebar) {
@@ -308,24 +299,12 @@ public abstract class BaseFragment extends Fragment {
     }
   }
 
-  protected void setUseTitlebar() {
-    useTitlebar = !useToolbar;
-  }
-
-  protected void setUseToolbar() {
-    useToolbar = !useTitlebar;
-  }
-
-  protected void setUseBottombar() {
-    useBottombar = true;
-  }
-
-  //对于Activiy的操作------------------------------------------------------------------------------
+  // Activiy start -----------------------------------------------------------------------
 
   /**
-   * 如果startActivity有数据就返回true，如果没数据就返回false
+   * if startActivity with data return true，else return false
    */
-  public boolean mangoStartActivity(Class activity, Bundle bundle) {
+  public boolean mStartActivity(Class activity, Bundle bundle) {
     Intent mIntent = new Intent(mActivity, activity);
     mIntent.putExtra("bundle", bundle);
     mActivity.startActivity(mIntent);
@@ -334,30 +313,27 @@ public abstract class BaseFragment extends Fragment {
     }
     return true;
   }
+
   /**
-   * 如果startActivity有数据就返回true，如果没数据就返回false
+   * start Activity with no data
    */
-  public boolean mangoStartActivity(Class activity) {
+  public boolean mStartActivity(Class activity) {
     Intent mIntent = new Intent(mActivity, activity);
     mActivity.startActivity(mIntent);
     return false;
   }
 
-  public void mangoStartActiviy(Class activity) {
-    Intent intent = new Intent(mActivity, activity);
-    mActivity.startActivity(intent);
-  }
-  //对于Activity 操作结束-------------------------------------------------------------------------
+  //Activity end --------------------------------------------------------------------
 
-  //对于Fragment的操作-----------------------------------------------------------------------------
+  //Fragment start -----------------------------------------------------------------------------
 
   /**
-   * 封装添加fragment,如果没有add就add上来，如果已经add就替换原有的fragment
+   * if fragment not crateed , add ,if added ,replace
    *
-   * @param targetFragment 目标fragment
-   * @param ResID 要添加到activity的位置
+   * @param targetFragment target fragment
+   * @param ResID fragmetn location on activity
    */
-  public void mangoAddOrReplaceFragment(BaseFragment targetFragment, int ResID) {
+  public void mAddOrReplaceFragment(BaseFragment targetFragment, int ResID) {
     if (targetFragment == null) {
       mFragmentManager.beginTransaction()
           .add(ResID, targetFragment)
@@ -371,29 +347,28 @@ public abstract class BaseFragment extends Fragment {
     }
   }
 
-
-  public void mangoAddFragment(int des, BaseFragment fragment) {
+  public void mAddFragment(int des, BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .add(des, fragment, fragment.getClass().getSimpleName())
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
 
-  public void mangoReplaceFragment(int des, BaseFragment fragment) {
+  public void mReplaceFragment(int des, BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .replace(des, fragment, fragment.getClass().getSimpleName())
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
 
-  public void mangoHideFragment(BaseFragment fragment) {
+  public void mHideFragment(BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .hide(fragment)
         .addToBackStack(fragment.getClass().getSimpleName())
         .commit();
   }
 
-  public void mangoShowFragment(BaseFragment fragment) {
+  public void mShowFragment(BaseFragment fragment) {
     mFragmentManager.beginTransaction()
         .show(fragment)
         .addToBackStack(fragment.getClass().getSimpleName())
@@ -401,22 +376,22 @@ public abstract class BaseFragment extends Fragment {
   }
 
   /**
-   * 如果fragment 栈中数量大于1，就移除最顶层fragment
+   * if fragment stack count >1，remove the top fragment
    */
-  public void mangoRemoveFragment() {
+  public void mRemoveFragment() {
     if (mFragmentManager.getBackStackEntryCount() > 1) {
       mFragmentManager.popBackStack();
     } else {
-      killSelf();
+      mDestroy();
     }
   }
 
-  //对于framgent 操作结束-------------------------------------------------------------------------
+  //framgent end--------------------------------------------------------------------
 
   /**
-   * 销毁自己  就是移除
+   * destroy self
    */
-  public void killSelf() {
+  public void mDestroy() {
     FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
     fragmentTransaction.remove(this);
     fragmentTransaction.commit();
@@ -425,5 +400,25 @@ public abstract class BaseFragment extends Fragment {
   @Override public void onDestroy() {
     super.onDestroy();
     L.e(this.getClass().getSimpleName() + "  OnDestroy  .....");
+  }
+
+  //API----------------------------------------------------------------------------
+  protected void initConfig() {
+  }
+
+  public abstract int setRootView();
+
+  protected abstract void initViews();
+
+  protected void setUseTitlebar() {
+    useTitlebar = !useToolbar;
+  }
+
+  protected void setUseToolbar() {
+    useToolbar = !useTitlebar;
+  }
+
+  protected void setUseBottombar() {
+    useBottombar = true;
   }
 }

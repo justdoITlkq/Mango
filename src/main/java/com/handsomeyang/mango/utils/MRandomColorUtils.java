@@ -10,7 +10,7 @@ import java.util.Random;
  * Created by HandsomeYang on 2016/11/1.
  */
 
-public class MangoRandomColorUtils {
+public class MRandomColorUtils {
   private static Random random = new Random();
   //饱和度
   public static int SATURATIONTYPE_RANDOM = 1;     //饱和度随机
@@ -33,11 +33,11 @@ public class MangoRandomColorUtils {
   //存储颜色集合   颜色名    颜色信息
   private static HashMap<String, ColorInfo> colors = new HashMap<>();
 
-  public MangoRandomColorUtils() {
+  public MRandomColorUtils() {
     loadColorBounds();
   }
 
-  public MangoRandomColorUtils(long seed) {
+  public MRandomColorUtils(long seed) {
     loadColorBounds();
     random.setSeed(seed);
   }

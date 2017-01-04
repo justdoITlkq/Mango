@@ -8,17 +8,17 @@ import java.util.Map;
 
 /**
  * Created by HandsomeYang on 2016/9/20.
- * SharedPreferenceHelper zhy封装  不直接用apply而用内部类完全是为了兼容
+ * SharedPreferenceHelper created by zhy  don't use apply method is for compatible
  */
 
-public class MangoSPUtils {
+public class MSPUtils {
   /**
-   * 保存在手机里面的文件名
+   * file name
    */
   public static final String FILE_NAME = "share_data";
 
   /**
-   * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
+   * save data
    */
   public static void put(Context context, String key, Object object) {
 
@@ -43,7 +43,7 @@ public class MangoSPUtils {
   }
 
   /**
-   * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
+   * get  data
    */
   public static Object get(Context context, String key, Object defaultObject) {
     SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -63,9 +63,8 @@ public class MangoSPUtils {
     return null;
   }
 
-
   /**
-   * 移除某个key值已经对应的值
+   * remove some key and value
    */
   public static void remove(Context context, String key) {
     SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -75,7 +74,7 @@ public class MangoSPUtils {
   }
 
   /**
-   * 清除所有数据
+   * c;ear all data
    */
   public static void clear(Context context) {
     SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -85,7 +84,7 @@ public class MangoSPUtils {
   }
 
   /**
-   * 查询某个key是否已经存在
+   * judge key is exited or not
    */
   public static boolean contains(Context context, String key) {
     SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -93,7 +92,7 @@ public class MangoSPUtils {
   }
 
   /**
-   * 返回所有的键值对
+   * return all data
    */
   public static Map<String, ?> getAll(Context context) {
     SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
@@ -101,7 +100,7 @@ public class MangoSPUtils {
   }
 
   /**
-   * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
+   * create SharedPreferencesCompat.apply for compatible
    *
    * @author zhy
    */
@@ -109,7 +108,7 @@ public class MangoSPUtils {
     private static final Method sApplyMethod = findApplyMethod();
 
     /**
-     * 反射查找apply的方法
+     * reflect to use apply method
      */
     @SuppressWarnings({ "unchecked", "rawtypes" }) private static Method findApplyMethod() {
       try {
@@ -122,7 +121,7 @@ public class MangoSPUtils {
     }
 
     /**
-     * 如果找到则使用apply执行，否则使用commit
+     * if use apply  ,else use commit
      */
     public static void apply(SharedPreferences.Editor editor) {
       try {

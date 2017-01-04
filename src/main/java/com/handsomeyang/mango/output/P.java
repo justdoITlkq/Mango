@@ -19,12 +19,11 @@ import com.handsomeyang.mango.R;
 import com.handsomeyang.mango.thrid.jumpingbeans.JumpingBeans;
 import com.handsomeyang.mango.thrid.smoothprogressbar.circular.CircularProgressDrawable;
 import com.handsomeyang.mango.thrid.smoothprogressbar.horizontal.SmoothProgressDrawable;
-import com.handsomeyang.mango.utils.MangoRandomColorUtils;
+import com.handsomeyang.mango.utils.MRandomColorUtils;
 
 /**
  * Created by HandsomeYang on 2016/9/14.
  * md loading progressbar   circular/horizontal_Wave
- * 这个封装的并不是很好，还有很大优化空间，暂时先如此
  */
 
 public class P {
@@ -113,7 +112,7 @@ public class P {
             //环形半径宽度
             .strokeWidth(20.0f)
             //设置颜色
-            .colors(MangoRandomColorUtils.randomColor(10))
+            .colors(MRandomColorUtils.randomColor(10))
             //弧形旋转速度
             .sweepSpeed(1.2f)
             //旋转速度
@@ -234,7 +233,7 @@ public class P {
         new SmoothProgressDrawable.Builder(context).sectionsCount(4)
             .separatorLength(25)
             .strokeWidth(35f)
-            .colors(MangoRandomColorUtils.randomColor(20))
+            .colors(MRandomColorUtils.randomColor(20))
             .interpolator(new AccelerateDecelerateInterpolator())
             .progressiveStart(true)
             .progressiveStartSpeed(1.5f)

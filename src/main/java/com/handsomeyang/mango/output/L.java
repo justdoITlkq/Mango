@@ -9,9 +9,10 @@ import org.json.JSONObject;
 
 /**
  * Created by HandsomeYang on 2016/9/12.
- * log
- * 有个缺点，比如非标准的url   比如url中包含json串的就无法打印，会报错
- * Mango还包含一个库 LogUtils ：https://github.com/pengwei1024/LogUtils
+ * log  utils
+ * a weakness, url contain {json}  will make exception
+ *
+ * another LogUtils ：https://github.com/pengwei1024/LogUtils
  */
 
 public class L {
@@ -82,7 +83,7 @@ public class L {
 
     public static void e(String tag, String content) {
       LogText logText = new LogText("HHHHHHandsome" + tag + "-------->>>");
-      logText.setup("  日志内容：" + content);
+      logText.setup(" " + content);
     }
 
     public void setup(String content) {

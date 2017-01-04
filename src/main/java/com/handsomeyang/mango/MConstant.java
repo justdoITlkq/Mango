@@ -4,7 +4,7 @@ package com.handsomeyang.mango;
  * Created by HandsomeYang on 2016/9/9.
  */
 
-public class MangoConstant {
+public class MConstant {
   // 三方工具类Readme.md   https://github.com/Blankj/AndroidUtilCode/blob/master/README-CN.md
   //smartTablayout
   /**
