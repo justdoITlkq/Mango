@@ -50,15 +50,17 @@ public abstract class BaseFragment extends Fragment {
       Bundle savedInstanceState) {
     mLayoutInflater = mActivity.getLayoutInflater();
 
+    //must be called before initlayoutConfig
+    initConfig();
     if (useTitlebar || useToolbar || useBottombar) {
-      mRootView = initTileBar(setRootView());
+      mRootView = initLayoutConfig(setRootView());
     } else {
       mRootView = mLayoutInflater.inflate(setRootView(), container, false);
     }
 
-    initConfig();
     init();
     initViews();
+
     return mRootView;
   }
 
@@ -83,18 +85,14 @@ public abstract class BaseFragment extends Fragment {
     L.e(this.getClass().getSimpleName() + "  OnCreate  .....");
   }
 
-  @Override public void onSaveInstanceState(Bundle outState) {
-    super.onSaveInstanceState(outState);
-  }
-
   /**
    * init titlebar
    *
    * @param layoutResID rootView
-   * @return rootView after add titlebar
+   * @return rootView after added titlebar
    */
 
-  private View initTileBar(int layoutResID) {
+  private View initLayoutConfig(int layoutResID) {
 
     RelativeLayout mRelativeLayout = new RelativeLayout(mActivity);
 
@@ -117,6 +115,7 @@ public abstract class BaseFragment extends Fragment {
 
     //common titlebar ------------------------------------------------------------
     if (useTitlebar) {
+      L.e(this.getClass().getSimpleName()+"  is common titlebar mode ");
       try {
         mTitleLeft = mTitleBar.findViewById(R.id.title_left);
       } catch (Exception e) {
@@ -155,13 +154,15 @@ public abstract class BaseFragment extends Fragment {
       } catch (Exception e) {
         L.e("title right img  doesn't exit");
       }
-    } else if (useToolbar) {
 
+    } else if (useToolbar) {
+      L.e(this.getClass().getSimpleName()+"  is toolbar mode ");
       //Toolbar style-------------------------------------------------------
       mTitleBar.setVisibility(View.VISIBLE);
       mTitleRootView.setVisibility(View.GONE);
     }
 
+    //Activity rootView
     View rootView = mLayoutInflater.inflate(layoutResID, mRelativeLayout, false);
 
     RelativeLayout.LayoutParams rootViewLayoutParams =
@@ -174,7 +175,7 @@ public abstract class BaseFragment extends Fragment {
     mRelativeLayout.addView(rootView);
 
     //only after addView can findviewbyid
-    mToolbar = (Toolbar) mRootView.findViewById(R.id.titlbar);
+    mToolbar = (Toolbar) mTitleBar;
 
     if (useBottombar) {
       View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRelativeLayout, false);
@@ -186,7 +187,6 @@ public abstract class BaseFragment extends Fragment {
     }
 
     mTitleBar.requestFocus();
-
     return mRelativeLayout;
   }
 

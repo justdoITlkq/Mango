@@ -49,6 +49,7 @@ public abstract class BaseActivity extends FragmentActivity {
   private boolean useBottombar = false;
   private boolean useTitlebar = false;
   private boolean useToolbar = false;
+  private boolean useViewPager=false;
 
   protected BottomBar mBottomBar;
   protected View mDecorView;
@@ -108,8 +109,8 @@ public abstract class BaseActivity extends FragmentActivity {
   }
 
   @Override public void setContentView(int layoutResID) {
-    if (useTitlebar || useToolbar || useBottombar) {
-      initConfig(layoutResID);
+    if (useTitlebar || useToolbar || useBottombar||useViewPager) {
+      initLayoutConfig(layoutResID);
     } else {
       super.setContentView(layoutResID);
     }
@@ -121,7 +122,7 @@ public abstract class BaseActivity extends FragmentActivity {
    * @param layoutResID rootView
    * @return rootView add titlebar
    */
-  private void initConfig(int layoutResID) {
+  private void initLayoutConfig(int layoutResID) {
     //rootview
     RelativeLayout mRootRelativeLayout = new RelativeLayout(this);
     //rootView setId，for add fragment
@@ -206,7 +207,21 @@ public abstract class BaseActivity extends FragmentActivity {
     //before findviewbyid must set layout
     mToolbar = (Toolbar) findViewById(R.id.titlbar);
 
-    //bottombar  sytle -------------------------------------------------------------------------
+    //use viewpager-----------------------------------------------
+    if(useViewPager){
+      View vpcontainer = mLayoutInflater.inflate(layoutResID, mRootRelativeLayout, false);
+
+      RelativeLayout.LayoutParams vpLayoutParams =
+          (RelativeLayout.LayoutParams) vpcontainer.getLayoutParams();
+
+      vpLayoutParams.addRule(RelativeLayout.BELOW,R.id.titlbar);
+      vpLayoutParams.addRule(RelativeLayout.ABOVE, R.id.bottombar);
+      vpcontainer.setLayoutParams(vpLayoutParams);
+      //mRootRelativeLayout.addView(mTitleBar);
+      mRootRelativeLayout.addView(vpcontainer);
+    }
+
+    //bottombar  sytle ------------------------------------------------------------------
     if (useBottombar) {
       View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRootRelativeLayout, false);
       RelativeLayout.LayoutParams bottombarLayoutParams =
@@ -544,5 +559,9 @@ public abstract class BaseActivity extends FragmentActivity {
 
   protected void setUseBottombar() {
     useBottombar = true;
+  }
+
+  protected void setUseViewPager() {
+    useViewPager = true;
   }
 }
