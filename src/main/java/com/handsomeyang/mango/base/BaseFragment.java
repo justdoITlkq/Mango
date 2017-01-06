@@ -168,7 +168,7 @@ public abstract class BaseFragment extends Fragment {
     RelativeLayout.LayoutParams rootViewLayoutParams =
         (RelativeLayout.LayoutParams) rootView.getLayoutParams();
     rootViewLayoutParams.addRule(RelativeLayout.BELOW, R.id.titlbar);
-    rootViewLayoutParams.addRule(RelativeLayout.ABOVE, R.id.bottombar);
+    //rootViewLayoutParams.addRule(RelativeLayout.ABOVE, R.id.bottom_navigation);
     rootView.setLayoutParams(rootViewLayoutParams);
 
     mRelativeLayout.addView(mTitleBar);
@@ -178,7 +178,7 @@ public abstract class BaseFragment extends Fragment {
     mToolbar = (Toolbar) mTitleBar;
 
     if (useBottombar) {
-      View bottombar = mLayoutInflater.inflate(R.layout.bottombar, mRelativeLayout, false);
+      View bottombar = mLayoutInflater.inflate(R.layout.bottom_navigation, mRelativeLayout, false);
       RelativeLayout.LayoutParams bottombarLayoutParams =
           (RelativeLayout.LayoutParams) bottombar.getLayoutParams();
       bottombarLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);

@@ -23,11 +23,6 @@
   <dimen name="bottom_ellipsis_height">4dp</dimen>
   <!--material design edittext needs end-->
 
-
-<!--bottom bar needs start  原来是56 我改成66-->
-  <dimen name="bb_height">66dp</dimen>
-  <!--bottom bar needs end -->
-
   <!--AppIntro needs start -->
   <dimen name="appIntroBottomBarHeight">64dp</dimen>
   <!--AppIntro needs end -->

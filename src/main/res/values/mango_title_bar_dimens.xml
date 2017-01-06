@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--此处定义了共性标题栏所使用的尺寸-->
 <resources>
-  <!--my title bar needs-->
+  <!--mango title bar needs-->
   <!--标题栏的高度-->
   <dimen name="title_bar_height">85dp</dimen>
   <!--两边标题栏的宽度-->
@@ -10,5 +10,5 @@
   <dimen name="title_bar_text_size">18sp</dimen>
   <dimen name="title_bar_center_text_size">20sp</dimen>
   <dimen name="title_bar_padding">15dp</dimen>
-  <!--my title bar needs end-->
+  <!--mango title bar needs end-->
 </resources>

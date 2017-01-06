@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!--my title bar needs -->
+  <!--mango title bar needs -->
   <item name="tv_title_left" type="id"/>
   <item name="title_left" type="id"/>
 
@@ -12,7 +12,12 @@
 
   <item name="img_title_right" type="id"/>
   <item name="img_title_left" type="id"/>
+  <!--mango title bar needs end-->
 
+  <!--root  relatvielayout  -->
   <item name="root_relative_layout" type="id"/>
-  <!--my title bar needs end-->
+
+  <!--bottom navigationview-->
+  <item name="base_bottom_navigation" type="id"/>
+
 </resources>

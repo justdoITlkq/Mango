@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
   <color name="colorPrimary">#3F51B5</color>
   <color name="colorPrimaryDark">#303F9F</color>
   <color name="colorAccent">#FF4081</color>
@@ -20,15 +21,8 @@
   <color name="red">#D32F2F</color>
   <color name="orange">#FF9800</color>
   <color name="black">#212121</color>
-  <!--<color name="purple">#7c4dff</color>-->
+  <color name="purple">#7c4dff</color>
   <!--smoothprogressbar circular needs end-->
-
-
-<!--bottom bar needs start -->
-  <color name="bb_inActiveBottomBarItemColor">#747474</color>
-  <color name="bb_darkBackgroundColor">#212121</color>
-  <color name="bb_tabletRightBorderDark">#505050</color>
-  <!--bottom bar needs end -->
 
 </resources>
 

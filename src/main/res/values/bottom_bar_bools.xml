@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!--bottom bar needs start-->
-    <bool name="bb_bottom_bar_is_tablet_mode">false</bool>
-    <bool name="bb_bottom_bar_is_portrait_mode">true</bool>
-    <!--bottom bar needs end-->
-</resources>

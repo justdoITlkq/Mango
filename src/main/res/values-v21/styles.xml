@@ -24,4 +24,5 @@
   <style name="ActionButton.Overflow.ZhiHu" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
     <item name="android:src">@drawable/menu_setting</item>
   </style>
+
 </resources>
